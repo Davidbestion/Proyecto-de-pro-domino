@@ -1,0 +1,15 @@
+C:\Users\David\Documents\GitHub\Proyecto-de-pro-domino\bin\Debug\net6.0-windows\Proyecto-de-pro-domino.exe
+C:\Users\David\Documents\GitHub\Proyecto-de-pro-domino\bin\Debug\net6.0-windows\Proyecto-de-pro-domino.deps.json
+C:\Users\David\Documents\GitHub\Proyecto-de-pro-domino\bin\Debug\net6.0-windows\Proyecto-de-pro-domino.runtimeconfig.json
+C:\Users\David\Documents\GitHub\Proyecto-de-pro-domino\bin\Debug\net6.0-windows\Proyecto-de-pro-domino.dll
+C:\Users\David\Documents\GitHub\Proyecto-de-pro-domino\bin\Debug\net6.0-windows\ref\Proyecto-de-pro-domino.dll
+C:\Users\David\Documents\GitHub\Proyecto-de-pro-domino\bin\Debug\net6.0-windows\Proyecto-de-pro-domino.pdb
+C:\Users\David\Documents\GitHub\Proyecto-de-pro-domino\obj\Debug\net6.0-windows\Proyecto-de-pro-domino.csproj.AssemblyReference.cache
+C:\Users\David\Documents\GitHub\Proyecto-de-pro-domino\obj\Debug\net6.0-windows\Proyecto-de-pro-domino.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\David\Documents\GitHub\Proyecto-de-pro-domino\obj\Debug\net6.0-windows\Proyecto-de-pro-domino.AssemblyInfoInputs.cache
+C:\Users\David\Documents\GitHub\Proyecto-de-pro-domino\obj\Debug\net6.0-windows\Proyecto-de-pro-domino.AssemblyInfo.cs
+C:\Users\David\Documents\GitHub\Proyecto-de-pro-domino\obj\Debug\net6.0-windows\Proyecto-de-pro-domino.csproj.CoreCompileInputs.cache
+C:\Users\David\Documents\GitHub\Proyecto-de-pro-domino\obj\Debug\net6.0-windows\Proyecto-de-pro-domino.dll
+C:\Users\David\Documents\GitHub\Proyecto-de-pro-domino\obj\Debug\net6.0-windows\ref\Proyecto-de-pro-domino.dll
+C:\Users\David\Documents\GitHub\Proyecto-de-pro-domino\obj\Debug\net6.0-windows\Proyecto-de-pro-domino.pdb
+C:\Users\David\Documents\GitHub\Proyecto-de-pro-domino\obj\Debug\net6.0-windows\Proyecto-de-pro-domino.genruntimeconfig.cache
