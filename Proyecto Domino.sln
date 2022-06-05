@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaz de domino", "Interfaz de domino\Interfaz de domino.csproj", "{5834AA02-2830-423C-935C-C821A1BA425C}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Proyecto Domino", "Proyecto Domino\Proyecto Domino.vbproj", "{EA492AEA-D0C1-4D76-A28A-4B934A7AA9AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5834AA02-2830-423C-935C-C821A1BA425C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5834AA02-2830-423C-935C-C821A1BA425C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5834AA02-2830-423C-935C-C821A1BA425C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5834AA02-2830-423C-935C-C821A1BA425C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA492AEA-D0C1-4D76-A28A-4B934A7AA9AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA492AEA-D0C1-4D76-A28A-4B934A7AA9AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA492AEA-D0C1-4D76-A28A-4B934A7AA9AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA492AEA-D0C1-4D76-A28A-4B934A7AA9AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {E8BAAE33-93F5-407D-90D6-BEC89D8B186C}
+		SolutionGuid = {000B800B-60CC-4510-A622-585253673A73}
 	EndGlobalSection
 EndGlobal
