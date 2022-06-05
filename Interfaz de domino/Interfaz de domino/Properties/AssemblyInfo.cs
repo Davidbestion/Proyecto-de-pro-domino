@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Juego de domino")]
+[assembly: AssemblyTitle("Interfaz de domino")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Juego de domino")]
+[assembly: AssemblyProduct("Interfaz de domino")]
 [assembly: AssemblyCopyright("Copyright ©  2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("f7aa1fe7-f52c-4e44-a031-ff69201fdb1d")]
+[assembly: Guid("5834aa02-2830-423c-935c-c821a1ba425c")]
 
 // Version information for an assembly consists of the following four values:
 //

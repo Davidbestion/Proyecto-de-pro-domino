@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F7AA1FE7-F52C-4E44-A031-FF69201FDB1D}</ProjectGuid>
+    <ProjectGuid>{5834AA02-2830-423C-935C-C821A1BA425C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Juego_de_domino</RootNamespace>
-    <AssemblyName>Juego de domino</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <RootNamespace>Interfaz_de_domino</RootNamespace>
+    <AssemblyName>Interfaz de domino</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>

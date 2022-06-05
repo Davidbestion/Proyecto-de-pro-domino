@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Juego_de_domino
+namespace Interfaz_de_domino
 {
     static class Program
     {

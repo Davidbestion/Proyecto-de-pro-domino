@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Juego_de_domino.Properties
+namespace Interfaz_de_domino.Properties
 {
 
 

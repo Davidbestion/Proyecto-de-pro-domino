@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Juego_de_domino
+namespace Interfaz_de_domino
 {
     public partial class Form1 : Form
     {
