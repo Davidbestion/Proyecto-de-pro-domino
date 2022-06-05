@@ -47,9 +47,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(84, 253);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(638, 73);
+            this.label1.Size = new System.Drawing.Size(645, 73);
             this.label1.TabIndex = 1;
-            this.label1.Text = "si ves esto es q sirvio";
+            this.label1.Text = "YA A MI ME PINCHO";
             // 
             // Form1
             // 
