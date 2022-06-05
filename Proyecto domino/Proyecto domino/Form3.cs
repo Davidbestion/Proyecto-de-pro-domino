@@ -10,14 +10,21 @@ using System.Windows.Forms;
 
 namespace Proyecto_domino
 {
-    public partial class Form1 : Form
+    public partial class Form3 : Form
     {
-        public Form1()
+        public Form3()
         {
             InitializeComponent();
         }
 
         private void Button1_Click(object sender, EventArgs e)
+        {
+            Form4 form4 = new Form4();
+            this.Hide();
+            form4.Show();
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
         {
             Form2 form2 = new Form2();
             this.Hide();
