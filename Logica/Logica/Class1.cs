@@ -27,7 +27,7 @@
         protected override int Juega(List<Tuple<int, int>> fichas)
         {
             Random random = new Random();
-            int jugada = random.Next(fichas.Count);
+            int jugada = random.Next(fichas.Count);//Si la ficha no puede jugarse?
             return jugada;
         }
 

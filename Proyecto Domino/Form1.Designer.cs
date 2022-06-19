@@ -64,7 +64,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(236, 23);
             this.label2.TabIndex = 2;
-            this.label2.Text = "David Sanchez Iglesias C122";
+            this.label2.Text = "David Sanchez Iglesias C212";
             // 
             // label3
             // 
@@ -74,7 +74,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(284, 23);
             this.label3.TabIndex = 3;
-            this.label3.Text = "Carlos Arturo Perez Cabrera C122";
+            this.label3.Text = "Carlos Arturo Perez Cabrera C212";
             // 
             // label4
             // 
