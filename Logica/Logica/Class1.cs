@@ -8,18 +8,17 @@
 
         public bool EsTurno;
 
+        public List<Tuple<int, int>> Fichas;
+
         public Jugador(string Nombre)
         {
             this.Nombre = Nombre;
         }
 
         protected abstract int Juega(List<Tuple<int, int>> fichas);
+        protected abstract void Seleccionar(List<Tuple<int, int>> fichas,bool[]fichas2);  
 
     }
-
-
-
-
     public class JugadorAleatorio : Jugador
     {
         public JugadorAleatorio(string Nombre) : base(Nombre) { }
@@ -31,6 +30,19 @@
             return jugada;
         }
 
+        protected override void Seleccionar(List<Tuple<int, int>> fichas, bool[] fichas2)
+        {
+            Random selecciona = new Random();
+            for (int i = 0; i <= 7; i++)//Cantidad de fichas a robar
+            {
+                while (true)
+                {
+                    int fichaSeleccionada = selecciona.Next(0, fichas2.Length - 1);
+                    if (!fichas2[fichaSeleccionada]) { fichas2[fichaSeleccionada] = true;Fichas.Add(fichas[fichaSeleccionada]);break; }
+                }
+            }
+
+        }
     }
 
     public class JugadorGoloso : Jugador
@@ -50,6 +62,19 @@
             return fichaDeMayorValor;
         }
 
+        protected override void Seleccionar(List<Tuple<int, int>> fichas, bool[] fichas2)
+        {
+
+            //Random selecciona = new Random();
+            //for (int i = 0; i <= 7; i++)//Cantidad de fichas a robar
+            //{
+            //    while (true)
+            //    {
+            //        int fichaSeleccionada = selecciona.Next(0, fichas2.Length - 1);
+            //        if (!fichas2[fichaSeleccionada]) { fichas2[fichaSeleccionada] = true; Fichas.Add(fichas[fichaSeleccionada]); break; }
+            //    }
+            //}
+        }
     }
 
     // public class JugadorInteligente : Jugador { }
@@ -94,6 +119,7 @@
         {
             return jugador.Nombre + " ha jugado [" + ficha.Item1 + "|" + ficha.Item2 + "]";
         }
+    }
         /////////////////////////////////////////////////
         ///Cosas DEl FOrm 3
 
@@ -216,7 +242,23 @@
             }
         }
 
-
-
+    interface IFormadeRepartir
+    {
+        void Repartir(IList<Tuple<int, int>> fichas, List<Jugador> jugadores);
     }
+    public class RepartoAleatorio : IFormadeRepartir
+    {
+        public void Repartir(IList<Tuple<int, int>> fichas,List<Jugador>jugadores)
+        {
+            bool[]FichasBocaAbajo=new bool[fichas.Count];
+            for (int i = 0; i < jugadores.Count; i++)
+            {
+
+            }
+
+            
+           
+        }
+    }
+
 }
