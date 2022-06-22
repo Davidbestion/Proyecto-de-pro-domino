@@ -15,18 +15,38 @@
             this.Nombre = Nombre;
         }
 
-        protected abstract int Juega(List<Tuple<int, int>> fichas);
-        protected abstract void Seleccionar(List<Tuple<int, int>> fichas,bool[]fichas2);  
+        protected abstract int Juega(List<Tuple<int, int>> fichas, int num1, int num2);//Los numero disponibles en el tablero
+        protected abstract void Seleccionar(List<Tuple<int, int>> fichas, bool[] fichas2);
+
+        protected abstract bool EsFichaJugable(Tuple<int, int> ficha, int num1, int num2);//Pa cuando la hagas interface en vez de abstracta.
+        //{
+        //    return fichas[i].Item1 == num1 || fichas[i].Item2 == num1 || fichas[i].Item1 == num2 || fichas[i].Item2 == num2;
+        //}
 
     }
     public class JugadorAleatorio : Jugador
     {
         public JugadorAleatorio(string Nombre) : base(Nombre) { }
 
-        protected override int Juega(List<Tuple<int, int>> fichas)
+        protected override bool EsFichaJugable(Tuple<int, int> ficha, int num1, int num2)
         {
+            throw new NotImplementedException();
+        }
+
+        protected override int Juega(List<Tuple<int, int>> fichas, int num1, int num2)
+        {
+            int length = fichas.Count;
             Random random = new Random();
-            int jugada = random.Next(fichas.Count);//Si la ficha no puede jugarse?
+            for (int i = 0; i < length; i++)
+            {
+                if (EsFichaJugable(fichas[i], num1, num2)) break;
+                else if (i == length - 1) return 0;//Cambia en el return lo q quieras devolver si no se encuentra ficha jugable
+            }
+            int jugada = 0;
+            do
+            {
+                jugada = random.Next(length);//Si la ficha no puede jugarse?
+            } while (fichas[jugada].Item1 == num1 || fichas[jugada].Item2 == num1 || fichas[jugada].Item1 == num2 || fichas[jugada].Item2 == num2);
             return jugada;
         }
 
@@ -49,15 +69,28 @@
     {
         public JugadorGoloso(string Nombre) : base(Nombre) { }
 
-        protected override int Juega(List<Tuple<int, int>> fichas)
+        protected override bool EsFichaJugable(Tuple<int, int> ficha, int num1, int num2)
         {
+            throw new NotImplementedException();
+        }
+
+        protected override int Juega(List<Tuple<int, int>> fichas, int num1, int num2)
+        {
+            int length = fichas.Count;
             int mayorValor = 0;
             int fichaDeMayorValor = 0;
-            int[] jugadas = new int[fichas.Count];
-            for (int i = 0; i < jugadas.Length; i++)
+            int valor = 0;
+            //int[] jugadas = new int[fichas.Count];Pa no crear array, q ocupa espacio en memoria...
+            for (int i = 0; i < length; i++)
             {
-                jugadas[i] = fichas[i].Item1 + fichas[i].Item2;
-                if (jugadas[i] > mayorValor) { mayorValor = jugadas[i]; fichaDeMayorValor = i; }
+                //Condicional q determina si la ficha actual se puede poner en el tablero
+                if (fichas[i].Item1 == num1 || fichas[i].Item2 == num1 || fichas[i].Item1 == num2 || fichas[i].Item2 == num2)
+                {
+                    valor = fichas[i].Item1 + fichas[i].Item2;
+                    if (valor > mayorValor) { mayorValor = valor; fichaDeMayorValor = i; }
+                }
+                //jugadas[i] = fichas[i].Item1 + fichas[i].Item2;
+                //if (jugadas[i] > mayorValor) { mayorValor = jugadas[i]; fichaDeMayorValor = i; }
             }
             return fichaDeMayorValor;
         }
@@ -77,7 +110,25 @@
         }
     }
 
-    // public class JugadorInteligente : Jugador { }
+    public class JugadorInteligente : Jugador
+    {
+        public JugadorInteligente(string Nombre) : base(Nombre) { }
+
+        protected override bool EsFichaJugable(Tuple<int, int> ficha, int num1, int num2)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override int Juega(List<Tuple<int, int>> fichas, int num1, int num2)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void Seleccionar(List<Tuple<int, int>> fichas, bool[] fichas2)
+        {
+            throw new NotImplementedException();
+        }
+    }
     public class TiposDeJugador///////////////////Assembly
     {
 
@@ -135,10 +186,9 @@
                 List<Tuple<int, int>> listaDeFichas = new List<Tuple<int, int>>();
                 for (int i = 0; i <= valor; i++)
                 {
-                    for (int j = 0; j <= valor; j++)
+                    for (int j = i; j <= valor; j++)//tenias j = 0, puse j = i pa q no se creen duplicados de las fichas q se han creado hasta ahora
                     {
                         listaDeFichas.Add(new Tuple<int, int>(i, j));
-
                     }
                 }
                 return listaDeFichas;
