@@ -34,7 +34,7 @@ namespace Proyecto_Domino
             Application.Exit();
         }
 
-        private void button1_Click(object sender, EventArgs e)//Agregar Jugador
+        private void Agregar_Click(object sender, EventArgs e)//Agregar Jugador
         {
             Jugador jugador = tipos.Comparer(comboBox1.SelectedItem.ToString());
             bool estaElNombre = false;
@@ -52,14 +52,14 @@ namespace Proyecto_Domino
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)//Siguiente
+        private void Siguiente_Click(object sender, EventArgs e)//Siguiente
         {
             Form3 form3 = new Form3();
             this.Hide();
             form3.Show();
         }
 
-        private void button2_Click(object sender, EventArgs e)//Eliminar Jugador
+        private void Eliminar_Click(object sender, EventArgs e)//Eliminar Jugador
         {
             for (int i = 0; i < nombresDeJugadores.Count; i++)
             {

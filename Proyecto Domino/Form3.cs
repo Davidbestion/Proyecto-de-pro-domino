@@ -25,14 +25,14 @@ namespace Proyecto_Domino
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Siguiente_Click(object sender, EventArgs e)
         {
             Form4 form4 = new Form4();
             this.Hide();
             form4.Show();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Atras_Click(object sender, EventArgs e)
         {
             Form2 form2 = new Form2();
             this.Hide();

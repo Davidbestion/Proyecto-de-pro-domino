@@ -29,52 +29,54 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.SiguienteJugada = new System.Windows.Forms.Button();
+            this.JuegoAtomatico = new System.Windows.Forms.Button();
+            this.MostrarFinal = new System.Windows.Forms.Button();
+            this.Atras = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
-            // button1
+            // SiguienteJugada
             // 
-            this.button1.Location = new System.Drawing.Point(48, 45);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(117, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Siguiente Jugada";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.SiguienteJugada.Location = new System.Drawing.Point(48, 45);
+            this.SiguienteJugada.Name = "SiguienteJugada";
+            this.SiguienteJugada.Size = new System.Drawing.Size(117, 23);
+            this.SiguienteJugada.TabIndex = 0;
+            this.SiguienteJugada.Text = "Siguiente Jugada";
+            this.SiguienteJugada.UseVisualStyleBackColor = true;
+            this.SiguienteJugada.Click += new System.EventHandler(this.SiguienteJugada_Click);
             // 
-            // button2
+            // JuegoAtomatico
             // 
-            this.button2.Location = new System.Drawing.Point(51, 98);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(114, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Juego Automatico";
-            this.button2.UseVisualStyleBackColor = true;
+            this.JuegoAtomatico.Location = new System.Drawing.Point(51, 98);
+            this.JuegoAtomatico.Name = "JuegoAtomatico";
+            this.JuegoAtomatico.Size = new System.Drawing.Size(114, 23);
+            this.JuegoAtomatico.TabIndex = 1;
+            this.JuegoAtomatico.Text = "Juego Automatico";
+            this.JuegoAtomatico.UseVisualStyleBackColor = true;
+            this.JuegoAtomatico.Click += new System.EventHandler(this.JuegoAtomatico_Click);
             // 
-            // button3
+            // MostrarFinal
             // 
-            this.button3.Location = new System.Drawing.Point(51, 146);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(114, 23);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Mostrar Final";
-            this.button3.UseVisualStyleBackColor = true;
+            this.MostrarFinal.Location = new System.Drawing.Point(51, 146);
+            this.MostrarFinal.Name = "MostrarFinal";
+            this.MostrarFinal.Size = new System.Drawing.Size(114, 23);
+            this.MostrarFinal.TabIndex = 2;
+            this.MostrarFinal.Text = "Mostrar Final";
+            this.MostrarFinal.UseVisualStyleBackColor = true;
+            this.MostrarFinal.Click += new System.EventHandler(this.MostrarFinal_Click);
             // 
-            // button4
+            // Atras
             // 
-            this.button4.Location = new System.Drawing.Point(51, 372);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "Atras";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.Atras.Location = new System.Drawing.Point(51, 372);
+            this.Atras.Name = "Atras";
+            this.Atras.Size = new System.Drawing.Size(75, 23);
+            this.Atras.TabIndex = 3;
+            this.Atras.Text = "Atras";
+            this.Atras.UseVisualStyleBackColor = true;
+            this.Atras.Click += new System.EventHandler(this.Atras_Click);
             // 
             // listBox1
             // 
@@ -100,10 +102,10 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.vScrollBar1);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.Atras);
+            this.Controls.Add(this.MostrarFinal);
+            this.Controls.Add(this.JuegoAtomatico);
+            this.Controls.Add(this.SiguienteJugada);
             this.Name = "Form4";
             this.Text = "Form4";
             this.ResumeLayout(false);
@@ -112,10 +114,10 @@
 
         #endregion
 
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
+        private Button SiguienteJugada;
+        private Button JuegoAtomatico;
+        private Button MostrarFinal;
+        private Button Atras;
         private ListBox listBox1;
         private VScrollBar vScrollBar1;
         private System.Windows.Forms.Timer timer1;

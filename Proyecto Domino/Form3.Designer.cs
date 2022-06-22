@@ -33,8 +33,8 @@
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.Siguiente = new System.Windows.Forms.Button();
+            this.Atras = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -83,25 +83,25 @@
             this.comboBox5.Size = new System.Drawing.Size(172, 23);
             this.comboBox5.TabIndex = 4;
             // 
-            // button1
+            // Siguiente
             // 
-            this.button1.Location = new System.Drawing.Point(625, 352);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Siguiente";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.Siguiente.Location = new System.Drawing.Point(625, 352);
+            this.Siguiente.Name = "Siguiente";
+            this.Siguiente.Size = new System.Drawing.Size(75, 23);
+            this.Siguiente.TabIndex = 5;
+            this.Siguiente.Text = "Siguiente";
+            this.Siguiente.UseVisualStyleBackColor = true;
+            this.Siguiente.Click += new System.EventHandler(this.Siguiente_Click);
             // 
-            // button2
+            // Atras
             // 
-            this.button2.Location = new System.Drawing.Point(79, 352);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 6;
-            this.button2.Text = "Atras";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.Atras.Location = new System.Drawing.Point(79, 352);
+            this.Atras.Name = "Atras";
+            this.Atras.Size = new System.Drawing.Size(75, 23);
+            this.Atras.TabIndex = 6;
+            this.Atras.Text = "Atras";
+            this.Atras.UseVisualStyleBackColor = true;
+            this.Atras.Click += new System.EventHandler(this.Atras_Click);
             // 
             // label1
             // 
@@ -164,8 +164,8 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.Atras);
+            this.Controls.Add(this.Siguiente);
             this.Controls.Add(this.comboBox5);
             this.Controls.Add(this.comboBox4);
             this.Controls.Add(this.comboBox3);
@@ -185,8 +185,8 @@
         private ComboBox comboBox3;
         private ComboBox comboBox4;
         private ComboBox comboBox5;
-        private Button button1;
-        private Button button2;
+        private Button Siguiente;
+        private Button Atras;
         private Label label1;
         private Label label2;
         private Label label3;

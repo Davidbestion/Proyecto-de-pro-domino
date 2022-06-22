@@ -21,16 +21,26 @@ namespace Proyecto_Domino
             Application.Exit();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void SiguienteJugada_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void Atras_Click(object sender, EventArgs e)
         {
             Form3 form3 = new Form3();
             this.Hide();
             form3.Show();
+        }
+
+        private void JuegoAtomatico_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MostrarFinal_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

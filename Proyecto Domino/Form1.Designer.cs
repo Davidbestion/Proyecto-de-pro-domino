@@ -28,23 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.Iniciar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // button1
+            // Iniciar
             // 
-            this.button1.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(327, 326);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(126, 52);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Iniciar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.Iniciar.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Iniciar.Location = new System.Drawing.Point(327, 326);
+            this.Iniciar.Name = "Iniciar";
+            this.Iniciar.Size = new System.Drawing.Size(126, 52);
+            this.Iniciar.TabIndex = 0;
+            this.Iniciar.Text = "Iniciar";
+            this.Iniciar.UseVisualStyleBackColor = true;
+            this.Iniciar.Click += new System.EventHandler(this.Iniciar_Click);
             // 
             // label1
             // 
@@ -96,7 +96,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.Iniciar);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -106,7 +106,7 @@
 
         #endregion
 
-        private Button button1;
+        private Button Iniciar;
         private Label label1;
         private Label label2;
         private Label label3;
