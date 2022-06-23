@@ -36,7 +36,10 @@ namespace Proyecto_Domino
 
         private void Agregar_Click(object sender, EventArgs e)//Agregar Jugador
         {
-            Jugador jugador = tipos.Comparer(comboBox1.SelectedItem.ToString());
+            //Da error si no hay nada escrito en el combobox
+            if (comboBox1.SelectedItem.ToString() == null) MessageBox.Show("Elija un tipo de jugador por favor.");
+            if (textBox1.Text == null) MessageBox.Show("Debe ingresar un nombre para su jugador.");
+            Jugador jugador = tipos.Comparer(comboBox1.SelectedItem.ToString()!);
             bool estaElNombre = false;
             foreach (var item in jugadores)
             {
@@ -44,7 +47,7 @@ namespace Proyecto_Domino
             }
             if (!estaElNombre)
             {
-                jugador.Nombre = textBox1.Text;
+                jugador.Nombre = textBox1.Text!;
                 nombresDeJugadores.Add(textBox1.Text + " (" + comboBox1.SelectedItem.ToString() + ")");
                 jugadores.Add(jugador);
                 listBox1.DataSource = null;

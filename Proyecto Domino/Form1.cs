@@ -10,7 +10,7 @@ namespace Proyecto_Domino
         private void Iniciar_Click(object sender, EventArgs e)
         {
             Form2 form2 = new Form2();
-            this.Close();
+            this.Hide();
             form2.Show();
         }
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
