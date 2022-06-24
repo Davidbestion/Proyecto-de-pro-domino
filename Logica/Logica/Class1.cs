@@ -15,7 +15,7 @@
             this.Nombre = Nombre;
         }
 
-        protected abstract int Juega(List<Tuple<int, int>> fichas, int num1, int num2);//Los numero disponibles en el tablero
+        protected abstract Tuple<int,int> Juega(List<Tuple<int, int>> fichas, int num1, int num2);//Los numeros disponibles en el tablero
         protected abstract void Seleccionar(List<Tuple<int, int>> fichas, bool[] fichas2);
 
         protected abstract bool EsFichaJugable(Tuple<int, int> ficha, int num1, int num2);//Pa cuando la hagas interface en vez de abstracta.
@@ -33,21 +33,21 @@
             throw new NotImplementedException();
         }
 
-        protected override int Juega(List<Tuple<int, int>> fichas, int num1, int num2)
+        protected override Tuple<int, int> Juega(List<Tuple<int, int>> fichas, int num1, int num2)
         {
             int length = fichas.Count;
             Random random = new Random();
             for (int i = 0; i < length; i++)
             {
                 if (EsFichaJugable(fichas[i], num1, num2)) break;
-                else if (i == length - 1) return 0;//Cambia en el return lo q quieras devolver si no se encuentra ficha jugable
+                else if (i == length - 1) return new Tuple<int, int>(-1, -1);//Si no puede jugar ninguna ficha, retorna (-1,-1)
             }
-            int jugada = 0;
+            Tuple<int, int> ficha = new Tuple<int, int>(-1, -1);
             do
             {
-                jugada = random.Next(length);//Si la ficha no puede jugarse?
-            } while (fichas[jugada].Item1 == num1 || fichas[jugada].Item2 == num1 || fichas[jugada].Item1 == num2 || fichas[jugada].Item2 == num2);
-            return jugada;
+                ficha = fichas[random.Next(length)];
+            } while (!EsFichaJugable(ficha, num1, num2));
+            return ficha;
         }
 
         protected override void Seleccionar(List<Tuple<int, int>> fichas, bool[] fichas2)
@@ -74,20 +74,19 @@
             throw new NotImplementedException();
         }
 
-        protected override int Juega(List<Tuple<int, int>> fichas, int num1, int num2)
+        protected override Tuple<int, int> Juega(List<Tuple<int, int>> fichas, int num1, int num2)
         {
             int length = fichas.Count;
             int mayorValor = 0;
-            int fichaDeMayorValor = 0;
-            int valor = 0;
+            Tuple<int,int> fichaDeMayorValor = new Tuple<int, int>(-1,-1);
             //int[] jugadas = new int[fichas.Count];Pa no crear array, q ocupa espacio en memoria...
             for (int i = 0; i < length; i++)
             {
                 //Condicional q determina si la ficha actual se puede poner en el tablero
                 if (fichas[i].Item1 == num1 || fichas[i].Item2 == num1 || fichas[i].Item1 == num2 || fichas[i].Item2 == num2)
                 {
-                    valor = fichas[i].Item1 + fichas[i].Item2;
-                    if (valor > mayorValor) { mayorValor = valor; fichaDeMayorValor = i; }
+                    int valor = fichas[i].Item1 + fichas[i].Item2;
+                    if (valor > mayorValor) { mayorValor = valor; fichaDeMayorValor = fichas[i]; }
                 }
                 //jugadas[i] = fichas[i].Item1 + fichas[i].Item2;
                 //if (jugadas[i] > mayorValor) { mayorValor = jugadas[i]; fichaDeMayorValor = i; }
@@ -119,9 +118,62 @@
             throw new NotImplementedException();
         }
 
-        protected override int Juega(List<Tuple<int, int>> fichas, int num1, int num2)
-        {
-            throw new NotImplementedException();
+        protected override Tuple<int, int> Juega(List<Tuple<int, int>> fichas, int num1, int num2)
+        {//La idea de esto es escojer la ficha q pueda jugar por un numero y q su otro numero
+         //sea lo mas comun posible entre el resto de las fichas q tengo. 
+            int length = fichas.Count;
+            int potencialMaximo = 0;
+            Tuple<int, int> fichaElegida = new Tuple<int, int>(-1, -1);
+            foreach (Tuple<int, int> ficha in fichas)//Reviso por las fichas q tengo
+            {
+                int potencial = 0;
+                if (EsFichaJugable(ficha, num1, num2))//Escojo las q puedo jugar
+                {
+                    bool puedeJugar = true;
+                    int numero = -1;
+                    //Guardo el numero por el cual la puedo jugar
+                    if (ficha.Item1 == num1 || ficha.Item1 == num2)
+                    {
+                        numero = ficha.Item2;
+                        foreach (Tuple<int, int> ficha2 in fichas)
+                        {//Reviso cuales fichas de las q tengo tienen el otro numero
+                            //eso me dira que tan buena es la ficha jugable
+                            if (ficha2 == ficha) continue;
+                            if (ficha2.Item1 == numero || ficha2.Item2 == numero)
+                            {
+                                potencial++;//potencial de la ficha, NO DE ficha2.!!!!!!!!!
+                            }
+                            if (potencial > potencialMaximo)
+                            {
+                                fichaElegida = ficha;
+                                potencialMaximo = potencial;
+                            }
+
+                        }
+                    }//Repito el proceso con el otro numero de la ficha jugable por si la puedo pegar
+                    //con ambos numero en el "tablero": num1 y num2.
+                    if (ficha.Item2 == num1 || ficha.Item2 == num2)
+                    {
+                        numero = ficha.Item1;
+                        foreach (Tuple<int, int> ficha2 in fichas)
+                        {
+                            if (ficha2 == ficha) continue;
+                            if (ficha2.Item1 == numero || ficha2.Item2 == numero)
+                            {
+                                potencial++;
+                            }
+                            if (potencial > potencialMaximo)
+                            {
+                                fichaElegida = ficha;
+                                potencialMaximo = potencial;
+                            }
+
+                        }
+                    }
+                }
+            }
+            //Si nunca encontro ficha jugable entonces retorna (-1,-1)
+            return fichaElegida;
         }
 
         protected override void Seleccionar(List<Tuple<int, int>> fichas, bool[] fichas2)
