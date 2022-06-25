@@ -14,6 +14,10 @@ namespace Proyecto_Domino
     {
         public Form4()
         {
+
+
+
+
             InitializeComponent();
         }
         private void Form4_FormClosed(object sender, FormClosedEventArgs e)

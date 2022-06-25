@@ -57,7 +57,7 @@ namespace Proyecto_Domino
 
         private void Siguiente_Click(object sender, EventArgs e)//Siguiente
         {
-            Form3 form3 = new Form3();
+            Form3 form3 = new Form3(jugadores);
             this.Hide();
             form3.Show();
         }

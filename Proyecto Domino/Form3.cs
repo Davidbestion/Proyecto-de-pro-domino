@@ -7,13 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Logica;
 
 namespace Proyecto_Domino
 {
     public partial class Form3 : Form
     {
-        public Form3()
+        public Form3(List<Jugador>jugadores)
         {
+
             InitializeComponent();
         }
         private void Form3_FormClosed(object sender, FormClosedEventArgs e)
