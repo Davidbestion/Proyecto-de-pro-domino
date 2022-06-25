@@ -35,17 +35,17 @@
 
         protected override Tuple<int, int> Juega(List<Tuple<int, int>> fichas, int num1, int num2)
         {
-            int length = fichas.Count;
+            int length = Fichas.Count;
             Random random = new Random();
             for (int i = 0; i < length; i++)
             {
-                if (EsFichaJugable(fichas[i], num1, num2)) break;
+                if (EsFichaJugable(Fichas[i], num1, num2)) break;
                 else if (i == length - 1) return new Tuple<int, int>(-1, -1);//Si no puede jugar ninguna ficha, retorna (-1,-1)
             }
             Tuple<int, int> ficha = new Tuple<int, int>(-1, -1);
             do
             {
-                ficha = fichas[random.Next(length)];
+                ficha = Fichas[random.Next(length)];
             } while (!EsFichaJugable(ficha, num1, num2));
             return ficha;
         }
@@ -76,17 +76,17 @@
 
         protected override Tuple<int, int> Juega(List<Tuple<int, int>> fichas, int num1, int num2)
         {
-            int length = fichas.Count;
+            int length = Fichas.Count;
             int mayorValor = 0;
             Tuple<int,int> fichaDeMayorValor = new Tuple<int, int>(-1,-1);
             //int[] jugadas = new int[fichas.Count];Pa no crear array, q ocupa espacio en memoria...
             for (int i = 0; i < length; i++)
             {
                 //Condicional q determina si la ficha actual se puede poner en el tablero
-                if (fichas[i].Item1 == num1 || fichas[i].Item2 == num1 || fichas[i].Item1 == num2 || fichas[i].Item2 == num2)
+                if (Fichas[i].Item1 == num1 || Fichas[i].Item2 == num1 || Fichas[i].Item1 == num2 || Fichas[i].Item2 == num2)
                 {
-                    int valor = fichas[i].Item1 + fichas[i].Item2;
-                    if (valor > mayorValor) { mayorValor = valor; fichaDeMayorValor = fichas[i]; }
+                    int valor = Fichas[i].Item1 + Fichas[i].Item2;
+                    if (valor > mayorValor) { mayorValor = valor; fichaDeMayorValor = Fichas[i]; }
                 }
                 //jugadas[i] = fichas[i].Item1 + fichas[i].Item2;
                 //if (jugadas[i] > mayorValor) { mayorValor = jugadas[i]; fichaDeMayorValor = i; }
@@ -121,10 +121,10 @@
         protected override Tuple<int, int> Juega(List<Tuple<int, int>> fichas, int num1, int num2)
         {//La idea de esto es escojer la ficha q pueda jugar por un numero y q su otro numero
          //sea lo mas comun posible entre el resto de las fichas q tengo. 
-            int length = fichas.Count;
+            int length = Fichas.Count;
             int potencialMaximo = 0;
             Tuple<int, int> fichaElegida = new Tuple<int, int>(-1, -1);
-            foreach (Tuple<int, int> ficha in fichas)//Reviso por las fichas q tengo
+            foreach (Tuple<int, int> ficha in Fichas)//Reviso por las fichas q tengo
             {
                 int potencial = 0;
                 if (EsFichaJugable(ficha, num1, num2))//Escojo las q puedo jugar
@@ -135,7 +135,7 @@
                     if (ficha.Item1 == num1 || ficha.Item1 == num2)
                     {
                         numero = ficha.Item2;
-                        foreach (Tuple<int, int> ficha2 in fichas)
+                        foreach (Tuple<int, int> ficha2 in Fichas)
                         {//Reviso cuales fichas de las q tengo tienen el otro numero
                             //eso me dira que tan buena es la ficha jugable
                             if (ficha2 == ficha) continue;
@@ -155,7 +155,7 @@
                     if (ficha.Item2 == num1 || ficha.Item2 == num2)
                     {
                         numero = ficha.Item1;
-                        foreach (Tuple<int, int> ficha2 in fichas)
+                        foreach (Tuple<int, int> ficha2 in Fichas)
                         {
                             if (ficha2 == ficha) continue;
                             if (ficha2.Item1 == numero || ficha2.Item2 == numero)

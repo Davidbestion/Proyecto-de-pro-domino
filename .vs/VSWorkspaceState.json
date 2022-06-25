@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Logica",
+    "\\Logica\\Logica",
     "\\Proyecto Domino"
   ],
-  "SelectedNode": "\\Proyecto Domino\\Form3.cs",
+  "SelectedNode": "\\Logica\\Logica\\Class1.cs",
   "PreviewInSolutionExplorer": false
 }
