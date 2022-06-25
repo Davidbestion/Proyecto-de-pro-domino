@@ -16,7 +16,7 @@
         }
 
         protected abstract Tuple<int,int> Juega(List<Tuple<int, int>> fichas, int num1, int num2);//Los numeros disponibles en el tablero
-        protected abstract void Seleccionar(List<Tuple<int, int>> fichas, bool[] fichas2);
+        protected abstract void Seleccionar(List<Tuple<int, int>> fichas, bool bocaArriba, int cantFichas);
 
         protected abstract bool EsFichaJugable(Tuple<int, int> ficha, int num1, int num2);//Pa cuando la hagas interface en vez de abstracta.
         //{
@@ -50,17 +50,16 @@
             return ficha;
         }
 
-        protected override void Seleccionar(List<Tuple<int, int>> fichas, bool[] fichas2)
+        protected override void Seleccionar(List<Tuple<int, int>> fichas, bool bocaArriba, int cantFichas)
         {
             Random selecciona = new Random();
-            for (int i = 0; i <= 7; i++)//Cantidad de fichas a robar
+            while (Fichas.Count < cantFichas)
             {
-                while (true)
-                {
-                    int fichaSeleccionada = selecciona.Next(0, fichas2.Length - 1);
-                    if (!fichas2[fichaSeleccionada]) { fichas2[fichaSeleccionada] = true;Fichas.Add(fichas[fichaSeleccionada]);break; }
-                }
+                int a = selecciona.Next(fichas.Count);
+                Fichas.Add(fichas[a]);
+                fichas.Remove(fichas[a]);
             }
+
 
         }
     }
@@ -94,24 +93,50 @@
             return fichaDeMayorValor;
         }
 
-        protected override void Seleccionar(List<Tuple<int, int>> fichas, bool[] fichas2)
+        protected override void Seleccionar(List<Tuple<int, int>> fichas, bool bocaArriba, int cantFichas)
         {
+            Random random = new Random();
+            if (!bocaArriba)
+            {
+                int a = random.Next(fichas.Count);
+                Fichas.Add(fichas[a]);
+                fichas.Remove(fichas[a]);
+            }
+            else
+            {
+                int length = fichas.Count;
+                int valor = 0;
+                Tuple<int, int> fichaDeMenorValor = fichas[0];
+                int menorValor = fichaDeMenorValor.Item1 + fichaDeMenorValor.Item2;
+                while (Fichas.Count < cantFichas)
+                {
+                    for(int i = 0; i < length; i++)
+                    {
+                        if (fichaDeMenorValor == fichas[i]) continue;
+                        valor = fichas[i].Item1 + fichas[i].Item2;
+                        if(valor < menorValor)
+                        {
+                            fichaDeMenorValor = fichas[i];
+                            menorValor = valor;
+                        }
+                        if(i == length - 1)
+                        {
+                            Fichas.Add(fichaDeMenorValor);
+                            fichas.Remove(fichaDeMenorValor);
+                        }
+                    }
+                }
+            }
 
-            //Random selecciona = new Random();
-            //for (int i = 0; i <= 7; i++)//Cantidad de fichas a robar
-            //{
-            //    while (true)
-            //    {
-            //        int fichaSeleccionada = selecciona.Next(0, fichas2.Length - 1);
-            //        if (!fichas2[fichaSeleccionada]) { fichas2[fichaSeleccionada] = true; Fichas.Add(fichas[fichaSeleccionada]); break; }
-            //    }
-            //}
         }
     }
 
     public class JugadorInteligente : Jugador
     {
-        public JugadorInteligente(string Nombre) : base(Nombre) { }
+        public JugadorInteligente(string Nombre) : base(Nombre) 
+        { 
+            Fichas = new List<Tuple<int, int>>();
+        }
 
         protected override bool EsFichaJugable(Tuple<int, int> ficha, int num1, int num2)
         {
@@ -176,9 +201,17 @@
             return fichaElegida;
         }
 
-        protected override void Seleccionar(List<Tuple<int, int>> fichas, bool[] fichas2)
+        protected override void Seleccionar(List<Tuple<int, int>> fichas, bool bocaArriba)
         {
-            throw new NotImplementedException();
+            Random random = new Random();
+            if(!bocaArriba)
+            {
+                Fichas.Add(fichas[random.Next(fichas.Count)]);
+            }
+            else
+            {
+
+            }
         }
     }
     public class TiposDeJugador///////////////////Assembly
