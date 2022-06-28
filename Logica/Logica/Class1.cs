@@ -1,4 +1,6 @@
-﻿namespace Logica
+﻿using System.Collections;
+
+namespace Logica
 {
     public abstract class Jugador
     {
@@ -226,19 +228,19 @@
         /////////////////////////////////////////////////
         ///Cosas DEl FOrm 3
 
-        interface IFicha
+        public interface IFicha
         {
-            List<Tuple<int, int>> GeneradorDeFichas(int valor);
+            List<Tuple<int, int>> GeneradorDeFichas();
         }
 
-        public class Fichas : IFicha
+        public class FichasDe6 : IFicha
         {
-            public List<Tuple<int, int>> GeneradorDeFichas(int valor)
+            public List<Tuple<int, int>> GeneradorDeFichas()
             {
                 List<Tuple<int, int>> listaDeFichas = new List<Tuple<int, int>>();
-                for (int i = 0; i <= valor; i++)
+                for (int i = 0; i <= 6; i++)
                 {
-                    for (int j = i; j <= valor; j++)//tenias j = 0, puse j = i pa q no se creen duplicados de las fichas q se han creado hasta ahora
+                    for (int j = i; j <= 6; j++)//tenias j = 0, puse j = i pa q no se creen duplicados de las fichas q se han creado hasta ahora
                     {
                         listaDeFichas.Add(new Tuple<int, int>(i, j));
                     }
@@ -249,7 +251,7 @@
 
 
 
-        interface ICondicionDeFinalizacion
+        public interface ICondicionDeFinalizacion
         {
             //  bool Finalizo(List<Jugador> jugadores);
 
@@ -269,7 +271,7 @@
         // public class FinalizacionPorPase : ICondicionDeFinalizacion { }
 
 
-        interface IOrdenDeLasJugadas
+        public interface IOrdenDeLasJugadas
         {
             Jugador Orden(List<Jugador> jugadores, bool SePaso);
         }
@@ -344,7 +346,7 @@
             }
         }
 
-    interface IFormadeRepartir
+    public interface IFormadeRepartir
     {
         void Repartir(IList<Tuple<int, int>> fichas, List<Jugador> jugadores);
     }
@@ -362,5 +364,63 @@
            
         }
     }
+    ///Form 4
+
+    public class Juego : IEnumerator<Jugada>
+    {
+        List<Jugador> ListadeJugadores;
+        ICondicionDeFinalizacion CondicionDeFinalizacion;
+        IOrdenDeLasJugadas OrdenDeLasJugadas;
+        IFormadeRepartir FormadeRepartir;
+        IFicha ModoDeJuego;
+        //IFormaDeCalcularPuntuacionFinal FormaDeCalcularPuntuacionFinal;
+
+        bool PrimerTurno;
+        bool HuboMoveNext;
+
+
+
+        public Juego(List<Jugador> ListadeJugadores, ICondicionDeFinalizacion CondicionDeFinalizacion, IOrdenDeLasJugadas OrdenDeLasJugadas, IFormadeRepartir FormadeRepartir, IFicha ModoDeJuego)
+        {
+             this.ListadeJugadores= ListadeJugadores;
+            this.CondicionDeFinalizacion= CondicionDeFinalizacion;
+            this.OrdenDeLasJugadas= OrdenDeLasJugadas;
+            this.FormadeRepartir= FormadeRepartir;
+            this.ModoDeJuego= ModoDeJuego;
+            //
+            PrimerTurno= true;
+            HuboMoveNext = false;
+            
+
+        }
+
+        public Jugada Current => throw new NotImplementedException();
+
+        object IEnumerator.Current => throw new NotImplementedException();
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool MoveNext()
+        {
+            if (PrimerTurno)
+            {
+               List<Tuple<int,int>>fichas= ModoDeJuego.GeneradorDeFichas();
+               FormadeRepartir.Repartir(fichas,ListadeJugadores);
+               PrimerTurno = false;
+            }
+            OrdenDeLasJugadas.Orden(ListadeJugadores,)
+        }
+
+        public void Reset()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+
 
 }
