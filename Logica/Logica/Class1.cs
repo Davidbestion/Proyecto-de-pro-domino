@@ -117,7 +117,8 @@ namespace Logica
         }
 
         protected override void Seleccionar(List<Tuple<int, int>> fichas, bool bocaArriba, int cantFichas)
-        {
+        {/////////////////////////////////////////ATENCION//////////////////////////////////////////////////////////////
+            //cantFichas TIENE Q SER MENOR Q fichas.Count!!!!!!!!!!!!
             Random random = new Random();
             if (!bocaArriba)
             {
@@ -133,6 +134,7 @@ namespace Logica
                 int menorValor = fichaDeMenorValor.Item1 + fichaDeMenorValor.Item2;
                 while (Fichas.Count < cantFichas)
                 {
+                    length = fichas.Count;
                     for(int i = 0; i < length; i++)
                     {
                         if (fichaDeMenorValor == fichas[i]) continue;
@@ -232,9 +234,28 @@ namespace Logica
                 Fichas.Add(fichas[random.Next(fichas.Count)]);
             }
             else
-            {
+            {//Escoger al menos una ficha con cada numero
 
             }
+        }
+        /////METODO DE SELECCIONAR DEL JUGADOR INTELIGENTE INCOMPLETO
+        private List<Tuple<int, int>> EscogerFichas(int cantFichas, List<Tuple<int, int>> fichas, List<Tuple<int, int>> escogidas, int length, int indice)
+        {
+            if (indice > cantFichas) return escogidas;
+            if(indice > 0)
+            for (int i = indice; i < length; i++)
+            {
+                if(!EsDoble(fichas[i]))
+                {
+                    Tuple<int, int> ficha = fichas[i];
+                    escogidas.Add(ficha);
+                    escogidas.Remove(ficha);
+                }
+            }
+        }
+        private bool EsDoble(Tuple<int,int> ficha)
+        {
+            return ficha.Item1 == ficha.Item2;
         }
     }
     public class TiposDeJugador///////////////////Assembly
