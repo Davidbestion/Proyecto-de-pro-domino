@@ -7,14 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Logica;
 
 namespace Proyecto_Domino
 {
     public partial class Form4 : Form
     {
+        Juego juego;
         public Form4()
         {
-
+            juego = new Juego();///////
 
 
 
@@ -27,7 +29,7 @@ namespace Proyecto_Domino
 
         private void SiguienteJugada_Click(object sender, EventArgs e)
         {
-
+            if (juego.MoveNext()) { listBox1.Text = null;listBox1.Text=juego.Current.ToString(); }/////
         }
 
         private void Atras_Click(object sender, EventArgs e)
