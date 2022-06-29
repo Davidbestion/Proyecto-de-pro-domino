@@ -44,9 +44,6 @@ namespace Logica
             {
                 return Fichas[random.Next(length)];
             }
-
-
-
             for (int i = 0; i < length; i++)
             {
                 if (EsFichaJugable(Fichas[i], num1, num2)) break;
@@ -69,8 +66,6 @@ namespace Logica
                 Fichas.Add(fichas[a]);
                 fichas.Remove(fichas[a]);
             }
-
-
         }
     }
 
@@ -117,13 +112,17 @@ namespace Logica
         }
 
         protected override void Seleccionar(List<Tuple<int, int>> fichas, bool bocaArriba, int cantFichas)
-        {
+        {/////////////////////////////////////////ATENCION//////////////////////////////////////////////////////////////
+            //cantFichas TIENE Q SER MENOR Q fichas.Count!!!!!!!!!!!!
             Random random = new Random();
             if (!bocaArriba)
             {
-                int a = random.Next(fichas.Count);
-                Fichas.Add(fichas[a]);
-                fichas.Remove(fichas[a]);
+                while (Fichas.Count < cantFichas)
+                {
+                    int a = random.Next(fichas.Count);
+                    Fichas.Add(fichas[a]);
+                    fichas.Remove(fichas[a]);
+                }
             }
             else
             {
@@ -133,6 +132,7 @@ namespace Logica
                 int menorValor = fichaDeMenorValor.Item1 + fichaDeMenorValor.Item2;
                 while (Fichas.Count < cantFichas)
                 {
+                    length = fichas.Count;
                     for(int i = 0; i < length; i++)
                     {
                         if (fichaDeMenorValor == fichas[i]) continue;
@@ -150,7 +150,6 @@ namespace Logica
                     }
                 }
             }
-
         }
     }
 
@@ -166,7 +165,7 @@ namespace Logica
             throw new NotImplementedException();
         }
 
-        protected override Tuple<int, int> Juega(List<Tuple<int, int>> fichas, int num1, int num2)
+        public override Tuple<int, int> Juega(List<Tuple<int, int>> fichas, int num1, int num2)
         {//La idea de esto es escojer la ficha q pueda jugar por un numero y q su otro numero
          //sea lo mas comun posible entre el resto de las fichas q tengo. 
             int length = Fichas.Count;
@@ -224,17 +223,44 @@ namespace Logica
             return fichaElegida;
         }
 
-        protected override void Seleccionar(List<Tuple<int, int>> fichas, bool bocaArriba)
+        protected override void Seleccionar(List<Tuple<int, int>> fichas, bool bocaArriba, int cantFichas)
         {
             Random random = new Random();
             if(!bocaArriba)
             {
+                while()
                 Fichas.Add(fichas[random.Next(fichas.Count)]);
             }
             else
             {
+                //TENER LA MAYOR CANTIDAD POSIBLE DE CADA NUMERO EN Fichas
 
             }
+        }
+        /////METODO DE SELECCIONAR DEL JUGADOR INTELIGENTE INCOMPLETO
+        private List<Tuple<int, int>> EscogerFichas(int cantFichas, List<Tuple<int, int>> fichas, List<Tuple<int, int>> escogidas, int length, int indice)
+        {
+            if (indice > cantFichas) return escogidas;
+            for (int i = indice; i < length; i++)//Escojo una ficha
+            {
+                Tuple<int, int> ficha = fichas[i];
+                escogidas.Add(ficha);//La agrego
+                for (int j = 0; j < escogidas.Count; j++) 
+                {//Verifico si 
+                    if(ficha.Item1 == escogidas[j].Item1 || ficha.Item2 == escogidas[j].Item1 || ficha.Item1 == escogidas[j].Item2 || ficha.Item2 == escogidas[j].Item2)
+                    {
+                        if (ficha.Equals(escogidas[j])) continue;
+
+                        break;
+                    }
+                    if (j == escogidas.Count - 1) return EscogerFichas(cantFichas, fichas, escogidas, length, i + 1);
+                }
+                escogidas.Remove(ficha);
+            } 
+        }
+        private bool EsDoble(Tuple<int,int> ficha)
+        {
+            return ficha.Item1 == ficha.Item2;
         }
     }
     public class TiposDeJugador///////////////////Assembly
