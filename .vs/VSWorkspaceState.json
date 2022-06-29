@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Logica",
+    "\\Logica\\Logica"
   ],
+  "SelectedNode": "\\Logica\\Logica\\Class1.cs",
   "PreviewInSolutionExplorer": false
 }
