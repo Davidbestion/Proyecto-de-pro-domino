@@ -14,13 +14,18 @@ namespace Proyecto_Domino
     public partial class Form4 : Form
     {
         Juego juego;
-        public Form4()
+        List<string> guardadas = new List<string>();
+
+        List<Jugador> jugadores;
+
+        public Form4(List<Jugador> jugadores,ICondicionDeFinalizacion condicionDeFinalizacion,IOrdenDeLasJugadas ordenDeLasJugadas,IFormadeRepartir formadeRepartir,IFicha modoDeJuego,IFormaDeCalcularPuntuacion formaDeCalcular)
         {
-            juego = new Juego();///////
-
-
-
             InitializeComponent();
+            juego = new Juego(jugadores,condicionDeFinalizacion,ordenDeLasJugadas,formadeRepartir,modoDeJuego,formaDeCalcular);///////
+            this.jugadores = jugadores;
+
+
+            
         }
         private void Form4_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -29,12 +34,14 @@ namespace Proyecto_Domino
 
         private void SiguienteJugada_Click(object sender, EventArgs e)
         {
-            if (juego.MoveNext()) { listBox1.Text = null;listBox1.Text=juego.Current.ToString(); }/////
+            if (juego.MoveNext()) { listBox1.Text = null;guardadas.Add(juego.Current.ToString());
+                //listBox1.Text = guardadas; 
+            }/////
         }
 
         private void Atras_Click(object sender, EventArgs e)
         {
-            Form3 form3 = new Form3();
+            Form3 form3 = new Form3(jugadores);
             this.Hide();
             form3.Show();
         }

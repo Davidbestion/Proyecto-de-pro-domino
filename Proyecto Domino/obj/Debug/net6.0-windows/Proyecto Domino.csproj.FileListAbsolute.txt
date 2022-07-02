@@ -44,3 +44,26 @@ C:\Users\David\Source\Repos\Davidbestion\Proyecto-de-pro-domino\Proyecto Domino\
 C:\Users\David\Source\Repos\Davidbestion\Proyecto-de-pro-domino\Proyecto Domino\obj\Debug\net6.0-windows\Proyecto Domino.pdb
 C:\Users\David\Source\Repos\Davidbestion\Proyecto-de-pro-domino\Proyecto Domino\obj\Debug\net6.0-windows\Proyecto Domino.genruntimeconfig.cache
 C:\Users\David\Source\Repos\Davidbestion\Proyecto-de-pro-domino\Proyecto Domino\obj\Debug\net6.0-windows\ref\Proyecto Domino.dll
+C:\Users\hp\source\repos\Proyecto-de-pro-domino\Proyecto Domino\bin\Debug\net6.0-windows\Proyecto Domino.exe
+C:\Users\hp\source\repos\Proyecto-de-pro-domino\Proyecto Domino\bin\Debug\net6.0-windows\Proyecto Domino.deps.json
+C:\Users\hp\source\repos\Proyecto-de-pro-domino\Proyecto Domino\bin\Debug\net6.0-windows\Proyecto Domino.runtimeconfig.json
+C:\Users\hp\source\repos\Proyecto-de-pro-domino\Proyecto Domino\bin\Debug\net6.0-windows\Proyecto Domino.dll
+C:\Users\hp\source\repos\Proyecto-de-pro-domino\Proyecto Domino\bin\Debug\net6.0-windows\Proyecto Domino.pdb
+C:\Users\hp\source\repos\Proyecto-de-pro-domino\Proyecto Domino\bin\Debug\net6.0-windows\Logica.dll
+C:\Users\hp\source\repos\Proyecto-de-pro-domino\Proyecto Domino\bin\Debug\net6.0-windows\Logica.pdb
+C:\Users\hp\source\repos\Proyecto-de-pro-domino\Proyecto Domino\obj\Debug\net6.0-windows\Proyecto Domino.csproj.AssemblyReference.cache
+C:\Users\hp\source\repos\Proyecto-de-pro-domino\Proyecto Domino\obj\Debug\net6.0-windows\Proyecto_Domino.Form1.resources
+C:\Users\hp\source\repos\Proyecto-de-pro-domino\Proyecto Domino\obj\Debug\net6.0-windows\Proyecto_Domino.Form2.resources
+C:\Users\hp\source\repos\Proyecto-de-pro-domino\Proyecto Domino\obj\Debug\net6.0-windows\Proyecto_Domino.Form3.resources
+C:\Users\hp\source\repos\Proyecto-de-pro-domino\Proyecto Domino\obj\Debug\net6.0-windows\Proyecto_Domino.Form4.resources
+C:\Users\hp\source\repos\Proyecto-de-pro-domino\Proyecto Domino\obj\Debug\net6.0-windows\Proyecto Domino.csproj.GenerateResource.cache
+C:\Users\hp\source\repos\Proyecto-de-pro-domino\Proyecto Domino\obj\Debug\net6.0-windows\Proyecto Domino.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\source\repos\Proyecto-de-pro-domino\Proyecto Domino\obj\Debug\net6.0-windows\Proyecto Domino.AssemblyInfoInputs.cache
+C:\Users\hp\source\repos\Proyecto-de-pro-domino\Proyecto Domino\obj\Debug\net6.0-windows\Proyecto Domino.AssemblyInfo.cs
+C:\Users\hp\source\repos\Proyecto-de-pro-domino\Proyecto Domino\obj\Debug\net6.0-windows\Proyecto Domino.csproj.CoreCompileInputs.cache
+C:\Users\hp\source\repos\Proyecto-de-pro-domino\Proyecto Domino\obj\Debug\net6.0-windows\Proyecto Domino.csproj.CopyComplete
+C:\Users\hp\source\repos\Proyecto-de-pro-domino\Proyecto Domino\obj\Debug\net6.0-windows\Proyecto Domino.dll
+C:\Users\hp\source\repos\Proyecto-de-pro-domino\Proyecto Domino\obj\Debug\net6.0-windows\refint\Proyecto Domino.dll
+C:\Users\hp\source\repos\Proyecto-de-pro-domino\Proyecto Domino\obj\Debug\net6.0-windows\Proyecto Domino.pdb
+C:\Users\hp\source\repos\Proyecto-de-pro-domino\Proyecto Domino\obj\Debug\net6.0-windows\Proyecto Domino.genruntimeconfig.cache
+C:\Users\hp\source\repos\Proyecto-de-pro-domino\Proyecto Domino\obj\Debug\net6.0-windows\ref\Proyecto Domino.dll

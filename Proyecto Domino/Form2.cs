@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Logica;
+using System.Reflection;
 
 namespace Proyecto_Domino
 {
@@ -16,17 +17,43 @@ namespace Proyecto_Domino
 
 
         public List<Jugador> jugadores = new List<Jugador>();
-        public TiposDeJugador tipos = new TiposDeJugador();
+       // public TiposDeJugador tipos = new TiposDeJugador();
         public List<string> nombresDeJugadores = new List<string>();
+        public List<Type> tipos = new List<Type>();
+        public List<string>nombreDeLosTiposDeJugadores=new List<string>();
+        public Assembly assembly;
+
 
         public Form2()
         {
+
             InitializeComponent();
+
+            try
+            {
+                assembly = Assembly.Load("Logica");
+                foreach (var x in assembly.GetTypes())
+                {
+                    if (x.BaseType != null && x.BaseType.Name.Equals("Jugador")) { tipos.Add(x); }
+                }
+                foreach (var item in tipos)
+                {
+                    nombreDeLosTiposDeJugadores.Add(item.Name);
+                }
+            }
+            catch (Exception) { }
+            //comboBox1.DataSource = null;
+            comboBox1.DataSource = nombreDeLosTiposDeJugadores;
+
+
+
+
+           
             ////////////////////////////////////
-            jugadores = new List<Jugador>();
-            tipos = new TiposDeJugador();
-            nombresDeJugadores = new List<string>();
-            comboBox1.DataSource = tipos.NombreDeLosTipos;
+            //jugadores = new List<Jugador>();
+            //tipos = new TiposDeJugador();
+            //nombresDeJugadores = new List<string>();
+            //comboBox1.DataSource = tipos.NombreDeLosTipos;
             ////////////////////////////////////
         }
         private void Form2_FormClosed(object sender, FormClosedEventArgs e)
@@ -39,7 +66,17 @@ namespace Proyecto_Domino
             //Da error si no hay nada escrito en el combobox
             if (comboBox1.SelectedItem.ToString() == null) MessageBox.Show("Elija un tipo de jugador por favor.");
             if (textBox1.Text == null) MessageBox.Show("Debe ingresar un nombre para su jugador.");
-            Jugador jugador = tipos.Comparer(comboBox1.SelectedItem.ToString()!);
+
+
+
+            //Jugador jugador = tipos.Comparer(comboBox1.SelectedItem.ToString()!);
+            //
+            Jugador jugador=new JugadorAleatorio();//Para q no sea null
+            foreach (var item in tipos)
+            {
+                if (comboBox1.SelectedItem != null && comboBox1.SelectedItem.ToString() == item.Name) {  jugador = (Jugador)assembly.CreateInstance(item.FullName); }
+            }
+            //
             bool estaElNombre = false;
             foreach (var item in jugadores)
             {
