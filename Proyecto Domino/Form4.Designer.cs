@@ -34,7 +34,6 @@
             this.MostrarFinal = new System.Windows.Forms.Button();
             this.Atras = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
@@ -87,12 +86,9 @@
             this.listBox1.Size = new System.Drawing.Size(423, 244);
             this.listBox1.TabIndex = 4;
             // 
-            // vScrollBar1
+            // timer1
             // 
-            this.vScrollBar1.Location = new System.Drawing.Point(696, 42);
-            this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(17, 244);
-            this.vScrollBar1.TabIndex = 5;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form4
             // 
@@ -100,7 +96,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.vScrollBar1);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.Atras);
             this.Controls.Add(this.MostrarFinal);
@@ -119,7 +114,6 @@
         private Button MostrarFinal;
         private Button Atras;
         private ListBox listBox1;
-        private VScrollBar vScrollBar1;
         private System.Windows.Forms.Timer timer1;
     }
 }

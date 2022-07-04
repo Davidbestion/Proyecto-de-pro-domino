@@ -15,6 +15,7 @@ namespace Proyecto_Domino
     {
         Juego juego;
         List<string> guardadas = new List<string>();
+        bool juegoAutomatico = false; 
 
         List<Jugador> jugadores;
 
@@ -23,9 +24,6 @@ namespace Proyecto_Domino
             InitializeComponent();
             juego = new Juego(jugadores,condicionDeFinalizacion,ordenDeLasJugadas,formadeRepartir,modoDeJuego,formaDeCalcular);///////
             this.jugadores = jugadores;
-
-
-            
         }
         private void Form4_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -34,13 +32,22 @@ namespace Proyecto_Domino
 
         private void SiguienteJugada_Click(object sender, EventArgs e)
         {
-            if (juego.MoveNext()) { listBox1.Text = null;guardadas.Add(juego.Current.ToString());
-                //listBox1.Text = guardadas; 
+            if (juego.MoveNext()) { listBox1.DataSource = null;guardadas.Add(juego.Current.ToString());
+                listBox1.DataSource  = guardadas; 
             }/////
         }
 
         private void Atras_Click(object sender, EventArgs e)
         {
+            foreach (var item in jugadores)
+            {
+                item.EsTurno = false;
+                item.Fichas = new List<Tuple<int, int>>();
+                item.Ganador = false;
+                item.FormaDeCalcularPuntuacionDeLasFichas = null ;
+                item.Puntuacion = 0;
+            }
+            timer1.Enabled = false;
             Form3 form3 = new Form3(jugadores);
             this.Hide();
             form3.Show();
@@ -48,12 +55,19 @@ namespace Proyecto_Domino
 
         private void JuegoAtomatico_Click(object sender, EventArgs e)
         {
-
+            juegoAutomatico = !juegoAutomatico;
+            timer1.Enabled = juegoAutomatico;
+            timer1.Interval = 1000;
         }
 
         private void MostrarFinal_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (juegoAutomatico) { SiguienteJugada_Click(sender, e); }
         }
     }
 }

@@ -59,6 +59,7 @@ namespace Logica
 
         public override void Seleccionar(List<Tuple<int, int>> fichas, bool bocaArriba, int cantFichas)
         {
+            Fichas=new List<Tuple<int, int>>();
             Random selecciona = new Random();
             while (Fichas.Count < cantFichas)
             {
@@ -113,6 +114,7 @@ namespace Logica
 
         public override void Seleccionar(List<Tuple<int, int>> fichas, bool bocaArriba, int cantFichas)
         {
+            Fichas = new List<Tuple<int, int>>();
             Random random = new Random();
             if (!bocaArriba)
             {
@@ -225,6 +227,7 @@ namespace Logica
 
         public override void Seleccionar(List<Tuple<int, int>> fichas, bool bocaArriba, int cantFichas)
         {
+            Fichas = new List<Tuple<int, int>>();
             Random random = new Random();
             if(!bocaArriba)
             {
@@ -441,7 +444,7 @@ namespace Logica
         IList <int>vecesPasadasSeguidas=new List<int>();
         public bool Finalizo(Jugador jugador,Tuple<int,int>fichaJugada)
         {
-            if (!jugadores.Contains(jugador)) { jugadores.Add(jugador); }
+            if (!jugadores.Contains(jugador)) { jugadores.Add(jugador);vecesPasadasSeguidas.Add(0); }
             if (jugador.Fichas.Count == 0)
             {
                 return true;
@@ -452,7 +455,7 @@ namespace Logica
                 vecesPasadasSeguidas[indice]++;
                 if (vecesPasadasSeguidas[indice] == 2) {
                     double mejorPuntuacion = 0;
-                    int indiceJugadorConMejorPuntaje = 0 ;
+                    int indiceJugadorConMejorPuntaje = 0;
                     foreach (var item in jugadores)
                     {
                         if (mejorPuntuacion < item.Puntuacion) { indiceJugadorConMejorPuntaje = jugadores.IndexOf(item);mejorPuntuacion = item.Puntuacion; }
@@ -483,13 +486,15 @@ namespace Logica
                     {
                         if (i == jugadores.Count - 1)
                         {
+                        jugadores[jugadores.Count - 1].EsTurno = false;
                             jugadores[0].EsTurno = true;
                             return jugadores[0];
                         }
                         else
                         {
-                            jugadores[i + 1].EsTurno = true;
-                            return jugadores[i + 1];
+                            jugadores[i].EsTurno=false;
+                            jugadores[i+1].EsTurno = true;
+                            return jugadores[i+1];
                         }
                     }
                 }
@@ -501,36 +506,45 @@ namespace Logica
 
     public class OrdenCambiadoSiSePasa : IOrdenDeLasJugadas
         {
+        bool ordenCambiado = false;
             public Jugador Orden(List<Jugador> jugadores, bool SePaso)
             {
                 for (int i = 0; i < jugadores.Count; i++)
                 {
                     if (jugadores[i].EsTurno)
                     {
-                        if (SePaso)
+                    if (SePaso)
+                    {
+                        ordenCambiado = !ordenCambiado;
+                    }
+                        if (ordenCambiado)
                         {
                             if (i == 0)
                             {
+                                jugadores[0].EsTurno = false;
                                 jugadores[jugadores.Count - 1].EsTurno = true;
                                 return jugadores[jugadores.Count - 1];
                             }
                             else
                             {
+                                jugadores[i].EsTurno = false;
                                 jugadores[i - 1].EsTurno = true;
                                 return jugadores[i - 1];
                             }
-
-
                         }
+
+                        
 
 
                         if (i == jugadores.Count - 1)
                         {
+                            jugadores[jugadores.Count - 1].EsTurno= false;
                             jugadores[0].EsTurno = true;
                             return jugadores[0];
                         }
                         else
                         {
+                            jugadores[i].EsTurno=false;
                             jugadores[i + 1].EsTurno = true;
                             return jugadores[i + 1];
                         }
