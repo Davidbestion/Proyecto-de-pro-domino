@@ -64,31 +64,33 @@ namespace Proyecto_Domino
         private void Agregar_Click(object sender, EventArgs e)//Agregar Jugador
         {
             //Da error si no hay nada escrito en el combobox
-            if (comboBox1.SelectedItem.ToString() == null) MessageBox.Show("Elija un tipo de jugador por favor.");
-            if (textBox1.Text == null) MessageBox.Show("Debe ingresar un nombre para su jugador.");
+            if (comboBox1.Text.ToString() == "") MessageBox.Show("Elija un tipo de jugador por favor.");
+            else if (textBox1.Text.ToString() == "") MessageBox.Show("Debe ingresar un nombre para su jugador.");
+            else
+            {
 
 
-
-            //Jugador jugador = tipos.Comparer(comboBox1.SelectedItem.ToString()!);
-            //
-            Jugador jugador=new JugadorAleatorio();//Para q no sea null
-            foreach (var item in tipos)
-            {
-                if (comboBox1.SelectedItem != null && comboBox1.SelectedItem.ToString() == item.Name) {  jugador = (Jugador)assembly.CreateInstance(item.FullName); }
-            }
-            //
-            bool estaElNombre = false;
-            foreach (var item in jugadores)
-            {
-                if (item.Nombre == textBox1.Text) { MessageBox.Show("No puede haber mas de un jugador con el mismo nombre"); estaElNombre = true; break; }
-            }
-            if (!estaElNombre)
-            {
-                jugador.Nombre = textBox1.Text!;
-                nombresDeJugadores.Add(textBox1.Text + " (" + comboBox1.SelectedItem.ToString() + ")");
-                jugadores.Add(jugador);
-                listBox1.DataSource = null;
-                listBox1.DataSource = nombresDeJugadores;
+                //Jugador jugador = tipos.Comparer(comboBox1.SelectedItem.ToString()!);
+                //
+                Jugador jugador = new JugadorAleatorio();//Para q no sea null
+                foreach (var item in tipos)
+                {
+                    if (comboBox1.SelectedItem != null && comboBox1.SelectedItem.ToString() == item.Name) { jugador = (Jugador)assembly.CreateInstance(item.FullName); }
+                }
+                //
+                bool estaElNombre = false;
+                foreach (var item in jugadores)
+                {
+                    if (item.Nombre == textBox1.Text) { MessageBox.Show("No puede haber mas de un jugador con el mismo nombre"); estaElNombre = true; break; }
+                }
+                if (!estaElNombre)
+                {
+                    jugador.Nombre = textBox1.Text!;
+                    nombresDeJugadores.Add(textBox1.Text + " (" + comboBox1.SelectedItem.ToString() + ")");
+                    jugadores.Add(jugador);
+                    listBox1.DataSource = null;
+                    listBox1.DataSource = nombresDeJugadores;
+                }
             }
         }
 

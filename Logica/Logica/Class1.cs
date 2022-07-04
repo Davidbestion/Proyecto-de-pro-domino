@@ -38,17 +38,20 @@ namespace Logica
         {
             int length = Fichas.Count;
             Random random = new Random();
-
+            int a = random.Next(length);
+            Tuple<int, int> ficha = new Tuple<int, int>(-1, -1);
             if (num1 == -1 && num2 == -1)//Para si es el primer turno jugar una ficha random
             {
-                return Fichas[random.Next(length)];
+                ficha = Fichas[a];    
+                Fichas.Remove(ficha);
+                return ficha;
             }
+
             for (int i = 0; i < length; i++)
             {
                 if (EsFichaJugable(Fichas[i], num1, num2)) break;
                 else if (i == length - 1) return new Tuple<int, int>(-1, -1);//Si no puede jugar ninguna ficha, retorna (-1,-1)
             }
-            Tuple<int, int> ficha = new Tuple<int, int>(-1, -1);
             do
             {
                 ficha = Fichas[random.Next(length)];
@@ -80,14 +83,13 @@ namespace Logica
 
         public  override Tuple<int, int> Juega(List<Tuple<int, int>> fichas, int num1, int num2)
         {
-            int length = Fichas.Count;// -_- really nigga?
+            int length = Fichas.Count;// Yes nigga :) , esto es una pequeñisima optimizacion
             int mayorValor = 0;
             Tuple<int,int> fichaDeMayorValor = new Tuple<int, int>(-1,-1);
-            //int[] jugadas = new int[fichas.Count];Pa no crear array, q ocupa espacio en memoria...
 
             if (num1 == -1 && num2 == -1)//Por si es el primer turno,que juegue la ficha mas grande
             {
-                for (int i = 0; i < Fichas.Count; i++)
+                for (int i = 0; i < length; i++)
                 {
                     int valor = Fichas[i].Item1 + Fichas[i].Item2;
                     if (valor > mayorValor) { mayorValor = valor; fichaDeMayorValor = Fichas[i]; }
@@ -99,14 +101,11 @@ namespace Logica
 
             for (int i = 0; i < length; i++)
             {
-
-                //Condicional q determina si la ficha actual se puede poner en el tablero
                 if (EsFichaJugable(Fichas[i], num1, num2))
                 {
                     int valor = Fichas[i].Item1 + Fichas[i].Item2;
                     if (valor > mayorValor) { mayorValor = valor; fichaDeMayorValor = Fichas[i]; }
                 }
-               
             }
             Fichas.Remove(fichaDeMayorValor);
             return fichaDeMayorValor;
@@ -177,7 +176,6 @@ namespace Logica
                 int potencial = 0;
                 if (EsFichaJugable(ficha, num1, num2))//Escojo las q puedo jugar
                 {
-                    bool puedeJugar = true;
                     int numero = -1;
                     //Guardo el numero por el cual la puedo jugar
                     if (ficha.Item1 == num1 || ficha.Item1 == num2)
@@ -722,7 +720,7 @@ namespace Logica
                 Jugador actual = OrdenDeLasJugadas.Orden(ListadeJugadores, SePaso);
                 SePaso = false;//reseteando el SePaso
                 Tuple<int, int> fichaJugada = actual.Juega(fichas, Extremo1, Extremo2);
-                //aqi iba lo de juagda actual
+                //aqui iba lo de jugada actual
 
                 actual.Puntuacion+= FormaDeCalcularPuntuacion.CalcularPuntuacion(fichaJugada);
 
