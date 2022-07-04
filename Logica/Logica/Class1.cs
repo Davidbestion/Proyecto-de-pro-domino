@@ -334,15 +334,16 @@ namespace Logica
         Jugador jugador;
         Tuple<int, int> ficha;
         bool termino;
+        bool trancado;
         Jugador ganador;
 
-        public Jugada(Jugador jugador, Tuple<int, int> ficha,bool termino,Jugador ganador)
+        public Jugada(Jugador jugador, Tuple<int, int> ficha,bool termino,Jugador ganador,bool trancado)
         {
             this.jugador = jugador;
             this.ficha = ficha;
             this.termino= termino;
             this.ganador = ganador;
-
+            this.trancado= trancado;
         }
 
         public override string ToString()
@@ -355,7 +356,8 @@ namespace Logica
             else { oracion = jugador.Nombre + " ha jugado [" + ficha.Item1 + "|" + ficha.Item2 + "]"; }
             if (termino)
             {
-                oracion+= "\n El ganador es " + ganador.Nombre;
+                if (trancado) { oracion += " Juego trancado,el ganador es " + ganador.Nombre; }
+                else { oracion += "\n El ganador es " + ganador.Nombre; }
             }
             return oracion;
         }
@@ -409,7 +411,7 @@ namespace Logica
     public interface ICondicionDeFinalizacion
         {
         //bool Finalizo(List<Jugador> jugadores);
-        bool Finalizo(Jugador jugador, Tuple<int, int> fichaJugada);
+        bool Finalizo(Jugador jugador, Tuple<int, int> fichaJugada, List<Jugador> jugadores, int extremo1, int extremo2, out bool tabla);
 
         }
         public class FinalizacionPorPuntos : ICondicionDeFinalizacion
@@ -423,30 +425,53 @@ namespace Logica
         //    }
         //    return false;
         //}
-        public bool Finalizo(Jugador jugador,Tuple<int, int>fichaJugada)
+        public bool Finalizo(Jugador jugador,Tuple<int, int>fichaJugada,List<Jugador>jugadores,int extremo1,int extremo2,out bool tabla)
         {
 
             if (jugador.Fichas.Count == 0)
             {
+                jugador.Ganador = true;
+                tabla = false;
                 return true;
             }
-           
-           if (jugador.Puntuacion >= 50) { jugador.Ganador = true;   return true; }
-       
-            return false;
+
+           if (jugador.Puntuacion >= 50) { jugador.Ganador = true; tabla = false;  return true; }
+
+            foreach (var item in jugadores)//Comprobando si se tranco el juego
+            {
+                foreach (var item2 in item.Fichas )
+                {
+                    if(item2.Item1==extremo1||item2.Item2==extremo1|| item2.Item1 == extremo2 || item2.Item2 == extremo2) { tabla = false; return false; }
+                }
+            }
+
+            tabla = true;
+            
+                double mejorPuntuacion = 0;
+                int indiceJugadorConMejorPuntaje = 0;
+                foreach (var item in jugadores)
+                {
+                    if (mejorPuntuacion < item.Puntuacion) { indiceJugadorConMejorPuntaje = jugadores.IndexOf(item); mejorPuntuacion = item.Puntuacion; }
+                }
+                jugadores[indiceJugadorConMejorPuntaje].Ganador = true;
+            
+
+            return true;
         }
 
         }
 
     public class FinalizacionPorPase : ICondicionDeFinalizacion
     {
-        List<Jugador>jugadores=new List<Jugador>(); 
-        IList <int>vecesPasadasSeguidas=new List<int>();
-        public bool Finalizo(Jugador jugador,Tuple<int,int>fichaJugada)
+        int[] vecesPasadasSeguidas;
+        bool primeraVez = true;
+        public bool Finalizo(Jugador jugador,Tuple<int,int>fichaJugada, List<Jugador> jugadores, int extremo1, int extremo2, out bool tabla)
         {
-            if (!jugadores.Contains(jugador)) { jugadores.Add(jugador);vecesPasadasSeguidas.Add(0); }
+            if (primeraVez) { vecesPasadasSeguidas = new int[jugadores.Count];primeraVez = false; }
             if (jugador.Fichas.Count == 0)
             {
+                jugador.Ganador = true;
+                tabla = false;
                 return true;
             }
             if (fichaJugada.Item1 == -1 && fichaJugada.Item2 == -1)
@@ -454,18 +479,39 @@ namespace Logica
                 int indice = jugadores.IndexOf(jugador);
                 vecesPasadasSeguidas[indice]++;
                 if (vecesPasadasSeguidas[indice] == 2) {
-                    double mejorPuntuacion = 0;
-                    int indiceJugadorConMejorPuntaje = 0;
+                    double MejorPuntuacion = 0;
+                    int indiceDeJugadorConMejorPuntaje = 0;
                     foreach (var item in jugadores)
                     {
-                        if (mejorPuntuacion < item.Puntuacion) { indiceJugadorConMejorPuntaje = jugadores.IndexOf(item);mejorPuntuacion = item.Puntuacion; }
+                        if (MejorPuntuacion < item.Puntuacion) { indiceDeJugadorConMejorPuntaje = jugadores.IndexOf(item); MejorPuntuacion = item.Puntuacion; }
                     }
-                    jugadores[indiceJugadorConMejorPuntaje].Ganador = true;
+                    jugadores[indiceDeJugadorConMejorPuntaje].Ganador = true;
+                    tabla = false;
                     return true;
                 }
             }
             else if (fichaJugada.Item1 != -1 || fichaJugada.Item2 != -1) { vecesPasadasSeguidas[jugadores.IndexOf(jugador)] = 0; }
-            return false;
+
+
+            foreach (var item in jugadores)//Comprobando si se tranco el juego
+            {
+                foreach (var item2 in item.Fichas)
+                {
+                    if (item2.Item1 == extremo1 || item2.Item2 == extremo1 || item2.Item1 == extremo2 || item2.Item2 == extremo2) { tabla = false; return false; }
+                }
+            }
+
+            tabla = true;
+
+            double mejorPuntuacion = 0;
+            int indiceJugadorConMejorPuntaje = 0;
+            foreach (var item in jugadores)
+            {
+                if (mejorPuntuacion < item.Puntuacion) { indiceJugadorConMejorPuntaje = jugadores.IndexOf(item); mejorPuntuacion = item.Puntuacion; }
+            }
+            jugadores[indiceJugadorConMejorPuntaje].Ganador = true;
+
+            return true;
         }
     }
 
@@ -626,6 +672,7 @@ namespace Logica
         Jugador ganador;
 
         bool FinalizoElJuego;
+        bool JuegoTrancado;
 
 
 
@@ -646,7 +693,7 @@ namespace Logica
             Extremo2 = -1;
             fichas = ModoDeJuego.GeneradorDeFichas();
             FinalizoElJuego = false;
-
+            JuegoTrancado = false;
         }
 
         public Jugada Current { get { return jugadaActual; } }
@@ -681,7 +728,7 @@ namespace Logica
 
                 ReconocerExtremos(fichaJugada);
                 fichas.Add(fichaJugada);
-                FinalizoElJuego = CondicionDeFinalizacion.Finalizo(actual,fichaJugada);
+                FinalizoElJuego = CondicionDeFinalizacion.Finalizo(actual,fichaJugada,ListadeJugadores,Extremo1,Extremo2,out JuegoTrancado);
                 if (FinalizoElJuego)//Si termino el juego,buscar al ganador
                 {
                     
@@ -692,7 +739,7 @@ namespace Logica
                 }
 
 
-                jugadaActual = new Jugada(actual, fichaJugada, FinalizoElJuego,ganador);//
+                jugadaActual = new Jugada(actual, fichaJugada, FinalizoElJuego,ganador, JuegoTrancado);//
                 return true;
             }
             return false;
