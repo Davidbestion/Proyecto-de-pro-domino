@@ -62,6 +62,13 @@ namespace Proyecto_Domino
 
         private void MostrarFinal_Click(object sender, EventArgs e)
         {
+            while (juego.MoveNext())
+            {
+                guardadas.Add(juego.Current.ToString());
+            }
+            listBox1.DataSource = null;
+            listBox1.DataSource = guardadas;
+            //Foreach in juego{guardadas.add(item.current)}
 
         }
 

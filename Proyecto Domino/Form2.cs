@@ -47,7 +47,6 @@ namespace Proyecto_Domino
 
 
 
-
            
             ////////////////////////////////////
             //jugadores = new List<Jugador>();

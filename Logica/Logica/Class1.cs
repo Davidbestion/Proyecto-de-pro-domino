@@ -715,7 +715,7 @@ namespace Logica
                         item.FormaDeCalcularPuntuacionDeLasFichas = FormaDeCalcularPuntuacion.CalcularPuntuacion;
                     }
                     FormadeRepartir.Repartir(fichas, ListadeJugadores,ModoDeJuego.CantDeFichasParaCadaJugador);
-                    PrimerTurno = false;
+                   
                 }
                 Jugador actual = OrdenDeLasJugadas.Orden(ListadeJugadores, SePaso);
                 SePaso = false;//reseteando el SePaso
@@ -738,6 +738,9 @@ namespace Logica
 
 
                 jugadaActual = new Jugada(actual, fichaJugada, FinalizoElJuego,ganador, JuegoTrancado);//
+
+                PrimerTurno = false;
+
                 return true;
             }
             return false;
@@ -766,7 +769,12 @@ namespace Logica
                 SePaso = true;
                 return;
             }
-
+            if (PrimerTurno)
+            {
+                Extremo1 = fichaJugada.Item1;
+                Extremo2=fichaJugada.Item2;
+                return;
+            }
 
             if (fichaJugada.Item1 == Extremo1)
             {
