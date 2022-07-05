@@ -94,7 +94,7 @@ namespace Logica
             {
                 for (int i = 0; i < length; i++)
                 {
-                    int valor = Fichas[i].Item1 + Fichas[i].Item2;
+                    int valor = FormaDeCalcularPuntuacionDeLasFichas(Fichas[i]);
                     if (valor > mayorValor) { mayorValor = valor; fichaDeMayorValor = Fichas[i]; }
                 }
                 Fichas.Remove(fichaDeMayorValor);
@@ -106,7 +106,7 @@ namespace Logica
             {
                 if (EsFichaJugable(Fichas[i], num1, num2))
                 {
-                    int valor = Fichas[i].Item1 + Fichas[i].Item2;
+                    int valor = FormaDeCalcularPuntuacionDeLasFichas(Fichas[i]);
                     if (valor > mayorValor) { mayorValor = valor; fichaDeMayorValor = Fichas[i]; }
                 }
             }
@@ -169,11 +169,56 @@ namespace Logica
         }
 
         public override Tuple<int, int> Juega(List<Tuple<int, int>> fichas, int num1, int num2)
-        {//La idea de esto es escojer la ficha q pueda jugar por un numero y q su otro numero
-         //sea lo mas comun posible entre el resto de las fichas q tengo. 
+        {
             int length = Fichas.Count;
             int potencialMaximo = 0;
             Tuple<int, int> fichaElegida = new Tuple<int, int>(-1, -1);
+            if (num1 == -1 && num2 == -1)
+            {
+                foreach (Tuple<int, int> ficha in Fichas)//Reviso por las fichas q tengo
+                {
+                    int potencial = 0;
+                    int numero = ficha.Item2;
+
+                    foreach (Tuple<int, int> ficha2 in Fichas)
+                    {//Reviso cuales fichas de las q tengo tienen el otro numero
+                     //eso me dira que tan buena es la ficha
+                        if (ficha2 == ficha) continue;
+                        if (ficha2.Item1 == numero || ficha2.Item2 == numero)
+                        {
+                            potencial++;//potencial de la ficha, NO DE ficha2.!!!!!!!!!
+                        }
+                        if (potencial > potencialMaximo)
+                        {
+                            fichaElegida = ficha;
+                            potencialMaximo = potencial;
+                        }
+
+                    }
+                    //Repito el proceso con el otro numero de la ficha 
+
+                    numero = ficha.Item1;
+                    foreach (Tuple<int, int> ficha2 in Fichas)
+                    {
+                        if (ficha2 == ficha) continue;
+                        if (ficha2.Item1 == numero || ficha2.Item2 == numero)
+                        {
+                            potencial++;
+                        }
+                        if (potencial > potencialMaximo)
+                        {
+                            fichaElegida = ficha;
+                            potencialMaximo = potencial;
+                        }
+
+                    }
+                }
+                Fichas.Remove(fichaElegida);
+                return fichaElegida;
+            }
+            //La idea de esto es escojer la ficha q pueda jugar por un numero y q su otro numero
+            //sea lo mas comun posible entre el resto de las fichas q tengo. 
+           
             foreach (Tuple<int, int> ficha in Fichas)//Reviso por las fichas q tengo
             {
                 int potencial = 0;
@@ -304,31 +349,6 @@ namespace Logica
             return ficha.Item1 == ficha.Item2;
         }
     }
-    //public class TiposDeJugador///////////////////Assembly
-    //{
-
-    //    public List<string> NombreDeLosTipos { get { return nombreDeLosTipos; } }
-    //    public List<string> nombreDeLosTipos = new List<string> { "Jugador Aleatorio", "Jugador Goloso" };//
-    //    //List<Jugador> tiposdejugadores = new List<Jugador> { new JugadorAleatorio(""), new JugadorGoloso("") };
-
-    //    public void Add(string tipo)
-    //    {
-    //        nombreDeLosTipos.Add(tipo);
-    //    }
-    //    public Jugador Comparer(string nombre)
-    //    {
-    //        switch (nombre)
-    //        {
-    //            case "Jugador Aleatorio":
-    //                return new JugadorAleatorio("");
-    //            case "Jugador Goloso":
-    //                return new JugadorGoloso("");
-    //            default:
-    //                throw new Exception("paso algo en el Comparer");
-    //        }
-    //    }
-
-    //}
 
     public class Jugada
     {
@@ -360,7 +380,7 @@ namespace Logica
                 if (trancado) { oracion += " Juego trancado,el ganador es " + ganador.Nombre; }
                 else { oracion += "\n El ganador es " + ganador.Nombre; }
             }
-            return oracion;
+            return oracion + "tiene " + jugador.Puntuacion;
         }
     }
         /////////////////////////////////////////////////
@@ -389,8 +409,8 @@ namespace Logica
             }
         }
 
-        public class FichasDe9 : IFicha
-        {
+    public class FichasDe9 : IFicha
+    {
         public int CantDeFichasParaCadaJugador { get { return 10; } }
         public List<Tuple<int, int>> GeneradorDeFichas()
         {
@@ -404,7 +424,7 @@ namespace Logica
             }
             return listaDeFichas;
         }
-        }
+    }
 
 
 
@@ -415,8 +435,8 @@ namespace Logica
         bool Finalizo(Jugador jugador, Tuple<int, int> fichaJugada, List<Jugador> jugadores, int extremo1, int extremo2, out bool tabla);
 
         }
-        public class FinalizacionPorPuntos : ICondicionDeFinalizacion
-        {
+    public class FinalizacionPorPuntos : ICondicionDeFinalizacion
+    {
         //Aqui quite puntuacion para asignarselo directamente,ya q no tengo modo en q me entren una puntuacion
         //public bool Finalizo(List<Jugador> jugadores)
         //{
@@ -426,7 +446,7 @@ namespace Logica
         //    }
         //    return false;
         //}
-        public bool Finalizo(Jugador jugador,Tuple<int, int>fichaJugada,List<Jugador>jugadores,int extremo1,int extremo2,out bool tabla)
+        public bool Finalizo(Jugador jugador, Tuple<int, int> fichaJugada, List<Jugador> jugadores, int extremo1, int extremo2, out bool tabla)
         {
 
             if (jugador.Fichas.Count == 0)
@@ -436,31 +456,31 @@ namespace Logica
                 return true;
             }
 
-           if (jugador.Puntuacion >= 50) { jugador.Ganador = true; tabla = false;  return true; }
+            if (jugador.Puntuacion >= 50) { jugador.Ganador = true; tabla = false; return true; }
 
             foreach (var item in jugadores)//Comprobando si se tranco el juego
             {
-                foreach (var item2 in item.Fichas )
+                foreach (var item2 in item.Fichas)
                 {
-                    if(item2.Item1==extremo1||item2.Item2==extremo1|| item2.Item1 == extremo2 || item2.Item2 == extremo2) { tabla = false; return false; }
+                    if (item2.Item1 == extremo1 || item2.Item2 == extremo1 || item2.Item1 == extremo2 || item2.Item2 == extremo2) { tabla = false; return false; }
                 }
             }
 
             tabla = true;
-            
-                double mejorPuntuacion = 0;
-                int indiceJugadorConMejorPuntaje = 0;
-                foreach (var item in jugadores)
-                {
-                    if (mejorPuntuacion < item.Puntuacion) { indiceJugadorConMejorPuntaje = jugadores.IndexOf(item); mejorPuntuacion = item.Puntuacion; }
-                }
-                jugadores[indiceJugadorConMejorPuntaje].Ganador = true;
-            
+
+            double mejorPuntuacion = 0;
+            int indiceJugadorConMejorPuntaje = 0;
+            foreach (var item in jugadores)
+            {
+                if (mejorPuntuacion < item.Puntuacion) { indiceJugadorConMejorPuntaje = jugadores.IndexOf(item); mejorPuntuacion = item.Puntuacion; }
+            }
+            jugadores[indiceJugadorConMejorPuntaje].Ganador = true;
+
 
             return true;
         }
 
-        }
+    }
 
     public class FinalizacionPorPase : ICondicionDeFinalizacion
     {
@@ -639,6 +659,7 @@ namespace Logica
     {
         public int CalcularPuntuacion(Tuple<int,int>ficha)
         {
+            if(ficha.Item1 == -1 || ficha.Item2 == -1)return 0;
             if (ficha.Item1 == ficha.Item2) { return (ficha.Item1 + ficha.Item2) * 2; }
             else { return  ficha.Item1 + ficha.Item2; }
         }
@@ -647,8 +668,17 @@ namespace Logica
     {
         public int CalcularPuntuacion(Tuple<int, int> ficha)
         {
+            if (ficha.Item1 == -1 || ficha.Item2 == -1) return 0;
             if (ficha.Item1 == ficha.Item2) { return -(ficha.Item1 + ficha.Item2); }
-            else { return -(ficha.Item1 + ficha.Item2); }
+            else { return ficha.Item1 + ficha.Item2; }
+        }
+    }
+    public class PuntuacionNormal : IFormaDeCalcularPuntuacion
+    {
+        public int CalcularPuntuacion(Tuple<int, int> ficha)
+        {
+            if (ficha.Item1 == -1 || ficha.Item2 == -1) return 0;
+            return ficha.Item1 + ficha.Item2; 
         }
     }
 
