@@ -74,18 +74,25 @@ namespace Proyecto_Domino
                 Jugador jugador = new JugadorAleatorio();//Para q no sea null
                 foreach (var item in tipos)
                 {
-                    if (comboBox1.SelectedItem != null && comboBox1.SelectedItem.ToString() == item.Name) { jugador = (Jugador)assembly.CreateInstance(item.FullName); }
+                    if (comboBox1.Text != null && comboBox1.Text== item.Name) { jugador = (Jugador)assembly.CreateInstance(item.FullName); }
                 }
                 //
                 bool estaElNombre = false;
+                bool tipoDeJugadorExiste= false;
                 foreach (var item in jugadores)
                 {
                     if (item.Nombre == textBox1.Text) { MessageBox.Show("No puede haber mas de un jugador con el mismo nombre"); estaElNombre = true; break; }
                 }
-                if (!estaElNombre)
+                foreach (var item in nombreDeLosTiposDeJugadores)
+                {
+                    if(item == comboBox1.Text) { tipoDeJugadorExiste = true;break; }
+                }
+                if (!tipoDeJugadorExiste) { MessageBox.Show("Este tipo de jugador no existe"); }
+
+                if (!estaElNombre && tipoDeJugadorExiste)
                 {
                     jugador.Nombre = textBox1.Text!;
-                    nombresDeJugadores.Add(textBox1.Text + " (" + comboBox1.SelectedItem.ToString() + ")");
+                    nombresDeJugadores.Add(textBox1.Text + " (" + comboBox1.Text + ")");
                     jugadores.Add(jugador);
                     listBox1.DataSource = null;
                     listBox1.DataSource = nombresDeJugadores;

@@ -121,11 +121,18 @@ namespace Proyecto_Domino
 
         private void Siguiente_Click(object sender, EventArgs e)
         {
-            IFicha modoDeJuego =new FichasDe6();
-            ICondicionDeFinalizacion condicionDeFinalizacion = new FinalizacionPorPuntos();
-            IOrdenDeLasJugadas ordenDeLasJugadas = new OrdenNormal();
-            IFormadeRepartir formadeRepartir = new RepartoAleatorio();
-            IFormaDeCalcularPuntuacion formaDeCalcular = new ContarFichasDoblesPor2();
+            //IFicha modoDeJuego =new FichasDe6();
+            //ICondicionDeFinalizacion condicionDeFinalizacion = new FinalizacionPorPuntos();
+            //IOrdenDeLasJugadas ordenDeLasJugadas = new OrdenNormal();
+            //IFormadeRepartir formadeRepartir = new RepartoAleatorio();
+            //IFormaDeCalcularPuntuacion formaDeCalcular = new ContarFichasDoblesPor2();
+
+            IFicha modoDeJuego = null;
+            ICondicionDeFinalizacion condicionDeFinalizacion = null;
+            IOrdenDeLasJugadas ordenDeLasJugadas = null;
+            IFormadeRepartir formadeRepartir = null;
+            IFormaDeCalcularPuntuacion formaDeCalcular = null;
+
 
             foreach (var item in tiposDeModoDeJuego)
             {
@@ -148,11 +155,14 @@ namespace Proyecto_Domino
                 if (comboBox5.SelectedItem != null && comboBox5.SelectedItem.ToString() == item.Name) {  formaDeCalcular = (IFormaDeCalcularPuntuacion)assembly.CreateInstance(item.FullName); }
             }
 
-
-            ///////////
-            Form4 form4 = new Form4(jugadores,condicionDeFinalizacion,ordenDeLasJugadas,formadeRepartir,modoDeJuego,formaDeCalcular);
-            this.Hide();
-            form4.Show();
+            if (modoDeJuego != null && condicionDeFinalizacion != null && ordenDeLasJugadas != null && formadeRepartir != null && formaDeCalcular != null)
+            {
+                ///////////
+                Form4 form4 = new Form4(jugadores, condicionDeFinalizacion, ordenDeLasJugadas, formadeRepartir, modoDeJuego, formaDeCalcular);
+                this.Hide();
+                form4.Show();
+            }
+            else { MessageBox.Show("Debe completar bien los campos para poder iniciar una partida"); }
         }
 
         private void Atras_Click(object sender, EventArgs e)

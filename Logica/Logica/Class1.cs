@@ -36,6 +36,9 @@ namespace Logica
 
         public override Tuple<int, int> Juega(List<Tuple<int, int>> fichas, int num1, int num2)
         {
+
+            //int puntuaciondelaficha2=FormaDeCalcularPuntuacionDeLasFichas(fichas[2]);
+
             int length = Fichas.Count;
             Random random = new Random();
             int a = random.Next(length);
