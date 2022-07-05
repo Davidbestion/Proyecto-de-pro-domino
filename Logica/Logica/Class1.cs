@@ -86,7 +86,7 @@ namespace Logica
 
         public  override Tuple<int, int> Juega(List<Tuple<int, int>> fichas, int num1, int num2)
         {
-            int length = Fichas.Count;// Yes nigga :) , esto es una pequeñisima optimizacion
+             int length = Fichas.Count;// Yes nigga :) , esto es una pequeñisima optimizacion
             int mayorValor = 0;
             Tuple<int,int> fichaDeMayorValor = new Tuple<int, int>(-1,-1);
 
@@ -343,11 +343,7 @@ namespace Logica
             opcion2 = EscogerFichas(cantFichas, fichas, escogidas, indice + 1);
 
             return escogidas.Count > opcion1.Count ? escogidas : opcion1;
-        }
-        private bool EsDoble(Tuple<int,int> ficha)
-        {
-            return ficha.Item1 == ficha.Item2;
-        }
+        }    
     }
 
     public class Jugada
@@ -380,7 +376,7 @@ namespace Logica
                 if (trancado) { oracion += " Juego trancado,el ganador es " + ganador.Nombre; }
                 else { oracion += "\n El ganador es " + ganador.Nombre; }
             }
-            return oracion + "tiene " + jugador.Puntuacion;
+            return oracion + " tiene " + jugador.Puntuacion + " puntos.";
         }
     }
         /////////////////////////////////////////////////
