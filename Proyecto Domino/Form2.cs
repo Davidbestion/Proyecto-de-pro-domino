@@ -63,8 +63,8 @@ namespace Proyecto_Domino
         private void Agregar_Click(object sender, EventArgs e)//Agregar Jugador
         {
             //Da error si no hay nada escrito en el combobox
-            if (comboBox1.Text.ToString() == "") MessageBox.Show("Elija un tipo de jugador por favor.");
-            else if (textBox1.Text.ToString() == "") MessageBox.Show("Debe ingresar un nombre para su jugador.");
+            if (comboBox1.Text == "") MessageBox.Show("Elija un tipo de jugador por favor.");
+            else if (textBox1.Text == "") MessageBox.Show("Debe ingresar un nombre para su jugador.");
             else
             {
 
@@ -102,9 +102,13 @@ namespace Proyecto_Domino
 
         private void Siguiente_Click(object sender, EventArgs e)//Siguiente
         {
-            Form3 form3 = new Form3(jugadores);
-            this.Hide();
-            form3.Show();
+            if (jugadores.Count <= 1) { MessageBox.Show("Debe entrar mas jugadores"); }
+            else
+            {
+                Form3 form3 = new Form3(jugadores);
+                this.Hide();
+                form3.Show();
+            }
         }
 
         private void Eliminar_Click(object sender, EventArgs e)//Eliminar Jugador

@@ -136,33 +136,39 @@ namespace Proyecto_Domino
 
             foreach (var item in tiposDeModoDeJuego)
             {
-                if (comboBox1.SelectedItem != null && comboBox1.SelectedItem.ToString() == item.Name) { modoDeJuego= (IFicha)assembly.CreateInstance(item.FullName); }
+                if (comboBox1.Text != null && comboBox1.Text == item.Name) { modoDeJuego= (IFicha)assembly.CreateInstance(item.FullName); }
             }
             foreach (var item in tiposDeCondicionDeFinalizacion)
             {
-                if (comboBox2.SelectedItem != null && comboBox2.SelectedItem.ToString() == item.Name) {  condicionDeFinalizacion = (ICondicionDeFinalizacion)assembly.CreateInstance(item.FullName); }
+                if (comboBox2.Text != null && comboBox2.Text == item.Name) {  condicionDeFinalizacion = (ICondicionDeFinalizacion)assembly.CreateInstance(item.FullName); }
             }
             foreach (var item in tiposDeOrdenDeJugadas)
             {
-                if (comboBox3.SelectedItem != null && comboBox3.SelectedItem.ToString() == item.Name) {  ordenDeLasJugadas = (IOrdenDeLasJugadas)assembly.CreateInstance(item.FullName); }
+                if (comboBox3.Text != null && comboBox3.Text == item.Name) {  ordenDeLasJugadas = (IOrdenDeLasJugadas)assembly.CreateInstance(item.FullName); }
             }
             foreach (var item in tiposDeFormasDeRepartir)
             {
-                if (comboBox4.SelectedItem != null && comboBox4.SelectedItem.ToString() == item.Name) {  formadeRepartir = (IFormadeRepartir)assembly.CreateInstance(item.FullName); }
+                if (comboBox4.Text != null && comboBox4.Text == item.Name) {  formadeRepartir = (IFormadeRepartir)assembly.CreateInstance(item.FullName); }
             }
             foreach (var item in tiposDeFormasDeCalcularPuntuacion)
             {
-                if (comboBox5.SelectedItem != null && comboBox5.SelectedItem.ToString() == item.Name) {  formaDeCalcular = (IFormaDeCalcularPuntuacion)assembly.CreateInstance(item.FullName); }
+                if (comboBox5.Text != null && comboBox5.Text == item.Name) {  formaDeCalcular = (IFormaDeCalcularPuntuacion)assembly.CreateInstance(item.FullName); }
             }
 
-            if (modoDeJuego != null && condicionDeFinalizacion != null && ordenDeLasJugadas != null && formadeRepartir != null && formaDeCalcular != null)
-            {
-                ///////////
-                Form4 form4 = new Form4(jugadores, condicionDeFinalizacion, ordenDeLasJugadas, formadeRepartir, modoDeJuego, formaDeCalcular);
-                this.Hide();
-                form4.Show();
-            }
-            else { MessageBox.Show("Debe completar bien los campos para poder iniciar una partida"); }
+
+           if (modoDeJuego != null && condicionDeFinalizacion != null && ordenDeLasJugadas != null && formadeRepartir != null && formaDeCalcular != null)
+           {
+
+                   if (modoDeJuego.GeneradorDeFichas().Count / modoDeJuego.CantDeFichasParaCadaJugador >= jugadores.Count)//Condicion para saber si se puede jugar el modo seleccionado con esta cantidad de jugadores
+                   { 
+                    Form4 form4 = new Form4(jugadores, condicionDeFinalizacion, ordenDeLasJugadas, formadeRepartir, modoDeJuego, formaDeCalcular);
+                    this.Hide();
+                    form4.Show();
+                   }
+                   else { MessageBox.Show("No se puede jugar este modo de juego con esta cantidad de jugadores"); }
+
+           }
+           else { MessageBox.Show("Debe completar bien los campos para poder iniciar una partida"); }
         }
 
         private void Atras_Click(object sender, EventArgs e)
