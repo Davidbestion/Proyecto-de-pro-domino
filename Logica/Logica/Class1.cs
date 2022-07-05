@@ -62,7 +62,7 @@ namespace Logica
 
         public override void Seleccionar(List<Tuple<int, int>> fichas, bool bocaArriba, int cantFichas)
         {
-            Fichas=new List<Tuple<int, int>>();
+            Fichas = new List<Tuple<int, int>>();
             Random selecciona = new Random();
             while (Fichas.Count < cantFichas)
             {
