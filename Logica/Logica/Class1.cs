@@ -177,7 +177,7 @@ namespace Logica
             {
                 foreach (Tuple<int, int> ficha in Fichas)//Reviso por las fichas q tengo
                 {
-                    int potencial = 0;
+                    int potencial = 1;
                     int numero = ficha.Item2;
 
                     foreach (Tuple<int, int> ficha2 in Fichas)
@@ -221,7 +221,7 @@ namespace Logica
            
             foreach (Tuple<int, int> ficha in Fichas)//Reviso por las fichas q tengo
             {
-                int potencial = 0;
+                int potencial = 1;
                 if (EsFichaJugable(ficha, num1, num2))//Escojo las q puedo jugar
                 {
                     int numero = -1;
