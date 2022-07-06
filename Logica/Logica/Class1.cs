@@ -86,11 +86,11 @@ namespace Logica
 
         public  override Tuple<int, int> Juega(List<Tuple<int, int>> fichas, int num1, int num2)
         {
-             int length = Fichas.Count;// Yes nigga :) , esto es una pequeñisima optimizacion
+             int length = Fichas.Count;
             int mayorValor = 0;
             Tuple<int,int> fichaDeMayorValor = new Tuple<int, int>(-1,-1);
 
-            if (num1 == -1 && num2 == -1)//Por si es el primer turno,que juegue la ficha mas grande
+            if (num1 == -1 && num2 == -1)//Por si es el primer turno, que juegue la ficha mas grande
             {
                 for (int i = 0; i < length; i++)
                 {
@@ -131,24 +131,26 @@ namespace Logica
             {
                 int length = fichas.Count;
                 int valor = 0;
-                Tuple<int, int> fichaDeMenorValor = fichas[0];
-                int menorValor = fichaDeMenorValor.Item1 + fichaDeMenorValor.Item2;
+                Tuple<int, int> fichaDeMayorValor = fichas[0];
+                int mayorValor = FormaDeCalcularPuntuacionDeLasFichas(fichaDeMayorValor);
                 while (Fichas.Count < cantFichas)
                 {
                     length = fichas.Count;
                     for(int i = 0; i < length; i++)
                     {
-                        if (fichaDeMenorValor == fichas[i]) continue;
-                        valor = fichas[i].Item1 + fichas[i].Item2;
-                        if(valor < menorValor)
+                        if (fichaDeMayorValor == fichas[i]) continue;
+                        valor = FormaDeCalcularPuntuacionDeLasFichas(fichas[i]);
+                        if(valor > mayorValor)
                         {
-                            fichaDeMenorValor = fichas[i];
-                            menorValor = valor;
+                            fichaDeMayorValor = fichas[i];
+                            mayorValor = valor;
                         }
                         if(i == length - 1)
                         {
-                            Fichas.Add(fichaDeMenorValor);
-                            fichas.Remove(fichaDeMenorValor);
+                            Fichas.Add(fichaDeMayorValor);
+                            fichas.Remove(fichaDeMayorValor);
+                            fichaDeMayorValor = fichas[0];
+                            mayorValor = FormaDeCalcularPuntuacionDeLasFichas(fichaDeMayorValor);
                         }
                     }
                 }
@@ -289,9 +291,12 @@ namespace Logica
                 //TENER LA MAYOR CANTIDAD POSIBLE DE CADA NUMERO EN Fichas
                 List<Tuple<int, int>> escogidas = new List<Tuple<int, int>>();
 
-                escogidas = new List<Tuple<int, int>>();
-                escogidas = EscogerFichas(cantFichas, fichas, escogidas, 0);
-                this.Fichas.AddRange(escogidas);
+                do
+                {
+                    escogidas = new List<Tuple<int, int>>();
+                    escogidas = EscogerFichas(cantFichas, fichas, escogidas, 0, NumMaximoEnFichas(fichas));
+                    if (escogidas.Count != 0) this.Fichas.AddRange(escogidas);
+                } while (escogidas.Count != 0 && this.Fichas.Count <= cantFichas);
 
                 if (this.Fichas.Count > cantFichas)
                 {
@@ -314,35 +319,50 @@ namespace Logica
                 }
             }
         }
+        private static int NumMaximoEnFichas(List<Tuple<int, int>> fichas)
+        {
+            int numero = int.MinValue;
+            foreach (var ficha in fichas)
+            {
+                if(ficha.Item1 > numero)numero = ficha.Item1;
+                if(ficha.Item2 > numero)numero = ficha.Item2;
+            }
+            return numero + 1;
+        }
         /////METODO DE SELECCIONAR DEL JUGADOR INTELIGENTE INCOMPLETO
-        private List<Tuple<int, int>> EscogerFichas(int cantFichas, List<Tuple<int, int>> fichas, List<Tuple<int, int>> escogidas, int indice)
+        private List<Tuple<int, int>> EscogerFichas(int cantFichas, List<Tuple<int, int>> fichas, List<Tuple<int, int>> escogidas, int indice, int numMaximo)
         {
             if (indice > cantFichas) return escogidas;
+            if (escogidas.Count == numMaximo / 2) return escogidas;
             List<Tuple<int, int>> opcion1 = new List<Tuple<int, int>>();
             List<Tuple<int, int>> opcion2 = new List<Tuple<int, int>>();
 
             Tuple<int, int> ficha = fichas[indice];
             escogidas.Add(ficha);//La agrego
             fichas.Remove(ficha);
-            for (int j = 0; j < escogidas.Count; j++)
-            {//Verifico si sus numeros los tengo ya en otras fichas q escogi antes
-             //si es asi, la desestimo
-                if (ficha.Item1 == escogidas[j].Item1 || ficha.Item2 == escogidas[j].Item1 || ficha.Item1 == escogidas[j].Item2 || ficha.Item2 == escogidas[j].Item2)
-                {
-                    if (ficha.Equals(escogidas[j])) continue;//Si es la misma no la tengo en cuenta
+            if (escogidas.Count < 2) opcion1 = EscogerFichas(cantFichas, fichas, escogidas, indice, numMaximo);//Analizo q pasa si la agrego
+            else
+            {
+                for (int j = 0; j < escogidas.Count - 1; j++)
+                {//Verifico si sus numeros los tengo ya en otras fichas q escogi antes
+                 //si es asi, la desestimo
+                    if (ficha.Item1 == escogidas[j].Item1 || ficha.Item2 == escogidas[j].Item1 || ficha.Item1 == escogidas[j].Item2 || ficha.Item2 == escogidas[j].Item2)
+                    {
+                        if (ficha.Equals(escogidas[j])) continue;//Si es la misma no la tengo en cuenta
 
-                    break;
-                }
-                if (j == escogidas.Count - 1)
-                {
-                    opcion1 = EscogerFichas(cantFichas, fichas, escogidas, indice + 1);
+                        break;
+                    }
+                    if (j == escogidas.Count - 2)
+                    {
+                        opcion1 = EscogerFichas(cantFichas, fichas, escogidas, indice, numMaximo);
+                    }
                 }
             }
-            escogidas.Remove(ficha);
+            escogidas.Remove(ficha);//La quito
             fichas.Add(ficha);
-            opcion2 = EscogerFichas(cantFichas, fichas, escogidas, indice + 1);
+            opcion2 = EscogerFichas(cantFichas, fichas, escogidas, indice + 1, numMaximo);//Y veo q pasa si la quito
 
-            return escogidas.Count > opcion1.Count ? escogidas : opcion1;
+            return opcion2.Count > opcion1.Count ? opcion2 : opcion1;
         }    
     }
 

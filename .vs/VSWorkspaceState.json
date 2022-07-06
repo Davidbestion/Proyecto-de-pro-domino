@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Logica",
+    "\\Logica\\Logica"
   ],
-  "SelectedNode": "\\Proyecto Domino.sln",
+  "SelectedNode": "\\Logica\\Logica\\Class1.cs",
   "PreviewInSolutionExplorer": false
 }
