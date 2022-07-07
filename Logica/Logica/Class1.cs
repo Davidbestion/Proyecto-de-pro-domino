@@ -297,7 +297,7 @@ namespace Logica
 
                 do
                 {
-                    escogidas = new int[0, 0];
+                    //escogidas = new int[0, 0];
                     escogidas = EscogerFichas(cantFichas, copia_fichas, escogidas, 0, NumMaximoEnFichas(fichas));
                     if (escogidas.Count != 0) this.Fichas.AddRange(escogidas);
                 } while (escogidas.Count != 0 && this.Fichas.Count <= cantFichas);
@@ -353,30 +353,38 @@ namespace Logica
             return numero + 1;
         }
         /////METODO DE SELECCIONAR DEL JUGADOR INTELIGENTE INCOMPLETO
-        private List<Tuple<int, int>> EscogerFichas(int cantFichas, List<Tuple<int, int>> fichas, List<Tuple<int, int>> escogidas, int indice, int numMaximo)
+        /////LA IDEA ES QUE ESCOJA LAS FICHAS DE MANERA Q POSEA LA MAYOR CANTIDAD DE NUMEROS POSIBLES
+        private List<Tuple<int, int>> EscogerFichas(int cantFichas, List<Tuple<int, int>> fichas, List<Tuple<int, int>> escogidas, List<Tuple<int, int>> posiblesFichas, int indice, int numMax)
         {
-            if (escogidas.Count > cantFichas) return escogidas;
-            if(indice >= fichas.Count)return escogidas;
-            int count = 0;
-            for (int i = 0; i <= numMaximo; i++)
+            //if (indice >= fichas.Count) return escogidas;
+            //if (posiblesFichas.Count == numMax) return posiblesFichas;
+            //if (posiblesFichas.Count == cantFichas)
+            //{
+            //    if (posiblesFichas.Count > escogidas.Count)
+            //    {
+            //        escogidas = posiblesFichas;
+            //    }
+            //}
+            //posiblesFichas.Add(fichas[indice]);
+
+
+            List<Tuple<int, int>> opcion1 = new List<Tuple<int, int>>();
+            foreach (Tuple<int, int> ficha in fichas)//Reviso por las fichas q tengo
             {
-                foreach (var ficha in escogidas)
+                if (EsFichaValida(opcion1, ficha))
                 {
-                    if (count == numMaximo) { return escogidas; }
-                    if (ficha.Item1 == i || ficha.Item2 == i)
-                    {
-                        count++;
-                        break;
-                    }
+                    opcion1.Add(ficha);
                 }
+
             }
-           // List<Tuple<int, int>> opcion1 = new List<Tuple<int, int>>();
-           // List<Tuple<int, int>> opcion2 = new List<Tuple<int, int>>();
+
+            List<Tuple<int, int>> opcion2 = new List<Tuple<int, int>>();
 
             opcion2 = EscogerFichas(cantFichas, fichas, escogidas, indice + 1, numMaximo);//Y veo q pasa si no agrego esta ficha
             escogidas.Add(fichas[indice]);//La agrego
-            fichas.RemoveAt(indice);
+                                          //fichas.RemoveAt(indice);
             opcion1 = EscogerFichas(cantFichas, fichas, escogidas, indice, numMaximo);//Analizo q pasa si la agrego
+            return opcion2.Count > opcion1.Count ? opcion1 : opcion2;
             //if (escogidas.Count < 2) 
             //else
             //{
@@ -395,8 +403,33 @@ namespace Logica
             //        }
             //    }
             //}
-            return opcion2.Count > opcion1.Count ? opcion1 : opcion2;
-        }    
+
+        }
+        private static bool EsFichaValida(List<Tuple<int,int>> fichas, Tuple<int, int> ficha)
+        {
+            if (fichas.Count == 0) return true;
+            int numero = ficha.Item1;
+            foreach (Tuple<int, int> ficha2 in fichas)
+            {
+                if (ficha2 == ficha) continue;
+                if (ficha2.Item1 == numero || ficha2.Item2 == numero)//Reviso si alguna de las fichas q tengo tienen el numero
+                {
+                    return false;
+                }
+
+            }
+            numero = ficha.Item2;
+            foreach (Tuple<int, int> ficha2 in fichas)
+            {
+                if (ficha2 == ficha) continue;
+                if (ficha2.Item1 == numero || ficha2.Item2 == numero)
+                {
+                    return false;
+                }
+
+            }
+            return true;
+        }
     }
 
     public class Jugada
