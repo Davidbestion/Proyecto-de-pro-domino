@@ -127,7 +127,7 @@ namespace Proyecto_Domino
             //IFormadeRepartir formadeRepartir = new RepartoAleatorio();
             //IFormaDeCalcularPuntuacion formaDeCalcular = new ContarFichasDoblesPor2();
 
-            IFichas modoDeJuego = null;
+            IFicha modoDeJuego = null;
             ICondicionDeFinalizacion condicionDeFinalizacion = null;
             IOrdenDeLasJugadas ordenDeLasJugadas = null;
             IFormadeRepartir formadeRepartir = null;
@@ -136,7 +136,7 @@ namespace Proyecto_Domino
 
             foreach (var item in tiposDeModoDeJuego)
             {
-                if (comboBox1.Text != null && comboBox1.Text == item.Name) { modoDeJuego= (IFichas)assembly.CreateInstance(item.FullName); }
+                if (comboBox1.Text != null && comboBox1.Text == item.Name) { modoDeJuego= (IFicha)assembly.CreateInstance(item.FullName); }
             }
             foreach (var item in tiposDeCondicionDeFinalizacion)
             {

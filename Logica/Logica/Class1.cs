@@ -414,13 +414,13 @@ namespace Logica
     /////////////////////////////////////////////////
     ///Cosas DEl FOrm 3
 
-    public interface IFichas
+    public interface IFicha
     {
         int FichasPorJugador { get; }
         List<Tuple<int, int>> GeneradorDeFichas();
     }
 
-    public class FichasDe6 : IFichas
+    public class FichasDe6 : IFicha
     {
         public int FichasPorJugador { get { return 7; } }
         public List<Tuple<int, int>> GeneradorDeFichas()
@@ -437,7 +437,7 @@ namespace Logica
         }
     }
 
-    public class FichasDe9 : IFichas
+    public class FichasDe9 : IFicha
     {
         public int FichasPorJugador { get { return 10; } }
         public List<Tuple<int, int>> GeneradorDeFichas()
@@ -722,7 +722,7 @@ namespace Logica
         ICondicionDeFinalizacion CondicionDeFinalizacion;
         IOrdenDeLasJugadas OrdenDeLasJugadas;
         IFormadeRepartir FormadeRepartir;
-        IFichas ModoDeJuego;
+        IFicha ModoDeJuego;
         IFormaDeCalcularPuntuacion FormaDeCalcularPuntuacion;
 
         bool PrimerTurno;
@@ -739,7 +739,7 @@ namespace Logica
 
 
 
-        public Juego(List<Jugador> ListadeJugadores, ICondicionDeFinalizacion CondicionDeFinalizacion, IOrdenDeLasJugadas OrdenDeLasJugadas, IFormadeRepartir FormadeRepartir, IFichas ModoDeJuego, IFormaDeCalcularPuntuacion FormaDeCalcularPuntuacion)
+        public Juego(List<Jugador> ListadeJugadores, ICondicionDeFinalizacion CondicionDeFinalizacion, IOrdenDeLasJugadas OrdenDeLasJugadas, IFormadeRepartir FormadeRepartir, IFicha ModoDeJuego, IFormaDeCalcularPuntuacion FormaDeCalcularPuntuacion)
         {
 
             this.ListadeJugadores= ListadeJugadores;
