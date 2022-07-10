@@ -19,7 +19,7 @@ namespace Proyecto_Domino
 
         List<Jugador> jugadores;
 
-        public Form4(List<Jugador> jugadores,ICondicionDeFinalizacion condicionDeFinalizacion,IOrdenDeLasJugadas ordenDeLasJugadas,IFormadeRepartir formadeRepartir,IFicha modoDeJuego,IFormaDeCalcularPuntuacion formaDeCalcular)
+        public Form4(List<Jugador> jugadores,ICondicionDeFinalizacion condicionDeFinalizacion,IOrdenDeLasJugadas ordenDeLasJugadas,IFormadeRepartir formadeRepartir,IFichas modoDeJuego,IFormaDeCalcularPuntuacion formaDeCalcular)
         {
             InitializeComponent();
             juego = new Juego(jugadores,condicionDeFinalizacion,ordenDeLasJugadas,formadeRepartir,modoDeJuego,formaDeCalcular);///////
