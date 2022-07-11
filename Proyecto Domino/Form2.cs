@@ -56,7 +56,7 @@ namespace Proyecto_Domino
             else if (textBox1.Text == "") MessageBox.Show("Debe ingresar un nombre para su jugador.");
             else
             {
-                IJugador jugador =null;
+                IJugador jugador = null;
                 foreach (var item in tipos)
                 {
                     if (comboBox1.Text != null && comboBox1.Text== item.Name) { jugador = (IJugador)assembly.CreateInstance(item.FullName); }

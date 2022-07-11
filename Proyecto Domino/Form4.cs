@@ -76,7 +76,7 @@ namespace Proyecto_Domino
             if (juegoAutomatico) { SiguienteJugada_Click(sender, e); }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Resetear_Click(object sender, EventArgs e)
         {
             guardadas = new List<string>();
             listBox1.DataSource = null;

@@ -21,11 +21,8 @@ namespace Logica
         public  void Seleccionar(List<Tuple<int, int>> fichas, bool bocaArriba, int cantFichas);
 
         protected  bool EsFichaJugable(Tuple<int, int> ficha, int num1, int num2);//Pa cuando la hagas interface en vez de abstracta.
-        //{
-        //    return fichas[i].Item1 == num1 || fichas[i].Item2 == num1 || fichas[i].Item1 == num2 || fichas[i].Item2 == num2;
-        //}
 
-    }
+}
     public class JugadorAleatorio : IJugador
     {
 
@@ -48,9 +45,6 @@ namespace Logica
 
         public Tuple<int, int> Juega(List<Tuple<int, int>> fichas, int num1, int num2)
         {
-
-            //int puntuaciondelaficha2=FormaDeCalcularPuntuacionDeLasFichas(fichas[2]);
-
             int length = Fichas.Count;
             Random random = new Random();
             int a = random.Next(length);
@@ -429,13 +423,13 @@ namespace Logica
             string oracion;
             if (ficha.Item1 == -1 && ficha.Item2 == -1)
             {
-                oracion = jugador.Nombre + " se ha pasado." + " Se mantiene con: " + jugador.Puntuacion + " puntos."; ;
+                oracion = jugador.Nombre + " se ha pasado." + " Se mantiene con: " + jugador.Puntuacion + " puntos."; 
             }
             else { oracion = jugador.Nombre + " ha jugado [" + ficha.Item1 + "|" + ficha.Item2 + "]. Tiene: " + jugador.Puntuacion + " puntos."; }
             if (terminó)
             {
                 if (trancado) { oracion += " Juego trancado,el ganador es " + ganador.Nombre + " con: " + ganador.Puntuacion + " puntos."; }
-                else { oracion += "\n El ganador es " + ganador.Nombre + " con: " + ganador.Puntuacion + " puntos."; }
+                else { oracion += " El ganador es " + ganador.Nombre + " con: " + ganador.Puntuacion + " puntos."; }
             }
             return oracion ;
         }
