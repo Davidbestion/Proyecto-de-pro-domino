@@ -1,6 +1,6 @@
 ﻿namespace Proyecto_Domino
 {
-    partial class Form4
+    partial class Jugar
     {
         /// <summary>
         /// Required designer variable.
@@ -102,7 +102,7 @@
             this.Resetear.UseVisualStyleBackColor = true;
             this.Resetear.Click += new System.EventHandler(this.Resetear_Click);
             // 
-            // Form4
+            // Jugar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -115,8 +115,8 @@
             this.Controls.Add(this.JuegoAtomatico);
             this.Controls.Add(this.SiguienteJugada);
             this.MaximizeBox = false;
-            this.Name = "Form4";
-            this.Text = "Form4";
+            this.Name = "Jugar";
+            this.Text = "Jugar";
             this.ResumeLayout(false);
 
         }

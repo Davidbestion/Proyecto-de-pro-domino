@@ -12,7 +12,7 @@ using System.Reflection;
 
 namespace Proyecto_Domino
 {
-    public partial class Form2 : Form
+    public partial class Crear_Jugadores : Form
     {
 
 
@@ -21,12 +21,24 @@ namespace Proyecto_Domino
         public List<Type> tipos = new List<Type>();
         public List<string>nombreDeLosTiposDeJugadores=new List<string>();
         public Assembly assembly;
+        ICondicionDeFinalizacion condicionDeFinalizacion;
+        IOrdenDeLasJugadas ordenDeLasJugadas;
+        IFormadeRepartir formadeRepartir;
+        IFicha modoDeJuego;
+        IFormaDeCalcularPuntuacion formaDeCalcular;
 
 
-        public Form2()
+        public Crear_Jugadores(ICondicionDeFinalizacion condicionDeFinalizacion, IOrdenDeLasJugadas ordenDeLasJugadas, IFormadeRepartir formadeRepartir, IFicha modoDeJuego, IFormaDeCalcularPuntuacion formaDeCalcular)
         {
 
             InitializeComponent();
+
+            this.condicionDeFinalizacion = condicionDeFinalizacion;
+            this.ordenDeLasJugadas = ordenDeLasJugadas;
+            this.formadeRepartir = formadeRepartir;
+            this.modoDeJuego = modoDeJuego;
+            this.formaDeCalcular = formaDeCalcular;
+           
 
             try
             {
@@ -89,9 +101,13 @@ namespace Proyecto_Domino
             if (jugadores.Count <= 1) { MessageBox.Show("Debe entrar mas jugadores"); }
             else
             {
-                Form3 form3 = new Form3(jugadores);
-                this.Hide();
-                form3.Show();
+                if (modoDeJuego.GeneradorDeFichas().Count / modoDeJuego.FichasPorJugador >= jugadores.Count)//Condicion para saber si se puede jugar el modo seleccionado con esta cantidad de jugadores
+                {
+                    Jugar form4 = new Jugar(jugadores, condicionDeFinalizacion, ordenDeLasJugadas, formadeRepartir, modoDeJuego, formaDeCalcular);
+                    this.Hide();
+                    form4.Show();
+                }
+                else { MessageBox.Show("No se puede jugar este modo de juego con esta cantidad de jugadores"); }
             }
         }
 
@@ -103,6 +119,13 @@ namespace Proyecto_Domino
                 listBox1.DataSource = null;
                 listBox1.DataSource = nombresDeJugadores;
             }
+        }
+
+        private void Atras_Click(object sender, EventArgs e)
+        {
+            Opciones opciones = new Opciones();
+            this.Hide();
+            opciones.Show();
         }
     }
 }

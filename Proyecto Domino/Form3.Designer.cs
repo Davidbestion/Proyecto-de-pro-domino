@@ -1,6 +1,6 @@
 ﻿namespace Proyecto_Domino
 {
-    partial class Form3
+    partial class Opciones
     {
         /// <summary>
         /// Required designer variable.
@@ -34,7 +34,6 @@
             this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.Siguiente = new System.Windows.Forms.Button();
-            this.Atras = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -93,16 +92,6 @@
             this.Siguiente.UseVisualStyleBackColor = true;
             this.Siguiente.Click += new System.EventHandler(this.Siguiente_Click);
             // 
-            // Atras
-            // 
-            this.Atras.Location = new System.Drawing.Point(79, 352);
-            this.Atras.Name = "Atras";
-            this.Atras.Size = new System.Drawing.Size(75, 23);
-            this.Atras.TabIndex = 6;
-            this.Atras.Text = "Atras";
-            this.Atras.UseVisualStyleBackColor = true;
-            this.Atras.Click += new System.EventHandler(this.Atras_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -153,7 +142,7 @@
             this.label5.TabIndex = 11;
             this.label5.Text = "Forma de Calcular la Puntuacion Final";
             // 
-            // Form3
+            // Opciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -164,7 +153,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.Atras);
             this.Controls.Add(this.Siguiente);
             this.Controls.Add(this.comboBox5);
             this.Controls.Add(this.comboBox4);
@@ -172,8 +160,8 @@
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
             this.MaximizeBox = false;
-            this.Name = "Form3";
-            this.Text = "Form3";
+            this.Name = "Opciones";
+            this.Text = "Opciones";
             this.Load += new System.EventHandler(this.Form3_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -188,7 +176,6 @@
         private ComboBox comboBox4;
         private ComboBox comboBox5;
         private Button Siguiente;
-        private Button Atras;
         private Label label1;
         private Label label2;
         private Label label3;

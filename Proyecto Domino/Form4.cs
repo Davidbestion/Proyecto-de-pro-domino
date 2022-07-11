@@ -11,15 +11,27 @@ using Logica;
 
 namespace Proyecto_Domino
 {
-    public partial class Form4 : Form
+    public partial class Jugar : Form
     {
         Juego juego;
         List<string> guardadas = new List<string>();
         bool juegoAutomatico = false; 
         List<IJugador> jugadores;
 
-        public Form4(List<IJugador> jugadores,ICondicionDeFinalizacion condicionDeFinalizacion,IOrdenDeLasJugadas ordenDeLasJugadas,IFormadeRepartir formadeRepartir,IFicha modoDeJuego,IFormaDeCalcularPuntuacion formaDeCalcular)
+        ICondicionDeFinalizacion condicionDeFinalizacion;
+        IOrdenDeLasJugadas ordenDeLasJugadas;
+        IFormadeRepartir formadeRepartir;
+        IFicha modoDeJuego;
+        IFormaDeCalcularPuntuacion formaDeCalcular;
+
+        public Jugar(List<IJugador> jugadores,ICondicionDeFinalizacion condicionDeFinalizacion,IOrdenDeLasJugadas ordenDeLasJugadas,IFormadeRepartir formadeRepartir,IFicha modoDeJuego,IFormaDeCalcularPuntuacion formaDeCalcular)
         {
+            this.condicionDeFinalizacion = condicionDeFinalizacion;
+            this.ordenDeLasJugadas = ordenDeLasJugadas;
+            this.formadeRepartir = formadeRepartir;
+            this.modoDeJuego = modoDeJuego;
+            this.formaDeCalcular = formaDeCalcular;
+
             InitializeComponent();
             juego = new Juego(jugadores,condicionDeFinalizacion,ordenDeLasJugadas,formadeRepartir,modoDeJuego,formaDeCalcular);///////
             this.jugadores = jugadores;
@@ -38,18 +50,10 @@ namespace Proyecto_Domino
 
         private void Atras_Click(object sender, EventArgs e)
         {
-            foreach (var item in jugadores)
-            {
-                item.EsTurno = false;
-                item.Fichas = new List<Tuple<int, int>>();
-                item.Ganador = false;
-                item.FormaDeCalcularPuntuacionDeLasFichas = null ;
-                item.Puntuacion = 0;
-            }
             timer1.Enabled = false;
-            Form3 form3 = new Form3(jugadores);
+            Crear_Jugadores form2 = new Crear_Jugadores(condicionDeFinalizacion, ordenDeLasJugadas, formadeRepartir, modoDeJuego, formaDeCalcular);
             this.Hide();
-            form3.Show();
+            form2.Show();
         }
 
         private void JuegoAtomatico_Click(object sender, EventArgs e)
