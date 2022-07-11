@@ -101,6 +101,7 @@
             this.Controls.Add(this.MostrarFinal);
             this.Controls.Add(this.JuegoAtomatico);
             this.Controls.Add(this.SiguienteJugada);
+            this.MaximizeBox = false;
             this.Name = "Form4";
             this.Text = "Form4";
             this.ResumeLayout(false);

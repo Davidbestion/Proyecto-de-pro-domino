@@ -156,19 +156,19 @@ namespace Proyecto_Domino
             }
 
 
-           if (modoDeJuego != null && condicionDeFinalizacion != null && ordenDeLasJugadas != null && formadeRepartir != null && formaDeCalcular != null)
-           {
+            if (modoDeJuego != null && condicionDeFinalizacion != null && ordenDeLasJugadas != null && formadeRepartir != null && formaDeCalcular != null)
+            {
 
-                   if (modoDeJuego.GeneradorDeFichas().Count / modoDeJuego.CantDeFichasParaCadaJugador >= jugadores.Count)//Condicion para saber si se puede jugar el modo seleccionado con esta cantidad de jugadores
-                   { 
+                if (modoDeJuego.GeneradorDeFichas().Count / modoDeJuego.FichasPorJugador >= jugadores.Count)//Condicion para saber si se puede jugar el modo seleccionado con esta cantidad de jugadores
+                {
                     Form4 form4 = new Form4(jugadores, condicionDeFinalizacion, ordenDeLasJugadas, formadeRepartir, modoDeJuego, formaDeCalcular);
                     this.Hide();
                     form4.Show();
-                   }
-                   else { MessageBox.Show("No se puede jugar este modo de juego con esta cantidad de jugadores"); }
+                }
+                else { MessageBox.Show("No se puede jugar este modo de juego con esta cantidad de jugadores"); }
 
-           }
-           else { MessageBox.Show("Debe completar bien los campos para poder iniciar una partida"); }
+            }
+            else { MessageBox.Show("Debe completar bien los campos para poder iniciar una partida"); }
         }
 
         private void Atras_Click(object sender, EventArgs e)
