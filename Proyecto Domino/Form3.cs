@@ -25,18 +25,12 @@ namespace Proyecto_Domino
         public List<string> NombreDeFormasDeRepartir = new List<string>();
         public List<Type> tiposDeFormasDeCalcularPuntuacion = new List<Type>();
         public List<string> NombreDeFormasDeCalcularPuntuacion = new List<string>();
+        public List<IJugador> jugadores;
 
-
-
-        public List<Jugador> jugadores;
-        public Form3(List<Jugador>jugadores)
+        public Form3(List<IJugador> jugadores)
         {
             this.jugadores = jugadores;
             InitializeComponent();
-
-           
-
-
             try
             {
                 assembly = Assembly.Load("Logica");
@@ -48,28 +42,6 @@ namespace Proyecto_Domino
                     else if (x.GetInterface("IFormadeRepartir") != null) { tiposDeFormasDeRepartir.Add(x); }
                     else if (x.GetInterface("IFormaDeCalcularPuntuacion") != null) { tiposDeFormasDeCalcularPuntuacion.Add(x); }
 
-                    //if (x.BaseType != null)
-                    //{
-                    //    x.GetInterface("Ificha")///
-                    //    //switch (x.BaseType.Name)
-                    //    //{
-                    //    //    case "IFicha":
-                    //    //        tiposDeModoDeJuego.Add(x);
-                    //    //        break;
-                    //    //    case "ICondicionDeFinalizacion":
-                    //    //        tiposDeCondicionDeFinalizacion.Add(x);
-                    //    //        break;
-                    //    //    case "IOrdenDeLasJugadas":
-                    //    //        tiposDeOrdenDeJugadas.Add(x);
-                    //    //        break;
-                    //    //    case "IFormadeRepartir":
-                    //    //        tiposDeFormasDeRepartir.Add(x);
-                    //    //        break;
-                    //    //    case "IFormaDeCalcularPuntuacion":
-                    //    //        tiposDeFormasDeCalcularPuntuacion.Add(x);
-                    //    //        break;
-                    //    //}
-                    //}
                 }
                 foreach (var item in tiposDeModoDeJuego)
                 {
@@ -121,11 +93,6 @@ namespace Proyecto_Domino
 
         private void Siguiente_Click(object sender, EventArgs e)
         {
-            //IFicha modoDeJuego =new FichasDe6();
-            //ICondicionDeFinalizacion condicionDeFinalizacion = new FinalizacionPorPuntos();
-            //IOrdenDeLasJugadas ordenDeLasJugadas = new OrdenNormal();
-            //IFormadeRepartir formadeRepartir = new RepartoAleatorio();
-            //IFormaDeCalcularPuntuacion formaDeCalcular = new ContarFichasDoblesPor2();
 
             IFicha modoDeJuego = null;
             ICondicionDeFinalizacion condicionDeFinalizacion = null;

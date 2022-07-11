@@ -3,38 +3,50 @@ using System.Reflection;
 
 namespace Logica
 {
-    public abstract class Jugador
+    public interface IJugador
     {
-        public string Nombre;
+        public string Nombre { get; set; }
 
-        public double Puntuacion;
+        public double Puntuacion { get; set; }
 
-        public bool EsTurno;
+        public bool EsTurno { get; set; }
 
-        public bool Ganador;
+        public bool Ganador { get; set; }
 
-        public List<Tuple<int, int>> Fichas;
+        public List<Tuple<int, int>> Fichas { get; set; }
 
-        public Func<Tuple<int, int>,int> FormaDeCalcularPuntuacionDeLasFichas;
+        public Func<Tuple<int, int>,int> FormaDeCalcularPuntuacionDeLasFichas { get; set; }
 
-        public abstract Tuple<int,int> Juega(List<Tuple<int, int>> fichas, int num1, int num2);//Los numeros disponibles en el tablero
-        public abstract void Seleccionar(List<Tuple<int, int>> fichas, bool bocaArriba, int cantFichas);
+        public  Tuple<int,int> Juega(List<Tuple<int, int>> fichas, int num1, int num2);//Los numeros disponibles en el tablero
+        public  void Seleccionar(List<Tuple<int, int>> fichas, bool bocaArriba, int cantFichas);
 
-        protected abstract bool EsFichaJugable(Tuple<int, int> ficha, int num1, int num2);//Pa cuando la hagas interface en vez de abstracta.
+        protected  bool EsFichaJugable(Tuple<int, int> ficha, int num1, int num2);//Pa cuando la hagas interface en vez de abstracta.
         //{
         //    return fichas[i].Item1 == num1 || fichas[i].Item2 == num1 || fichas[i].Item1 == num2 || fichas[i].Item2 == num2;
         //}
 
     }
-    public class JugadorAleatorio : Jugador
+    public class JugadorAleatorio : IJugador
     {
 
-        protected override bool EsFichaJugable(Tuple<int, int> ficha, int num1, int num2)
+        public string Nombre { get; set; }
+
+        public double Puntuacion { get; set; }
+
+        public bool EsTurno { get; set; }
+
+        public bool Ganador { get; set; }
+
+        public List<Tuple<int, int>> Fichas { get; set; }
+
+        public Func<Tuple<int, int>, int> FormaDeCalcularPuntuacionDeLasFichas { get; set; }
+
+        public  bool EsFichaJugable(Tuple<int, int> ficha, int num1, int num2)
         {
             return ficha.Item1 == num1 || ficha.Item2 == num1 || ficha.Item1 == num2 || ficha.Item2 == num2;
         }
 
-        public override Tuple<int, int> Juega(List<Tuple<int, int>> fichas, int num1, int num2)
+        public Tuple<int, int> Juega(List<Tuple<int, int>> fichas, int num1, int num2)
         {
 
             //int puntuaciondelaficha2=FormaDeCalcularPuntuacionDeLasFichas(fichas[2]);
@@ -63,7 +75,7 @@ namespace Logica
             return ficha;
         }
 
-        public override void Seleccionar(List<Tuple<int, int>> fichas, bool bocaArriba, int cantFichas)
+        public void Seleccionar(List<Tuple<int, int>> fichas, bool bocaArriba, int cantFichas)
         {
             Fichas = new List<Tuple<int, int>>();
             Random selecciona = new Random();
@@ -76,15 +88,25 @@ namespace Logica
         }
     }
 
-    public class JugadorGoloso : Jugador
+    public class JugadorGoloso : IJugador
     {
+        public string Nombre { get; set; }
 
-        protected override bool EsFichaJugable(Tuple<int, int> ficha, int num1, int num2)
+        public double Puntuacion { get; set; }
+
+        public bool EsTurno { get; set; }
+
+        public bool Ganador { get; set; }
+
+        public List<Tuple<int, int>> Fichas { get; set; }
+
+        public Func<Tuple<int, int>, int> FormaDeCalcularPuntuacionDeLasFichas { get; set; }
+        public bool EsFichaJugable(Tuple<int, int> ficha, int num1, int num2)
         {
             return ficha.Item1 == num1 || ficha.Item2 == num1 || ficha.Item1 == num2 || ficha.Item2 == num2;
         }
 
-        public  override Tuple<int, int> Juega(List<Tuple<int, int>> fichas, int num1, int num2)
+        public Tuple<int, int> Juega(List<Tuple<int, int>> fichas, int num1, int num2)
         {
             int length = Fichas.Count;
             int mayorValor = 0;
@@ -114,7 +136,7 @@ namespace Logica
             return fichaDeMayorValor;
         }
 
-        public override void Seleccionar(List<Tuple<int, int>> fichas, bool bocaArriba, int cantFichas)
+        public void Seleccionar(List<Tuple<int, int>> fichas, bool bocaArriba, int cantFichas)
         {
             Fichas = new List<Tuple<int, int>>();
             Random random = new Random();
@@ -158,19 +180,26 @@ namespace Logica
         }
     }
 
-    public class JugadorInteligente : Jugador
+    public class JugadorInteligente : IJugador
     {
-        //public JugadorInteligente(string Nombre) : base(Nombre) 
-        //{ 
-        //    Fichas = new List<Tuple<int, int>>();
-        //}
+        public string Nombre { get; set; }
 
-        protected override bool EsFichaJugable(Tuple<int, int> ficha, int num1, int num2)
+        public double Puntuacion { get; set; }
+
+        public bool EsTurno { get; set; }
+
+        public bool Ganador { get; set; }
+
+        public List<Tuple<int, int>> Fichas { get; set; }
+
+        public Func<Tuple<int, int>, int> FormaDeCalcularPuntuacionDeLasFichas { get; set; }
+
+        public bool EsFichaJugable(Tuple<int, int> ficha, int num1, int num2)
         {
             return ficha.Item1 == num1 || ficha.Item2 == num1 || ficha.Item1 == num2 || ficha.Item2 == num2;
         }
 
-        public override Tuple<int, int> Juega(List<Tuple<int, int>> fichas, int num1, int num2)
+        public  Tuple<int, int> Juega(List<Tuple<int, int>> fichas, int num1, int num2)
         {
             int length = Fichas.Count;
             int potencialMaximo = 0;
@@ -273,7 +302,7 @@ namespace Logica
             return fichaElegida;
         }
 
-        public override void Seleccionar(List<Tuple<int, int>> fichas, bool bocaArriba, int cantFichas)
+        public void Seleccionar(List<Tuple<int, int>> fichas, bool bocaArriba, int cantFichas)
         {
             Fichas = new List<Tuple<int, int>>();
             Random random = new Random();
@@ -380,13 +409,13 @@ namespace Logica
 
     public class Jugada//Para imprimir cada jugada 
     {
-        Jugador jugador;
+        IJugador jugador;
         Tuple<int, int> ficha;
         bool terminó;//Si es true, es porq terminó el juego
         bool trancado;
-        Jugador ganador;
+        IJugador ganador;
 
-        public Jugada(Jugador jugador, Tuple<int, int> ficha,bool terminó,Jugador ganador,bool trancado)
+        public Jugada(IJugador jugador, Tuple<int, int> ficha,bool terminó,IJugador ganador,bool trancado)
         {
             this.jugador = jugador;
             this.ficha = ficha;
@@ -405,8 +434,8 @@ namespace Logica
             else { oracion = jugador.Nombre + " ha jugado [" + ficha.Item1 + "|" + ficha.Item2 + "]. Tiene: " + jugador.Puntuacion + " puntos."; }
             if (terminó)
             {
-                if (trancado) { oracion += " Juego trancado,el ganador es " + ganador.Nombre + " con: " + jugador.Puntuacion + " puntos."; }
-                else { oracion += "\n El ganador es " + ganador.Nombre + " con: " + jugador.Puntuacion + " puntos."; }
+                if (trancado) { oracion += " Juego trancado,el ganador es " + ganador.Nombre + " con: " + ganador.Puntuacion + " puntos."; }
+                else { oracion += "\n El ganador es " + ganador.Nombre + " con: " + ganador.Puntuacion + " puntos."; }
             }
             return oracion ;
         }
@@ -460,7 +489,7 @@ namespace Logica
     public interface ICondicionDeFinalizacion
     {
         //bool Finalizo(List<Jugador> jugadores);
-        bool Finalizo(Jugador jugador, Tuple<int, int> fichaJugada, List<Jugador> jugadores, int extremo1, int extremo2, out bool tabla);
+        bool Finalizo(IJugador jugador, Tuple<int, int> fichaJugada, List<IJugador> jugadores, int extremo1, int extremo2, out bool tabla);
 
     }
     public class FinalizacionPorPuntos : ICondicionDeFinalizacion
@@ -474,7 +503,7 @@ namespace Logica
         //    }
         //    return false;
         //}
-        public bool Finalizo(Jugador jugador, Tuple<int, int> fichaJugada, List<Jugador> jugadores, int extremo1, int extremo2, out bool tabla)
+        public bool Finalizo(IJugador jugador, Tuple<int, int> fichaJugada, List<IJugador> jugadores, int extremo1, int extremo2, out bool tabla)
         {
 
             if (jugador.Fichas.Count == 0)
@@ -518,7 +547,7 @@ namespace Logica
     {
         int[] vecesPasadasSeguidas;
         bool primeraVez = true;
-        public bool Finalizo(Jugador jugador,Tuple<int,int>fichaJugada, List<Jugador> jugadores, int extremo1, int extremo2, out bool tabla)
+        public bool Finalizo(IJugador jugador,Tuple<int,int>fichaJugada, List<IJugador> jugadores, int extremo1, int extremo2, out bool tabla)
         {
             if (primeraVez) { vecesPasadasSeguidas = new int[jugadores.Count];primeraVez = false; }
             if (jugador.Fichas.Count == 0)
@@ -571,13 +600,13 @@ namespace Logica
 
     public interface IOrdenDeLasJugadas
     {
-        Jugador Siguiente(List<Jugador> jugadores, bool SePaso);
+        IJugador Siguiente(List<IJugador> jugadores, bool SePaso);
     }
 
 
     public class OrdenNormal : IOrdenDeLasJugadas
     {
-        public Jugador Siguiente(List<Jugador> jugadores, bool SePaso)
+        public IJugador Siguiente(List<IJugador> jugadores, bool SePaso)
         {
             for (int i = 0; i < jugadores.Count; i++)
             {
@@ -606,7 +635,7 @@ namespace Logica
     public class OrdenCambiadoSiSePasa : IOrdenDeLasJugadas
     {
         bool ordenCambiado = false;
-        public Jugador Siguiente(List<Jugador> jugadores, bool SePaso)
+        public IJugador Siguiente(List<IJugador> jugadores, bool SePaso)
         {
             for (int i = 0; i < jugadores.Count; i++)
             {
@@ -657,11 +686,11 @@ namespace Logica
 
     public interface IFormadeRepartir
     {
-        void Repartir(List<Tuple<int, int>> fichas, List<Jugador> jugadores, int cantidadDeFichas);
+        void Repartir(List<Tuple<int, int>> fichas, List<IJugador> jugadores, int cantidadDeFichas);
     }
     public class RepartoAleatorio : IFormadeRepartir
     {
-        public void Repartir(List<Tuple<int, int>> fichas,List<Jugador>jugadores,int cantidadDeFichas)
+        public void Repartir(List<Tuple<int, int>> fichas,List<IJugador> jugadores,int cantidadDeFichas)
         {
 
             foreach (var item in jugadores)
@@ -672,7 +701,7 @@ namespace Logica
     }
     public class RepartoBocaArriba : IFormadeRepartir
     {
-        public void Repartir(List<Tuple<int, int>> fichas, List<Jugador> jugadores, int cantidadDeFichas)
+        public void Repartir(List<Tuple<int, int>> fichas, List<IJugador> jugadores, int cantidadDeFichas)
         {
            foreach(var item in jugadores)
             {
@@ -718,7 +747,7 @@ namespace Logica
 
     public class Juego : IEnumerator<Jugada>
     {
-        List<Jugador> ListadeJugadores;
+        List<IJugador> ListadeJugadores;
         ICondicionDeFinalizacion CondicionDeFinalizacion;
         IOrdenDeLasJugadas OrdenDeLasJugadas;
         IFormadeRepartir FormadeRepartir;
@@ -726,20 +755,19 @@ namespace Logica
         IFormaDeCalcularPuntuacion FormaDeCalcularPuntuacion;
 
         bool PrimerTurno;
-        bool HuboMoveNext;/////////////
         bool SePaso;
         int Extremo1;
         int Extremo2;
         List<Tuple<int, int>> fichas;
         Jugada jugadaActual;
-        Jugador ganador;
+        IJugador ganador;
 
         bool FinalizoElJuego;
         bool JuegoTrancado;
 
 
 
-        public Juego(List<Jugador> ListadeJugadores, ICondicionDeFinalizacion CondicionDeFinalizacion, IOrdenDeLasJugadas OrdenDeLasJugadas, IFormadeRepartir FormadeRepartir, IFicha ModoDeJuego, IFormaDeCalcularPuntuacion FormaDeCalcularPuntuacion)
+        public Juego(List<IJugador> ListadeJugadores, ICondicionDeFinalizacion CondicionDeFinalizacion, IOrdenDeLasJugadas OrdenDeLasJugadas, IFormadeRepartir FormadeRepartir, IFicha ModoDeJuego, IFormaDeCalcularPuntuacion FormaDeCalcularPuntuacion)
         {
 
             this.ListadeJugadores= ListadeJugadores;
@@ -750,7 +778,6 @@ namespace Logica
             this.FormaDeCalcularPuntuacion = FormaDeCalcularPuntuacion;
             //
             PrimerTurno = true;
-            HuboMoveNext = false;////////////
             SePaso = false;
             Extremo1 = -1;
             Extremo2 = -1;
@@ -782,7 +809,7 @@ namespace Logica
                     FormadeRepartir.Repartir(fichas, ListadeJugadores,ModoDeJuego.FichasPorJugador);
                    
                 }
-                Jugador jugadorActual = OrdenDeLasJugadas.Siguiente(ListadeJugadores, SePaso);
+                IJugador jugadorActual = OrdenDeLasJugadas.Siguiente(ListadeJugadores, SePaso);
                 SePaso = false;//reseteando el SePaso
                 Tuple<int, int> fichaJugada = jugadorActual.Juega(fichas, Extremo1, Extremo2);
                 //aqui iba lo de jugada actual
@@ -820,8 +847,12 @@ namespace Logica
             Extremo2 = -1;
             fichas = ModoDeJuego.GeneradorDeFichas();
             FinalizoElJuego = false;
+            JuegoTrancado = false;
+
             foreach (var jugador in ListadeJugadores)
             {
+                jugador.Fichas = new List<Tuple<int, int>>();
+                jugador.Ganador = false;
                 jugador.EsTurno = false;
                 jugador.Puntuacion = 0;
             }

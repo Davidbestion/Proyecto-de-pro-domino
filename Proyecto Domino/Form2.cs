@@ -16,8 +16,7 @@ namespace Proyecto_Domino
     {
 
 
-        public List<Jugador> jugadores = new List<Jugador>();
-       // public TiposDeJugador tipos = new TiposDeJugador();
+        public List<IJugador> jugadores = new List<IJugador>();
         public List<string> nombresDeJugadores = new List<string>();
         public List<Type> tipos = new List<Type>();
         public List<string>nombreDeLosTiposDeJugadores=new List<string>();
@@ -34,7 +33,7 @@ namespace Proyecto_Domino
                 assembly = Assembly.Load("Logica");
                 foreach (var x in assembly.GetTypes())
                 {
-                    if (x.BaseType != null && x.BaseType.Name.Equals("Jugador")) { tipos.Add(x); }
+                    if (x.GetInterface("IJugador") != null) { tipos.Add(x); }
                 }
                 foreach (var item in tipos)
                 {
@@ -42,18 +41,8 @@ namespace Proyecto_Domino
                 }
             }
             catch (Exception) { }
-            //comboBox1.DataSource = null;
             comboBox1.DataSource = nombreDeLosTiposDeJugadores;
 
-
-
-           
-            ////////////////////////////////////
-            //jugadores = new List<Jugador>();
-            //tipos = new TiposDeJugador();
-            //nombresDeJugadores = new List<string>();
-            //comboBox1.DataSource = tipos.NombreDeLosTipos;
-            ////////////////////////////////////
         }
         private void Form2_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -67,16 +56,11 @@ namespace Proyecto_Domino
             else if (textBox1.Text == "") MessageBox.Show("Debe ingresar un nombre para su jugador.");
             else
             {
-
-
-                //Jugador jugador = tipos.Comparer(comboBox1.SelectedItem.ToString()!);
-                //
-                Jugador jugador = new JugadorAleatorio();//Para q no sea null
+                IJugador jugador =null;
                 foreach (var item in tipos)
                 {
-                    if (comboBox1.Text != null && comboBox1.Text== item.Name) { jugador = (Jugador)assembly.CreateInstance(item.FullName); }
+                    if (comboBox1.Text != null && comboBox1.Text== item.Name) { jugador = (IJugador)assembly.CreateInstance(item.FullName); }
                 }
-                //
                 bool estaElNombre = false;
                 bool tipoDeJugadorExiste= false;
                 foreach (var item in jugadores)

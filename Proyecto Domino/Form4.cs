@@ -16,10 +16,9 @@ namespace Proyecto_Domino
         Juego juego;
         List<string> guardadas = new List<string>();
         bool juegoAutomatico = false; 
+        List<IJugador> jugadores;
 
-        List<Jugador> jugadores;
-
-        public Form4(List<Jugador> jugadores,ICondicionDeFinalizacion condicionDeFinalizacion,IOrdenDeLasJugadas ordenDeLasJugadas,IFormadeRepartir formadeRepartir,IFicha modoDeJuego,IFormaDeCalcularPuntuacion formaDeCalcular)
+        public Form4(List<IJugador> jugadores,ICondicionDeFinalizacion condicionDeFinalizacion,IOrdenDeLasJugadas ordenDeLasJugadas,IFormadeRepartir formadeRepartir,IFicha modoDeJuego,IFormaDeCalcularPuntuacion formaDeCalcular)
         {
             InitializeComponent();
             juego = new Juego(jugadores,condicionDeFinalizacion,ordenDeLasJugadas,formadeRepartir,modoDeJuego,formaDeCalcular);///////
@@ -34,7 +33,7 @@ namespace Proyecto_Domino
         {
             if (juego.MoveNext()) { listBox1.DataSource = null;guardadas.Add(juego.Current.ToString());
                 listBox1.DataSource  = guardadas; 
-            }/////
+            }
         }
 
         private void Atras_Click(object sender, EventArgs e)
@@ -75,6 +74,14 @@ namespace Proyecto_Domino
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (juegoAutomatico) { SiguienteJugada_Click(sender, e); }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            guardadas = new List<string>();
+            listBox1.DataSource = null;
+            listBox1.DataSource=guardadas;
+            juego.Reset();
         }
     }
 }

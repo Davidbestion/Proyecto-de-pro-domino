@@ -35,6 +35,7 @@
             this.Atras = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.Resetear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // SiguienteJugada
@@ -90,12 +91,23 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // Resetear
+            // 
+            this.Resetear.Location = new System.Drawing.Point(51, 201);
+            this.Resetear.Name = "Resetear";
+            this.Resetear.Size = new System.Drawing.Size(115, 23);
+            this.Resetear.TabIndex = 5;
+            this.Resetear.Text = "Resetear";
+            this.Resetear.UseVisualStyleBackColor = true;
+            this.Resetear.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Resetear);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.Atras);
             this.Controls.Add(this.MostrarFinal);
@@ -116,5 +128,6 @@
         private Button Atras;
         private ListBox listBox1;
         private System.Windows.Forms.Timer timer1;
+        private Button Resetear;
     }
 }
