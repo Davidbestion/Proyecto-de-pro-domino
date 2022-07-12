@@ -1,6 +1,6 @@
 ﻿namespace Proyecto_Domino
 {
-    partial class Form2
+    partial class Crear_Jugadores
     {
         /// <summary>
         /// Required designer variable.
@@ -36,6 +36,7 @@
             this.Siguiente = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.Atras = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -85,7 +86,7 @@
             // 
             // Siguiente
             // 
-            this.Siguiente.Location = new System.Drawing.Point(611, 343);
+            this.Siguiente.Location = new System.Drawing.Point(611, 296);
             this.Siguiente.Name = "Siguiente";
             this.Siguiente.Size = new System.Drawing.Size(75, 23);
             this.Siguiente.TabIndex = 5;
@@ -113,12 +114,23 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "Nombre del Jugador";
             // 
-            // Form2
+            // Atras
+            // 
+            this.Atras.Location = new System.Drawing.Point(611, 343);
+            this.Atras.Name = "Atras";
+            this.Atras.Size = new System.Drawing.Size(75, 23);
+            this.Atras.TabIndex = 8;
+            this.Atras.Text = "Atras";
+            this.Atras.UseVisualStyleBackColor = true;
+            this.Atras.Click += new System.EventHandler(this.Atras_Click);
+            // 
+            // Crear_Jugadores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Atras);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Siguiente);
@@ -128,8 +140,8 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.comboBox1);
             this.MaximizeBox = false;
-            this.Name = "Form2";
-            this.Text = "Form2";
+            this.Name = "Crear_Jugadores";
+            this.Text = "Jugadores";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -145,5 +157,6 @@
         private Button Siguiente;
         private Label label1;
         private Label label2;
+        private Button Atras;
     }
 }

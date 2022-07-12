@@ -1,6 +1,6 @@
 ﻿namespace Proyecto_Domino
 {
-    partial class Form4
+    partial class Jugar
     {
         /// <summary>
         /// Required designer variable.
@@ -81,10 +81,11 @@
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
+            this.listBox1.HorizontalScrollbar = true;
             this.listBox1.ItemHeight = 15;
-            this.listBox1.Location = new System.Drawing.Point(251, 42);
+            this.listBox1.Location = new System.Drawing.Point(213, 42);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(423, 244);
+            this.listBox1.Size = new System.Drawing.Size(532, 289);
             this.listBox1.TabIndex = 4;
             // 
             // timer1
@@ -99,9 +100,9 @@
             this.Resetear.TabIndex = 5;
             this.Resetear.Text = "Resetear";
             this.Resetear.UseVisualStyleBackColor = true;
-            this.Resetear.Click += new System.EventHandler(this.button1_Click);
+            this.Resetear.Click += new System.EventHandler(this.Resetear_Click);
             // 
-            // Form4
+            // Jugar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -114,8 +115,8 @@
             this.Controls.Add(this.JuegoAtomatico);
             this.Controls.Add(this.SiguienteJugada);
             this.MaximizeBox = false;
-            this.Name = "Form4";
-            this.Text = "Form4";
+            this.Name = "Jugar";
+            this.Text = "Jugar";
             this.ResumeLayout(false);
 
         }

@@ -21,11 +21,8 @@ namespace Logica
         public  void Seleccionar(List<Tuple<int, int>> fichas, bool bocaArriba, int cantFichas);
 
         protected  bool EsFichaJugable(Tuple<int, int> ficha, int num1, int num2);//Pa cuando la hagas interface en vez de abstracta.
-        //{
-        //    return fichas[i].Item1 == num1 || fichas[i].Item2 == num1 || fichas[i].Item1 == num2 || fichas[i].Item2 == num2;
-        //}
 
-    }
+}
     public class JugadorAleatorio : IJugador
     {
 
@@ -48,9 +45,6 @@ namespace Logica
 
         public Tuple<int, int> Juega(List<Tuple<int, int>> fichas, int num1, int num2)
         {
-
-            //int puntuaciondelaficha2=FormaDeCalcularPuntuacionDeLasFichas(fichas[2]);
-
             int length = Fichas.Count;
             Random random = new Random();
             int a = random.Next(length);
@@ -214,7 +208,7 @@ namespace Logica
                     foreach (Tuple<int, int> ficha2 in Fichas)
                     {//Reviso cuales fichas de las q tengo tienen el otro numero
                      //eso me dira que tan buena es la ficha
-                        if (ficha2 == ficha) continue;
+                        if (ficha2.Equals(ficha)) continue;
                         if (ficha2.Item1 == numero || ficha2.Item2 == numero)
                         {
                             potencial++;//potencial de la ficha, NO DE ficha2.!!!!!!!!!
@@ -231,7 +225,7 @@ namespace Logica
                     numero = ficha.Item1;
                     foreach (Tuple<int, int> ficha2 in Fichas)
                     {
-                        if (ficha2 == ficha) continue;
+                        if (ficha2.Equals(ficha)) continue;
                         if (ficha2.Item1 == numero || ficha2.Item2 == numero)
                         {
                             potencial++;
@@ -255,6 +249,7 @@ namespace Logica
                 int potencial = 1;
                 if (EsFichaJugable(ficha, num1, num2))//Escojo las q puedo jugar
                 {
+
                     int numero = -1;
                     //Guardo el numero por el cual la puedo jugar
                     if (ficha.Item1 == num1 || ficha.Item1 == num2)
@@ -263,7 +258,7 @@ namespace Logica
                         foreach (Tuple<int, int> ficha2 in Fichas)
                         {//Reviso cuales fichas de las q tengo tienen el otro numero
                             //eso me dira que tan buena es la ficha jugable
-                            if (ficha2 == ficha) continue;
+                            if (ficha2.Equals(ficha) && Fichas.Count != 1) continue;
                             if (ficha2.Item1 == numero || ficha2.Item2 == numero)
                             {
                                 potencial++;//potencial de la ficha, NO DE ficha2.!!!!!!!!!
@@ -282,7 +277,7 @@ namespace Logica
                         numero = ficha.Item1;
                         foreach (Tuple<int, int> ficha2 in Fichas)
                         {
-                            if (ficha2 == ficha) continue;
+                            if (ficha2.Equals(ficha) && Fichas.Count != 1) continue;
                             if (ficha2.Item1 == numero || ficha2.Item2 == numero)
                             {
                                 potencial++;
@@ -429,13 +424,13 @@ namespace Logica
             string oracion;
             if (ficha.Item1 == -1 && ficha.Item2 == -1)
             {
-                oracion = jugador.Nombre + " se ha pasado." + " Se mantiene con: " + jugador.Puntuacion + " puntos."; ;
+                oracion = jugador.Nombre + " se ha pasado." + " Se mantiene con: " + jugador.Puntuacion + " puntos."; 
             }
             else { oracion = jugador.Nombre + " ha jugado [" + ficha.Item1 + "|" + ficha.Item2 + "]. Tiene: " + jugador.Puntuacion + " puntos."; }
             if (terminó)
             {
                 if (trancado) { oracion += " Juego trancado,el ganador es " + ganador.Nombre + " con: " + ganador.Puntuacion + " puntos."; }
-                else { oracion += "\n El ganador es " + ganador.Nombre + " con: " + ganador.Puntuacion + " puntos."; }
+                else { oracion += " El ganador es " + ganador.Nombre + " con: " + ganador.Puntuacion + " puntos."; }
             }
             return oracion ;
         }
@@ -492,17 +487,8 @@ namespace Logica
         bool Finalizo(IJugador jugador, Tuple<int, int> fichaJugada, List<IJugador> jugadores, int extremo1, int extremo2, out bool tabla);
 
     }
-    public class FinalizacionPorPuntos : ICondicionDeFinalizacion
+    public class FinalizacionPorPuntos_50puntos : ICondicionDeFinalizacion
     {
-        //Aqui quite puntuacion para asignarselo directamente,ya q no tengo modo en q me entren una puntuacion
-        //public bool Finalizo(List<Jugador> jugadores)
-        //{
-        //    foreach (var item in jugadores)
-        //    {
-        //        if (item.Puntuacion >= 50) { return true; }
-        //    }
-        //    return false;
-        //}
         public bool Finalizo(IJugador jugador, Tuple<int, int> fichaJugada, List<IJugador> jugadores, int extremo1, int extremo2, out bool tabla)
         {
 
@@ -601,6 +587,7 @@ namespace Logica
     public interface IOrdenDeLasJugadas
     {
         IJugador Siguiente(List<IJugador> jugadores, bool SePaso);
+        public void Reset();
     }
 
 
@@ -630,15 +617,25 @@ namespace Logica
             jugadores[0].EsTurno = true;//Para cuando sea el primer turno
             return jugadores[0];
         }
+        public void Reset()
+        {
+
+        }
     }
 
     public class OrdenCambiadoSiSePasa : IOrdenDeLasJugadas
     {
-        List<IJugador>pasados=new List<IJugador>();
+        List<IJugador> pasados = new List<IJugador>();
         bool ordenCambiado = false;
-        int VecesPasadasSeguidas=0;
+        int VecesPasadasSeguidas = 0;
         bool primeraVez = true;
-
+        public void Reset()
+        {
+            pasados = new List<IJugador>();
+            ordenCambiado = false;
+            VecesPasadasSeguidas = 0;
+            primeraVez = true;
+        }
 
         public IJugador Siguiente(List<IJugador> jugadores, bool SePaso)
         {
@@ -663,10 +660,12 @@ namespace Logica
                         VecesPasadasSeguidas++;
                         ordenCambiado = !ordenCambiado;
                     }
-                    else { VecesPasadasSeguidas = 0;primeraVez = true; }
+                    else { VecesPasadasSeguidas = 0; primeraVez = true; pasados = new List<IJugador>(); }
 
-                    if (VecesPasadasSeguidas > 2)
+                    if (VecesPasadasSeguidas >= 2)
                     {
+                        jugadores[i].EsTurno = false;
+                        pasados[0].EsTurno = true;
                         return pasados[0];
                     }
 
@@ -874,6 +873,7 @@ namespace Logica
             fichas = ModoDeJuego.GeneradorDeFichas();
             FinalizoElJuego = false;
             JuegoTrancado = false;
+            OrdenDeLasJugadas.Reset();
 
             foreach (var jugador in ListadeJugadores)
             {

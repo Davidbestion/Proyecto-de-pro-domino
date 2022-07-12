@@ -1,6 +1,6 @@
 ﻿namespace Proyecto_Domino
 {
-    partial class Form1
+    partial class Presentacion
     {
         /// <summary>
         ///  Required designer variable.
@@ -101,7 +101,7 @@
             this.label4.TabIndex = 4;
             this.label4.Text = "Domino";
             // 
-            // Form1
+            // Presentacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -113,8 +113,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Iniciar);
             this.MaximizeBox = false;
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "Presentacion";
+            this.Text = "Presentacion";
             this.ResumeLayout(false);
             this.PerformLayout();
 

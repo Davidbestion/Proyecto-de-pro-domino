@@ -12,7 +12,7 @@ using System.Reflection;
 
 namespace Proyecto_Domino
 {
-    public partial class Form3 : Form
+    public partial class Opciones : Form
     {
         Assembly assembly;
         public List<Type> tiposDeModoDeJuego = new List<Type>();
@@ -27,9 +27,9 @@ namespace Proyecto_Domino
         public List<string> NombreDeFormasDeCalcularPuntuacion = new List<string>();
         public List<IJugador> jugadores;
 
-        public Form3(List<IJugador> jugadores)
+        public Opciones()
         {
-            this.jugadores = jugadores;
+            
             InitializeComponent();
             try
             {
@@ -125,24 +125,11 @@ namespace Proyecto_Domino
 
             if (modoDeJuego != null && condicionDeFinalizacion != null && ordenDeLasJugadas != null && formadeRepartir != null && formaDeCalcular != null)
             {
-
-                if (modoDeJuego.GeneradorDeFichas().Count / modoDeJuego.FichasPorJugador >= jugadores.Count)//Condicion para saber si se puede jugar el modo seleccionado con esta cantidad de jugadores
-                {
-                    Form4 form4 = new Form4(jugadores, condicionDeFinalizacion, ordenDeLasJugadas, formadeRepartir, modoDeJuego, formaDeCalcular);
-                    this.Hide();
-                    form4.Show();
-                }
-                else { MessageBox.Show("No se puede jugar este modo de juego con esta cantidad de jugadores"); }
-
+                Crear_Jugadores form2 = new Crear_Jugadores(condicionDeFinalizacion, ordenDeLasJugadas, formadeRepartir, modoDeJuego, formaDeCalcular);
+                this.Hide();
+                form2.Show();
             }
             else { MessageBox.Show("Debe completar bien los campos para poder iniciar una partida"); }
-        }
-
-        private void Atras_Click(object sender, EventArgs e)
-        {
-            Form2 form2 = new Form2();
-            this.Hide();
-            form2.Show();
         }
 
         private void Form3_Load(object sender, EventArgs e)
