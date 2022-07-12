@@ -634,17 +634,43 @@ namespace Logica
 
     public class OrdenCambiadoSiSePasa : IOrdenDeLasJugadas
     {
+        List<IJugador>pasados=new List<IJugador>();
         bool ordenCambiado = false;
+        int VecesPasadasSeguidas=0;
+        bool primeraVez = true;
+
+
         public IJugador Siguiente(List<IJugador> jugadores, bool SePaso)
         {
+            if (primeraVez)
+            {
+                foreach (IJugador jugador in jugadores)
+                {
+                    pasados.Add(jugador);
+                }
+                primeraVez = false;
+            }
+
+
+
             for (int i = 0; i < jugadores.Count; i++)
             {
                 if (jugadores[i].EsTurno)
                 {
                     if (SePaso)
                     {
+                        pasados.Remove(jugadores[i]);
+                        VecesPasadasSeguidas++;
                         ordenCambiado = !ordenCambiado;
                     }
+                    else { VecesPasadasSeguidas = 0;primeraVez = true; }
+
+                    if (VecesPasadasSeguidas > 2)
+                    {
+                        return pasados[0];
+                    }
+
+
                     if (ordenCambiado)
                     {
                         if (i == 0)
