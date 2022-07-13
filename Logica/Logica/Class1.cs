@@ -118,7 +118,7 @@ namespace Logica
 
 
             for (int i = 0; i < length; i++)
-            {
+            {//La idea es jugar la ficha de mayor valor
                 if (EsFichaJugable(Fichas[i], num1, num2))
                 {
                     int valor = FormaDeCalcularPuntuacionDeLasFichas(Fichas[i]);
@@ -133,7 +133,7 @@ namespace Logica
         {
             Fichas = new List<Tuple<int, int>>();
             Random random = new Random();
-            if (!bocaArriba)
+            if (!bocaArriba)//Si estan boca abajo las escoge al azar, se supone que no puede ver los numeros de las fichas
             {
                 while (Fichas.Count < cantFichas)
                 {
@@ -150,11 +150,16 @@ namespace Logica
                 int mayorValor = FormaDeCalcularPuntuacionDeLasFichas(fichaDeMayorValor);
                 while (Fichas.Count < cantFichas)
                 {
-                    length = fichas.Count;
-                    for(int i = 0; i < length; i++)
+                    if (fichas.Count == 1)//Si solo queda una ficha, la agrego
                     {
-                        if (fichaDeMayorValor == fichas[i]) continue;
-                        valor = FormaDeCalcularPuntuacionDeLasFichas(fichas[i]);
+                        Fichas.Add(fichas[0]);
+                        fichas.RemoveAt(0);
+                    }
+                    length = fichas.Count;
+                    for(int i = 0; i < length; i++)//Busco la ficha de mayor valor pues al jugarla obtendra mas puntos
+                    {
+                        if (fichaDeMayorValor == fichas[i]) continue;//Si es la misma con la que estoy comparando no hago nada
+                        valor = FormaDeCalcularPuntuacionDeLasFichas(fichas[i]);//Calculo su valor
                         if(valor > mayorValor)
                         {
                             fichaDeMayorValor = fichas[i];
@@ -162,11 +167,12 @@ namespace Logica
                         }
                         if(i == length - 1)
                         {
-                            Fichas.Add(fichaDeMayorValor);
-                            fichas.Remove(fichaDeMayorValor);
+                            Fichas.Add(fichaDeMayorValor);//Agrego la de mayor valor a Fichas
+                            fichas.Remove(fichaDeMayorValor);//La quito de las fichas del juego pues la cogio el jugador, pa q no se repitan fichas
                             fichaDeMayorValor = fichas[0];
                             mayorValor = FormaDeCalcularPuntuacionDeLasFichas(fichaDeMayorValor);
                         }
+                        
                     }
                 }
             }
@@ -219,6 +225,7 @@ namespace Logica
 
                     }
                     //Repito el proceso con el otro numero de la ficha 
+                    //Por si la puedo poner en ambos lados
 
                     numero = ficha.Item1;
                     foreach (Tuple<int, int> ficha2 in Fichas)
@@ -269,7 +276,7 @@ namespace Logica
 
                         }
                     }//Repito el proceso con el otro numero de la ficha jugable por si la puedo pegar
-                    //con ambos numero en el "tablero": num1 y num2.
+                    //con ambos numeros en el "tablero": num1 y num2.
                     if (ficha.Item2 == num1 || ficha.Item2 == num2)
                     {
                         numero = ficha.Item1;
@@ -316,8 +323,8 @@ namespace Logica
 
                 do
                 {
-                    escogidas = EscogerFichas(cantFichas, fichas, NumMaximoEnFichas(fichas));
-                    if (escogidas.Count != 0)
+                    escogidas = EscogerFichas(cantFichas, fichas);//Escojo un grupo de fichas cuyos numeros no esten repetidos en las otras
+                    if (escogidas.Count != 0)//Si encontro fichas con esas caracteristicas, las quito de las fichas del juego pa que no haya repetidas
                     {
                         this.Fichas.AddRange(escogidas);
                         for (int i = 0; i < escogidas.Count; i++)
@@ -325,9 +332,10 @@ namespace Logica
                             fichas.Remove(escogidas[i]);
                         }
                     }
-                } while (escogidas.Count != 0 && this.Fichas.Count < cantFichas);
+                } while (escogidas.Count != 0 && this.Fichas.Count < cantFichas);//Si aun no tengo suficientes fichas, repito el proceso
+                                                                                 //hasta que tenga suficientes o hasta que escogidas salga vacia 
 
-                if (this.Fichas.Count > cantFichas)
+                if (this.Fichas.Count > cantFichas)//Si la cantidad de fichas que escogi excede el total de fichas por jugador, elimino las ultimas agregadas
                 {
                     int resto = Fichas.Count - cantFichas;
                     for (int i = this.Fichas.Count - 1, j = resto; i >= 0 && j > 0; i--, j--) 
@@ -336,7 +344,7 @@ namespace Logica
                         Fichas.RemoveAt(i);
                     }
                 }
-                if(this.Fichas.Count < cantFichas)
+                if(this.Fichas.Count < cantFichas)//Si me faltaron fichas por escoger, las escojo al azar
                 {
                     while(this.Fichas.Count < cantFichas)
                     {
@@ -347,18 +355,8 @@ namespace Logica
                 }
             }
         }
-        private static int NumMaximoEnFichas(List<Tuple<int, int>> fichas)
-        {
-            int numero = int.MinValue;
-            foreach (var ficha in fichas)
-            {
-                if(ficha.Item1 > numero)numero = ficha.Item1;
-                if(ficha.Item2 > numero)numero = ficha.Item2;
-            }
-            return numero + 1;
-        }
         /////LA IDEA ES QUE ESCOJA LAS FICHAS DE MANERA Q POSEA LA MAYOR CANTIDAD DE NUMEROS POSIBLES
-        private List<Tuple<int,int>> EscogerFichas(int cantFichas, List<Tuple<int, int>> fichas, int numMax)
+        private List<Tuple<int,int>> EscogerFichas(int cantFichas, List<Tuple<int, int>> fichas)
         {
             List<Tuple<int,int>> escogidas = new List<Tuple<int,int>>();
             List<Tuple<int, int>> fichasSinDobles = new List<Tuple<int, int>>();
@@ -375,13 +373,15 @@ namespace Logica
                     fichasDobles.Add(ficha);
                 }
             }
-            escogidas.Add(fichasSinDobles[0]);//////////////AQUI DA EL ERROR
+           
             escogidas = FichasElegidas(fichasSinDobles, escogidas);
             return FichasElegidas(fichasDobles, escogidas);
         }
         private List<Tuple<int,int>> FichasElegidas(List<Tuple<int,int>> fichas, List<Tuple<int, int>> escogidas)
         {
-            foreach(var ficha in fichas)
+            if (fichas.Count == 0) return escogidas;
+            if (escogidas.Count == 0) escogidas.Add(fichas[0]);
+            foreach (var ficha in fichas)
             {
                 for (int j = 0; j < escogidas.Count; j++)
                 {
