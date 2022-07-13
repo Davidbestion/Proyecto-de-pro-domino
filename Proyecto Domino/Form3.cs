@@ -33,8 +33,8 @@ namespace Proyecto_Domino
             InitializeComponent();
             try
             {
-                assembly = Assembly.Load("Logica");
-                foreach (var x in assembly.GetTypes())
+                assembly = Assembly.Load("Logica");//Cargando los componentes del archivo Logica
+                foreach (var x in assembly.GetTypes())//Añadiendo las clases que implementen dichas interfaces
                 {
                     if (x.GetInterface("IFicha") != null) { tiposDeModoDeJuego.Add(x); }
                     else if(x.GetInterface("ICondicionDeFinalizacion") != null) { tiposDeCondicionDeFinalizacion.Add(x); }
@@ -43,7 +43,7 @@ namespace Proyecto_Domino
                     else if (x.GetInterface("IFormaDeCalcularPuntuacion") != null) { tiposDeFormasDeCalcularPuntuacion.Add(x); }
 
                 }
-                foreach (var item in tiposDeModoDeJuego)
+                foreach (var item in tiposDeModoDeJuego)//Añadiendo los nombres
                 {
                     NombreDeLosTiposDeJuego.Add(item.Name);
                 }
@@ -66,20 +66,21 @@ namespace Proyecto_Domino
 
             }
             catch (Exception) { }
+
             comboBox1.DataSource = null;
-            comboBox1.DataSource = NombreDeLosTiposDeJuego;
+            comboBox1.DataSource = NombreDeLosTiposDeJuego;//Mostrando los tipos de Modos de Juegos disponibles
 
             comboBox2.DataSource = null;
-            comboBox2.DataSource = NombreDeCondicionDeFinalizacion;
+            comboBox2.DataSource = NombreDeCondicionDeFinalizacion;//Mostrando los tipos de Condicion de Finalizacion disponibles
 
             comboBox3.DataSource = null;
-            comboBox3.DataSource = NombreDeTiposDeOrdenDeJugada;
+            comboBox3.DataSource = NombreDeTiposDeOrdenDeJugada;//Mostrando los tipos de Orden de Jugadas disponibles
 
             comboBox4.DataSource = null;
-            comboBox4.DataSource = NombreDeFormasDeRepartir;
+            comboBox4.DataSource = NombreDeFormasDeRepartir;//Mostrando los tipos de Formas de Repartir disponibles
 
             comboBox5.DataSource = null;
-            comboBox5.DataSource = NombreDeFormasDeCalcularPuntuacion;
+            comboBox5.DataSource = NombreDeFormasDeCalcularPuntuacion;//Mostrando los tipos de Formas de Calcular las Puntuaciones disponibles
 
         }
         private void Form3_FormClosed(object sender, FormClosedEventArgs e)
@@ -101,7 +102,7 @@ namespace Proyecto_Domino
             IFormaDeCalcularPuntuacion formaDeCalcular = null;
 
 
-            foreach (var item in tiposDeModoDeJuego)
+            foreach (var item in tiposDeModoDeJuego)//Creando las intancias de las clases de opciones seleccionadas
             {
                 if (comboBox1.Text != null && comboBox1.Text == item.Name) { modoDeJuego= (IFicha)assembly.CreateInstance(item.FullName); }
             }

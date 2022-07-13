@@ -42,18 +42,18 @@ namespace Proyecto_Domino
 
             try
             {
-                assembly = Assembly.Load("Logica");
+                assembly = Assembly.Load("Logica");//cargando los componentes del archivo Logica
                 foreach (var x in assembly.GetTypes())
                 {
-                    if (x.GetInterface("IJugador") != null) { tipos.Add(x); }
+                    if (x.GetInterface("IJugador") != null) { tipos.Add(x); }//añadiendo las clases que implementen de la interfaz IJuego
                 }
                 foreach (var item in tipos)
                 {
-                    nombreDeLosTiposDeJugadores.Add(item.Name);
+                    nombreDeLosTiposDeJugadores.Add(item.Name);//añadiendo los nombres de esas clases
                 }
             }
             catch (Exception) { }
-            comboBox1.DataSource = nombreDeLosTiposDeJugadores;
+            comboBox1.DataSource = nombreDeLosTiposDeJugadores;//añadiendo esos elementos para mostrarlos en el combobox
 
         }
         private void Form2_FormClosed(object sender, FormClosedEventArgs e)
@@ -63,23 +63,23 @@ namespace Proyecto_Domino
 
         private void Agregar_Click(object sender, EventArgs e)//Agregar Jugador
         {
-            //Da error si no hay nada escrito en el combobox
-            if (comboBox1.Text == "") MessageBox.Show("Elija un tipo de jugador por favor.");
-            else if (textBox1.Text == "") MessageBox.Show("Debe ingresar un nombre para su jugador.");
+            
+            if (comboBox1.Text == "") MessageBox.Show("Elija un tipo de jugador por favor.");//Da error si no selecciono nada del combobox
+            else if (textBox1.Text == "") MessageBox.Show("Debe ingresar un nombre para su jugador.");//Da error si no le dio nombre al jugador
             else
             {
                 IJugador jugador = null;
-                foreach (var item in tipos)
+                foreach (var item in tipos)//Creando Jugadores segun lo seleccionado
                 {
                     if (comboBox1.Text != null && comboBox1.Text== item.Name) { jugador = (IJugador)assembly.CreateInstance(item.FullName); }
                 }
                 bool estaElNombre = false;
                 bool tipoDeJugadorExiste= false;
-                foreach (var item in jugadores)
+                foreach (var item in jugadores)//Comprobando que no haya mas de un jugador con el mismo nombre
                 {
                     if (item.Nombre == textBox1.Text) { MessageBox.Show("No puede haber mas de un jugador con el mismo nombre"); estaElNombre = true; break; }
                 }
-                foreach (var item in nombreDeLosTiposDeJugadores)
+                foreach (var item in nombreDeLosTiposDeJugadores)//Comprobando que selecciono algo valido en Tipo de Jugador
                 {
                     if(item == comboBox1.Text) { tipoDeJugadorExiste = true;break; }
                 }

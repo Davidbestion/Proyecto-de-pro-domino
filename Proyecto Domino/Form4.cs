@@ -33,7 +33,7 @@ namespace Proyecto_Domino
             this.formaDeCalcular = formaDeCalcular;
 
             InitializeComponent();
-            juego = new Juego(jugadores,condicionDeFinalizacion,ordenDeLasJugadas,formadeRepartir,modoDeJuego,formaDeCalcular);///////
+            juego = new Juego(jugadores,condicionDeFinalizacion,ordenDeLasJugadas,formadeRepartir,modoDeJuego,formaDeCalcular);
             this.jugadores = jugadores;
         }
         private void Form4_FormClosed(object sender, FormClosedEventArgs e)
@@ -43,7 +43,7 @@ namespace Proyecto_Domino
 
         private void SiguienteJugada_Click(object sender, EventArgs e)
         {
-            if (juego.MoveNext()) { listBox1.DataSource = null;guardadas.Add(juego.Current.ToString());
+            if (juego.MoveNext()) { listBox1.DataSource = null;guardadas.Add(juego.Current.ToString());//Guardando la Jugada si se hizo MoveNext
                 listBox1.DataSource  = guardadas; 
             }
         }
@@ -71,8 +71,6 @@ namespace Proyecto_Domino
             }
             listBox1.DataSource = null;
             listBox1.DataSource = guardadas;
-            //Foreach in juego{guardadas.add(item.current)}
-
         }
 
         private void timer1_Tick(object sender, EventArgs e)
