@@ -1,0 +1,10 @@
+# Proyecto-de-pro-domino
+Proyecto de segundo año de programación.
+Este proyecto fue hecho usando visual studio 2022, Net 6.0, en Windows. Lo ideal sería abrirlo en el mismo programa visual studio 2022, no obstante puede abrirlo y usarlo si está en windows accediendo a la carpeta: Proyecto Domino\bin\Debug\net6.0-windows y ejecutando el Proyecto Domino.exe.
+
+Instrucciones para su uso: 
+Después de presionar el botón “Iniciar” de la pantalla de presentación, se abre la pantalla de configuración del juego. En esta nueva ventana, el usuario puede escoger y cambiar a voluntad los modos de juego, la condición para que finalice el juego, el orden en el que jugarán los jugadores, la forma en la que se repartirán las fichas a cada jugador y la forma de calcular la puntuación de cada jugador en dependencia de las fichas que haya jugado.
+Luego, una vez configurado el juego, el usuario debe presionar “Siguiente” para acceder a la ventana de creación de jugadores. En dicha ventana se encuentran dos campos a rellenar: el primero: “Tipo de jugador”, determina la estrategia que empleará el jugador durante el juego una vez creado; el segundo: “Nombre del jugador”, proporciona un nombre a dicho jugador para diferenciarlo de los ya creados anteriormente.
+Después de seleccionados los jugadores, el usuario ha de presionar el botón “Siguiente” con el fin de pasar a la ventana de juego.
+En esta ventana se puede ver el juego y cómo se desarrolla: lo que juega cada jugador y los puntos que estos tienen en cada jugada.
+Aquí hay 4 botones: “Siguiente Jugada” muestra la ficha jugada por el jugador al que le toca ahora, o sea, le da el turno al siguiente jugador en la cola; “Juego Automático” reproduce cada jugada de manera autónoma hasta que termine el juego o hasta que se presione el botón de nuevo; “Mostrar Final” pone en pantalla el juego completo y su resultado de manera instantánea; y “Resetear” reinicia el juego, manteniendo las condiciones y configuraciones establecidas en la ventana de configuraciones del juego, con la diferencia de que a los jugadores se les vuelve a repartir las fichas para que escojan.
