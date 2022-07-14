@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hp\\source\\repos\\Proyecto-de-pro-domino\\Logica\\Logica\\Logica.csproj": {}
+    "C:\\Users\\David\\Source\\Repos\\Davidbestion\\Proyecto-de-pro-domino\\Logica\\Logica\\Logica.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hp\\source\\repos\\Proyecto-de-pro-domino\\Logica\\Logica\\Logica.csproj": {
+    "C:\\Users\\David\\Source\\Repos\\Davidbestion\\Proyecto-de-pro-domino\\Logica\\Logica\\Logica.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hp\\source\\repos\\Proyecto-de-pro-domino\\Logica\\Logica\\Logica.csproj",
+        "projectUniqueName": "C:\\Users\\David\\Source\\Repos\\Davidbestion\\Proyecto-de-pro-domino\\Logica\\Logica\\Logica.csproj",
         "projectName": "Logica",
-        "projectPath": "C:\\Users\\hp\\source\\repos\\Proyecto-de-pro-domino\\Logica\\Logica\\Logica.csproj",
-        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hp\\source\\repos\\Proyecto-de-pro-domino\\Logica\\Logica\\obj\\",
+        "projectPath": "C:\\Users\\David\\Source\\Repos\\Davidbestion\\Proyecto-de-pro-domino\\Logica\\Logica\\Logica.csproj",
+        "packagesPath": "C:\\Users\\David\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\David\\Source\\Repos\\Davidbestion\\Proyecto-de-pro-domino\\Logica\\Logica\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\David\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
