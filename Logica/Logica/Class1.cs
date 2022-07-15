@@ -475,10 +475,14 @@ namespace Logica
     public interface ICondicionDeFinalizacion
     {
         bool Finalizo(IJugador jugador, Tuple<int, int> fichaJugada, List<IJugador> jugadores, int extremo1, int extremo2, out bool tabla);
-
+        void Reset();
     }
     public class FinalizacionPorPuntos_50puntos : ICondicionDeFinalizacion
     {
+        public void Reset()
+        {
+
+        }
         public bool Finalizo(IJugador jugador, Tuple<int, int> fichaJugada, List<IJugador> jugadores, int extremo1, int extremo2, out bool tabla)
         {
 
@@ -522,6 +526,12 @@ namespace Logica
     {
         int[] vecesPasadasSeguidas;
         bool primeraVez = true;
+
+        public void Reset()
+        {
+            primeraVez = true;
+        }
+
         public bool Finalizo(IJugador jugador,Tuple<int,int>fichaJugada, List<IJugador> jugadores, int extremo1, int extremo2, out bool tabla)
         {
             if (primeraVez) { vecesPasadasSeguidas = new int[jugadores.Count];primeraVez = false; }
@@ -529,6 +539,7 @@ namespace Logica
             {
                 jugador.Ganador = true;
                 tabla = false;
+                primeraVez = true;
                 return true;
             }
             if (fichaJugada.Item1 == -1 && fichaJugada.Item2 == -1)
@@ -544,6 +555,7 @@ namespace Logica
                     }
                     jugadores[indiceDeJugadorConMejorPuntaje].Ganador = true;
                     tabla = false;
+                    primeraVez = true;
                     return true;
                 }
             }
@@ -568,6 +580,7 @@ namespace Logica
             }
             jugadores[indiceJugadorConMejorPuntaje].Ganador = true;
 
+            primeraVez = true;
             return true;
         }
     }
@@ -847,6 +860,8 @@ namespace Logica
             FinalizoElJuego = false;
             JuegoTrancado = false;
             OrdenDeLasJugadas.Reset();
+            CondicionDeFinalizacion.Reset();
+
 
             foreach (var jugador in ListadeJugadores)
             {

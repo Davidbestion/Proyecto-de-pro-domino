@@ -47,6 +47,7 @@ namespace Proyecto_Domino
         private void Atras_Click(object sender, EventArgs e)
         {
             timer1.Enabled = false;
+            juego.Reset();
             Crear_Jugadores form2 = new Crear_Jugadores(condicionDeFinalizacion, ordenDeLasJugadas, formadeRepartir, modoDeJuego, formaDeCalcular);
             this.Hide();
             form2.Show();
