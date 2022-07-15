@@ -9,6 +9,7 @@ namespace Proyecto_Domino
         public Presentacion()
         {
             InitializeComponent();
+         try{
             string direccion = Directory.GetCurrentDirectory();
    
             string direccionMenu=direccion.Substring(0,direccion.Length - 14)+ "mus_menu0_3.wav";//string de la direccion de la cancion de fondo  
@@ -16,6 +17,8 @@ namespace Proyecto_Domino
             SoundPlayer sonidoMenu = new SoundPlayer();
             sonidoMenu.SoundLocation = direccionMenu;
             sonidoMenu.PlayLooping();
+            }
+         catch{}
         }
 
         private void Iniciar_Click(object sender, EventArgs e)
