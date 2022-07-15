@@ -36,10 +36,6 @@ namespace Proyecto_Domino
             juego = new Juego(jugadores,condicionDeFinalizacion,ordenDeLasJugadas,formadeRepartir,modoDeJuego,formaDeCalcular);
             this.jugadores = jugadores;
         }
-        private void Form4_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
-        }
 
         private void SiguienteJugada_Click(object sender, EventArgs e)
         {
@@ -84,6 +80,11 @@ namespace Proyecto_Domino
             listBox1.DataSource = null;
             listBox1.DataSource=guardadas;
             juego.Reset();
+        }
+
+        private void Jugar_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

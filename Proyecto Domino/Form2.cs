@@ -56,10 +56,6 @@ namespace Proyecto_Domino
             comboBox1.DataSource = nombreDeLosTiposDeJugadores;//añadiendo esos elementos para mostrarlos en el combobox
 
         }
-        private void Form2_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
-        }
 
         private void Agregar_Click(object sender, EventArgs e)//Agregar Jugador
         {
@@ -126,6 +122,11 @@ namespace Proyecto_Domino
             Opciones opciones = new Opciones();
             this.Hide();
             opciones.Show();
+        }
+
+        private void Crear_Jugadores_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

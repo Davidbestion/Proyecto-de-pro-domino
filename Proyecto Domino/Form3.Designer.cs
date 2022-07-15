@@ -162,6 +162,7 @@
             this.MaximizeBox = false;
             this.Name = "Opciones";
             this.Text = "Opciones";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Opciones_FormClosing);
             this.Load += new System.EventHandler(this.Form3_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

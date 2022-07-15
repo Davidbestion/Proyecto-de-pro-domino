@@ -83,10 +83,6 @@ namespace Proyecto_Domino
             comboBox5.DataSource = NombreDeFormasDeCalcularPuntuacion;//Mostrando los tipos de Formas de Calcular las Puntuaciones disponibles
 
         }
-        private void Form3_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
-        }
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -136,6 +132,11 @@ namespace Proyecto_Domino
         private void Form3_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void Opciones_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

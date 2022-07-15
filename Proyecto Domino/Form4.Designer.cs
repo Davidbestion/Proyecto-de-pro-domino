@@ -117,6 +117,7 @@
             this.MaximizeBox = false;
             this.Name = "Jugar";
             this.Text = "Jugar";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Jugar_FormClosing);
             this.ResumeLayout(false);
 
         }

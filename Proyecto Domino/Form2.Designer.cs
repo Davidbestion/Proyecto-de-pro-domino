@@ -142,6 +142,7 @@
             this.MaximizeBox = false;
             this.Name = "Crear_Jugadores";
             this.Text = "Jugadores";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Crear_Jugadores_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

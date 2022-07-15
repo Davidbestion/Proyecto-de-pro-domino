@@ -115,6 +115,8 @@
             this.MaximizeBox = false;
             this.Name = "Presentacion";
             this.Text = "Presentacion";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Load += new System.EventHandler(this.Presentacion_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

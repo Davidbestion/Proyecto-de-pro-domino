@@ -24,10 +24,14 @@ namespace Proyecto_Domino
             this.Hide();
             form3.Show();
         }
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
         }
 
+        private void Presentacion_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
