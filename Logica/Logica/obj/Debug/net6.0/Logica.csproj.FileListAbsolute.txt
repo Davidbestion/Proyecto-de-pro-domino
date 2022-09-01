@@ -34,3 +34,15 @@ C:\Users\hp\source\repos\Proyecto-de-pro-domino\Logica\Logica\obj\Debug\net6.0\L
 C:\Users\hp\source\repos\Proyecto-de-pro-domino\Logica\Logica\obj\Debug\net6.0\refint\Logica.dll
 C:\Users\hp\source\repos\Proyecto-de-pro-domino\Logica\Logica\obj\Debug\net6.0\Logica.pdb
 C:\Users\hp\source\repos\Proyecto-de-pro-domino\Logica\Logica\obj\Debug\net6.0\ref\Logica.dll
+C:\Users\David\Desktop\Proyecto-de-pro-domino\Logica\Logica\bin\Debug\net6.0\Logica.deps.json
+C:\Users\David\Desktop\Proyecto-de-pro-domino\Logica\Logica\bin\Debug\net6.0\Logica.dll
+C:\Users\David\Desktop\Proyecto-de-pro-domino\Logica\Logica\bin\Debug\net6.0\Logica.pdb
+C:\Users\David\Desktop\Proyecto-de-pro-domino\Logica\Logica\obj\Debug\net6.0\Logica.csproj.AssemblyReference.cache
+C:\Users\David\Desktop\Proyecto-de-pro-domino\Logica\Logica\obj\Debug\net6.0\Logica.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\David\Desktop\Proyecto-de-pro-domino\Logica\Logica\obj\Debug\net6.0\Logica.AssemblyInfoInputs.cache
+C:\Users\David\Desktop\Proyecto-de-pro-domino\Logica\Logica\obj\Debug\net6.0\Logica.AssemblyInfo.cs
+C:\Users\David\Desktop\Proyecto-de-pro-domino\Logica\Logica\obj\Debug\net6.0\Logica.csproj.CoreCompileInputs.cache
+C:\Users\David\Desktop\Proyecto-de-pro-domino\Logica\Logica\obj\Debug\net6.0\Logica.dll
+C:\Users\David\Desktop\Proyecto-de-pro-domino\Logica\Logica\obj\Debug\net6.0\refint\Logica.dll
+C:\Users\David\Desktop\Proyecto-de-pro-domino\Logica\Logica\obj\Debug\net6.0\Logica.pdb
+C:\Users\David\Desktop\Proyecto-de-pro-domino\Logica\Logica\obj\Debug\net6.0\ref\Logica.dll

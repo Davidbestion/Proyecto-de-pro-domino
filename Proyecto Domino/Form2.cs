@@ -24,11 +24,11 @@ namespace Proyecto_Domino
         ICondicionDeFinalizacion condicionDeFinalizacion;
         IOrdenDeLasJugadas ordenDeLasJugadas;
         IFormadeRepartir formadeRepartir;
-        IFicha modoDeJuego;
+        IFichas modoDeJuego;
         IFormaDeCalcularPuntuacion formaDeCalcular;
 
 
-        public Crear_Jugadores(ICondicionDeFinalizacion condicionDeFinalizacion, IOrdenDeLasJugadas ordenDeLasJugadas, IFormadeRepartir formadeRepartir, IFicha modoDeJuego, IFormaDeCalcularPuntuacion formaDeCalcular)
+        public Crear_Jugadores(ICondicionDeFinalizacion condicionDeFinalizacion, IOrdenDeLasJugadas ordenDeLasJugadas, IFormadeRepartir formadeRepartir, IFichas modoDeJuego, IFormaDeCalcularPuntuacion formaDeCalcular)
         {
 
             InitializeComponent();

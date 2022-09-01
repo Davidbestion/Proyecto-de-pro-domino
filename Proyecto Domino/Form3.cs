@@ -36,7 +36,7 @@ namespace Proyecto_Domino
                 assembly = Assembly.Load("Logica");//Cargando los componentes del archivo Logica
                 foreach (var x in assembly.GetTypes())//Añadiendo las clases que implementen dichas interfaces
                 {
-                    if (x.GetInterface("IFicha") != null) { tiposDeModoDeJuego.Add(x); }
+                    if (x.GetInterface("IFichas") != null) { tiposDeModoDeJuego.Add(x); }
                     else if(x.GetInterface("ICondicionDeFinalizacion") != null) { tiposDeCondicionDeFinalizacion.Add(x); }
                     else if (x.GetInterface("IOrdenDeLasJugadas") != null) { tiposDeOrdenDeJugadas.Add(x); }
                     else if (x.GetInterface("IFormadeRepartir") != null) { tiposDeFormasDeRepartir.Add(x); }
@@ -91,7 +91,7 @@ namespace Proyecto_Domino
         private void Siguiente_Click(object sender, EventArgs e)
         {
 
-            IFicha modoDeJuego = null;
+            IFichas modoDeJuego = null;
             ICondicionDeFinalizacion condicionDeFinalizacion = null;
             IOrdenDeLasJugadas ordenDeLasJugadas = null;
             IFormadeRepartir formadeRepartir = null;
@@ -100,7 +100,7 @@ namespace Proyecto_Domino
 
             foreach (var item in tiposDeModoDeJuego)//Creando las intancias de las clases de opciones seleccionadas
             {
-                if (comboBox1.Text != null && comboBox1.Text == item.Name) { modoDeJuego= (IFicha)assembly.CreateInstance(item.FullName); }
+                if (comboBox1.Text != null && comboBox1.Text == item.Name) { modoDeJuego= (IFichas)assembly.CreateInstance(item.FullName); }
             }
             foreach (var item in tiposDeCondicionDeFinalizacion)
             {
