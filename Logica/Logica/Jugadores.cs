@@ -18,7 +18,7 @@ namespace Logica
 
         public List<IFicha> Fichas { get; set; }//Las fichas que tiene cada Jugador
 
-        public Func<IFicha, int> FormaDeCalcularPuntuacionDeLasFichas { get; set; }//Para saber como jugar en dependencia de como se esten calculando los puntajes
+        public Func<IFicha, int> CalcularPuntuacion { get; set; }//Para saber como jugar en dependencia de como se esten calculando los puntajes
 
         public IFicha Juega(List<IFicha> fichas, object extremo1, object extremo2);//extremo1 y extremo2 son los "numeros" disponibles por donde jugar en el tablero
         public void Seleccionar(List<IFicha> fichas, bool bocaArriba, int cantFichas);//Para poder seleccionar las fichas segun el comportamiento que uno le de al Jugador
@@ -39,7 +39,7 @@ namespace Logica
 
         public List<IFicha> Fichas { get; set; }
 
-        public Func<IFicha, int> FormaDeCalcularPuntuacionDeLasFichas { get; set; }
+        public Func<IFicha, int> CalcularPuntuacion { get; set; }
 
         public bool EsFichaJugable(IFicha ficha, object extremo1, object extremo2)
         {
@@ -48,7 +48,6 @@ namespace Logica
                 return true;
             }
             return false;
-            //return ficha.Item1 == num1 || ficha.Item2 == num1 || ficha.Item1 == num2 || ficha.Item2 == num2;
         }
 
         public IFicha Juega(List<IFicha> fichas, object extremo1, object extremo2)
@@ -67,7 +66,7 @@ namespace Logica
             for (int i = 0; i < length; i++)
             {
                 if (EsFichaJugable(Fichas[i], extremo1, extremo2)) break;
-                else if (i == length - 1) return null;   //Si no puede jugar ninguna ficha, retorna (-1,-1)
+                else if (i == length - 1) return null;   //Si no puede jugar ninguna ficha, retorna null
             }
             do
             {
@@ -101,7 +100,7 @@ namespace Logica
 
         public List<IFicha> Fichas { get; set; }
 
-        public Func<IFicha, int> FormaDeCalcularPuntuacionDeLasFichas { get; set; }
+        public Func<IFicha, int> CalcularPuntuacion { get; set; }
         public bool EsFichaJugable(IFicha ficha, object extremo1, object extremo2)
         {
             if (ficha.contenido.Item1.Equals(extremo1) || ficha.contenido.Item1.Equals(extremo2) || ficha.contenido.Item2.Equals(extremo1) || ficha.contenido.Item2.Equals(extremo2))
@@ -109,7 +108,6 @@ namespace Logica
                 return true;
             }
             return false;
-            //return ficha.Item1 == num1 || ficha.Item2 == num1 || ficha.Item1 == num2 || ficha.Item2 == num2;
         }
 
         public IFicha Juega(List<IFicha> fichas, object extremo1, object extremo2)
@@ -122,7 +120,7 @@ namespace Logica
             {
                 for (int i = 0; i < length; i++)
                 {
-                    int valor = FormaDeCalcularPuntuacionDeLasFichas(Fichas[i]);
+                    int valor = CalcularPuntuacion(Fichas[i]);
                     if (valor > mayorValor) { mayorValor = valor; fichaDeMayorValor = Fichas[i]; }
                 }
                 Fichas.Remove(fichaDeMayorValor);
@@ -134,7 +132,7 @@ namespace Logica
             {//La idea es jugar la ficha de mayor valor
                 if (EsFichaJugable(Fichas[i], extremo1, extremo2))
                 {
-                    int valor = FormaDeCalcularPuntuacionDeLasFichas(Fichas[i]);
+                    int valor = CalcularPuntuacion(Fichas[i]);
                     if (valor > mayorValor) { mayorValor = valor; fichaDeMayorValor = Fichas[i]; }
                 }
             }
@@ -160,7 +158,7 @@ namespace Logica
                 int length = fichas.Count;
                 int valor = 0;
                 IFicha fichaDeMayorValor = fichas[0];
-                int mayorValor = FormaDeCalcularPuntuacionDeLasFichas(fichaDeMayorValor);
+                int mayorValor = CalcularPuntuacion(fichaDeMayorValor);
                 while (Fichas.Count < cantFichas)
                 {
                     if (fichas.Count == 1)//Si solo queda una ficha, la agrego
@@ -172,7 +170,7 @@ namespace Logica
                     for (int i = 0; i < length; i++)//Busco la ficha de mayor valor pues al jugarla obtendra mas puntos
                     {
                         if (fichaDeMayorValor == fichas[i]) continue;//Si es la misma con la que estoy comparando no hago nada
-                        valor = FormaDeCalcularPuntuacionDeLasFichas(fichas[i]);//Calculo su valor
+                        valor = CalcularPuntuacion(fichas[i]);//Calculo su valor
                         if (valor > mayorValor)
                         {
                             fichaDeMayorValor = fichas[i];
@@ -183,7 +181,7 @@ namespace Logica
                             Fichas.Add(fichaDeMayorValor);//Agrego la de mayor valor a Fichas
                             fichas.Remove(fichaDeMayorValor);//La quito de las fichas del juego pues la cogio el jugador, pa q no se repitan fichas
                             fichaDeMayorValor = fichas[0];
-                            mayorValor = FormaDeCalcularPuntuacionDeLasFichas(fichaDeMayorValor);
+                            mayorValor = CalcularPuntuacion(fichaDeMayorValor);
                         }
 
                     }
@@ -203,7 +201,7 @@ namespace Logica
 
         public List<IFicha> Fichas { get; set; }
 
-        public Func<IFicha, int> FormaDeCalcularPuntuacionDeLasFichas { get; set; }
+        public Func<IFicha, int> CalcularPuntuacion { get; set; }
 
         public bool EsFichaJugable(IFicha ficha, object extremo1, object extremo2)
         {
@@ -212,7 +210,6 @@ namespace Logica
                 return true;
             }
             return false;
-            //return ficha.Item1 == num1 || ficha.Item2 == num1 || ficha.Item1 == num2 || ficha.Item2 == num2;
         }
 
         public IFicha Juega(List<IFicha> fichas, object extremo1, object extremo2)

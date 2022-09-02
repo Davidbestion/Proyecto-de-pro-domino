@@ -40,7 +40,7 @@ namespace Logica
     public class Juego : IEnumerator<Jugada>
     {
         List<IJugador> Jugadores;
-        ICondicionDeFinalizacion CondicionDeFinalizacion;
+        ICondicionDeFinalizacion CondicionDeFin;
         IOrdenDeLasJugadas OrdenDeJugadas;
         IFormadeRepartir FormadeRepartir;
         IFichas Fichas;
@@ -56,11 +56,11 @@ namespace Logica
         List<IFicha> fichas;//Fichas que repartir
         Jugada jugadaActual;
         
-        public Juego(List<IJugador> Jugadores, ICondicionDeFinalizacion CondicionDeFinalizacion, IOrdenDeLasJugadas OrdenDeJugadas, IFormadeRepartir FormadeRepartir, IFichas Fichas, IFormaDeCalcularPuntuacion CalcularPuntuacion)
+        public Juego(List<IJugador> Jugadores, ICondicionDeFinalizacion CondicionDeFin, IOrdenDeLasJugadas OrdenDeJugadas, IFormadeRepartir FormadeRepartir, IFichas Fichas, IFormaDeCalcularPuntuacion CalcularPuntuacion)
         {
 
             this.Jugadores= Jugadores;
-            this.CondicionDeFinalizacion= CondicionDeFinalizacion;
+            this.CondicionDeFin= CondicionDeFin;
             this.OrdenDeJugadas= OrdenDeJugadas;
             this.FormadeRepartir= FormadeRepartir;
             this.Fichas= Fichas;
@@ -92,7 +92,7 @@ namespace Logica
                 {
                     foreach (var item in Jugadores)//intruyendo a los jugadores de la manera de calcular las puntuaciones
                     {
-                        item.FormaDeCalcularPuntuacionDeLasFichas = CalcularPuntuacion.CalcularPuntuacion;
+                        item.CalcularPuntuacion = CalcularPuntuacion.CalcularPuntuacion;
                     }
                     FormadeRepartir.Repartir(fichas, Jugadores,Fichas.FichasPorJugador);//Repartiendo y haciendo que los jugadores escojan sus fichas
                    
@@ -106,7 +106,7 @@ namespace Logica
                 {
                     fichas.Add(fichaJugada);//Recogiendo la ficha q se jugo
                 }
-                FinDelJuego = CondicionDeFinalizacion.Finalizo(jugadorActual,fichaJugada,Jugadores,Extremo1,Extremo2,out JuegoTrancado);
+                FinDelJuego = CondicionDeFin.Finalizo(jugadorActual,fichaJugada,Jugadores,Extremo1,Extremo2,out JuegoTrancado);
                 if (FinDelJuego)//Si termino el juego,buscar al ganador
                 {    
                     foreach (var item in Jugadores)
@@ -115,7 +115,7 @@ namespace Logica
                     }
                 }
 
-                jugadaActual = new Jugada(jugadorActual, fichaJugada, FinDelJuego,ganador, JuegoTrancado);//
+                jugadaActual = new Jugada(jugadorActual, fichaJugada, FinDelJuego,ganador, JuegoTrancado);
 
                 PrimerTurno = false;
 
@@ -135,7 +135,7 @@ namespace Logica
             FinDelJuego = false;
             JuegoTrancado = false;
             OrdenDeJugadas.Reset();
-            CondicionDeFinalizacion.Reset();
+            CondicionDeFin.Reset();
 
 
             foreach (var jugador in Jugadores)

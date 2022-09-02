@@ -34,15 +34,15 @@ namespace Logica
         public int FichasPorJugador { get { return 7; } }
         public List<IFicha> GeneradorDeFichas()
         {
-            List<IFicha> listaDeFichas = new List<IFicha>();
+            List<IFicha> fichas = new List<IFicha>();
             for (int i = 0; i <= 6; i++)
             {
                 for (int j = i; j <= 6; j++)
                 {
-                    listaDeFichas.Add(new Ficha(i, j));
+                    fichas.Add(new Ficha(i, j));
                 }
             }
-            return listaDeFichas;
+            return fichas;
         }
     }
     public class FichasDe9 : IFichas
@@ -50,15 +50,15 @@ namespace Logica
         public int FichasPorJugador { get { return 10; } }
         public List<IFicha> GeneradorDeFichas()
         {
-            List<IFicha> listaDeFichas = new List<IFicha>();
+            List<IFicha> fichas = new List<IFicha>();
             for (int i = 0; i <= 9; i++)
             {
                 for (int j = i; j <= 9; j++)
                 {
-                    listaDeFichas.Add(new Ficha(i, j));
+                    fichas.Add(new Ficha(i, j));
                 }
             }
-            return listaDeFichas;
+            return fichas;
         }
     }
     public interface ICondicionDeFinalizacion
@@ -96,16 +96,16 @@ namespace Logica
             tabla = true;
 
             double mejorPuntuacion = 0;
-            int indiceJugadorConMejorPuntaje = 0;
+            int jugadorConMasPuntos = 0;
             foreach (var item in jugadores)//como se tranco el juego se saca el jugador con mayor puntaje
             {
                 if (mejorPuntuacion < item.Puntuacion)
                 {
-                    indiceJugadorConMejorPuntaje = jugadores.IndexOf(item);
+                    jugadorConMasPuntos = jugadores.IndexOf(item);
                     mejorPuntuacion = item.Puntuacion;
                 }
             }
-            jugadores[indiceJugadorConMejorPuntaje].Ganador = true;
+            jugadores[jugadorConMasPuntos].Ganador = true;
 
 
             return true;
@@ -114,7 +114,7 @@ namespace Logica
     }
     public class PorPase : ICondicionDeFinalizacion
     {
-        int[] vecesPasadasSeguidas;
+        int[] pasesSeguidos;
         bool primeraVez = true;
 
         public void Reset()
@@ -124,7 +124,7 @@ namespace Logica
 
         public bool Finalizo(IJugador jugador, IFicha fichaJugada, List<IJugador> jugadores, object extremo1, object extremo2, out bool tabla)
         {
-            if (primeraVez) { vecesPasadasSeguidas = new int[jugadores.Count]; primeraVez = false; }
+            if (primeraVez) { pasesSeguidos = new int[jugadores.Count]; primeraVez = false; }
             if (jugador.Fichas.Count == 0)
             {
                 jugador.Ganador = true;
@@ -135,22 +135,22 @@ namespace Logica
             if (fichaJugada == null)
             {
                 int indice = jugadores.IndexOf(jugador);
-                vecesPasadasSeguidas[indice]++;
-                if (vecesPasadasSeguidas[indice] == 2)
+                pasesSeguidos[indice]++;
+                if (pasesSeguidos[indice] == 2)
                 {
                     double MejorPuntuacion = 0;
-                    int indiceDeJugadorConMejorPuntaje = 0;
+                    int JugadorConMasPuntos = 0;
                     foreach (var item in jugadores)
                     {
-                        if (MejorPuntuacion < item.Puntuacion) { indiceDeJugadorConMejorPuntaje = jugadores.IndexOf(item); MejorPuntuacion = item.Puntuacion; }
+                        if (MejorPuntuacion < item.Puntuacion) { JugadorConMasPuntos = jugadores.IndexOf(item); MejorPuntuacion = item.Puntuacion; }
                     }
-                    jugadores[indiceDeJugadorConMejorPuntaje].Ganador = true;
+                    jugadores[JugadorConMasPuntos].Ganador = true;
                     tabla = false;
                     primeraVez = true;
                     return true;
                 }
             }
-            else if (fichaJugada != null) { vecesPasadasSeguidas[jugadores.IndexOf(jugador)] = 0; }
+            else if (fichaJugada != null) { pasesSeguidos[jugadores.IndexOf(jugador)] = 0; }
 
 
             foreach (var item in jugadores)//Comprobando si se tranco el juego
@@ -165,12 +165,12 @@ namespace Logica
             tabla = true;
 
             double mejorPuntuacion = 0;
-            int indiceJugadorConMejorPuntaje = 0;
+            int jugadorConMasPuntos = 0;
             foreach (var item in jugadores)
             {
-                if (mejorPuntuacion < item.Puntuacion) { indiceJugadorConMejorPuntaje = jugadores.IndexOf(item); mejorPuntuacion = item.Puntuacion; }
+                if (mejorPuntuacion < item.Puntuacion) { jugadorConMasPuntos = jugadores.IndexOf(item); mejorPuntuacion = item.Puntuacion; }
             }
-            jugadores[indiceJugadorConMejorPuntaje].Ganador = true;
+            jugadores[jugadorConMasPuntos].Ganador = true;
 
             primeraVez = true;
             return true;
