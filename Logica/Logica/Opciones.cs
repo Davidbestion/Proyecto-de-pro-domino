@@ -24,12 +24,12 @@ namespace Logica
         }
     }
 
-    public interface IFichas
+    public interface IModoDeJuego
     {
         int FichasPorJugador { get; }
         List<IFicha> GeneradorDeFichas();//Para generar las fichas segun el tipo de juego que hayan escogido
     }
-    public class FichasDe6 : IFichas
+    public class FichasDe6 : IModoDeJuego
     {
         public int FichasPorJugador { get { return 7; } }
         public List<IFicha> GeneradorDeFichas()
@@ -45,7 +45,7 @@ namespace Logica
             return fichas;
         }
     }
-    public class FichasDe9 : IFichas
+    public class FichasDe9 : IModoDeJuego
     {
         public int FichasPorJugador { get { return 10; } }
         public List<IFicha> GeneradorDeFichas()

@@ -21,10 +21,10 @@ namespace Proyecto_Domino
         ICondicionDeFinalizacion condicionDeFinalizacion;
         IOrdenDeLasJugadas ordenDeLasJugadas;
         IFormadeRepartir formadeRepartir;
-        IFichas modoDeJuego;
+        IModoDeJuego modoDeJuego;
         IFormaDeCalcularPuntuacion formaDeCalcular;
 
-        public Jugar(List<IJugador> jugadores,ICondicionDeFinalizacion condicionDeFinalizacion,IOrdenDeLasJugadas ordenDeLasJugadas,IFormadeRepartir formadeRepartir,IFichas modoDeJuego,IFormaDeCalcularPuntuacion formaDeCalcular)
+        public Jugar(List<IJugador> jugadores,ICondicionDeFinalizacion condicionDeFinalizacion,IOrdenDeLasJugadas ordenDeLasJugadas,IFormadeRepartir formadeRepartir, IModoDeJuego modoDeJuego,IFormaDeCalcularPuntuacion formaDeCalcular)
         {
             this.condicionDeFinalizacion = condicionDeFinalizacion;
             this.ordenDeLasJugadas = ordenDeLasJugadas;

@@ -43,7 +43,7 @@ namespace Logica
         ICondicionDeFinalizacion CondicionDeFin;
         IOrdenDeLasJugadas OrdenDeJugadas;
         IFormadeRepartir FormadeRepartir;
-        IFichas Fichas;
+        IModoDeJuego Fichas;
         IFormaDeCalcularPuntuacion CalcularPuntuacion;
         IJugador ganador;
 
@@ -56,7 +56,7 @@ namespace Logica
         List<IFicha> fichas;//Fichas que repartir
         Jugada jugadaActual;
         
-        public Juego(List<IJugador> Jugadores, ICondicionDeFinalizacion CondicionDeFin, IOrdenDeLasJugadas OrdenDeJugadas, IFormadeRepartir FormadeRepartir, IFichas Fichas, IFormaDeCalcularPuntuacion CalcularPuntuacion)
+        public Juego(List<IJugador> Jugadores, ICondicionDeFinalizacion CondicionDeFin, IOrdenDeLasJugadas OrdenDeJugadas, IFormadeRepartir FormadeRepartir, IModoDeJuego Fichas, IFormaDeCalcularPuntuacion CalcularPuntuacion)
         {
 
             this.Jugadores= Jugadores;
