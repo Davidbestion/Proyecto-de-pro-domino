@@ -18,22 +18,22 @@ namespace Proyecto_Domino
         bool juegoAutomatico = false; 
         List<IJugador> jugadores;
 
-        ICondicionDeFinalizacion condicionDeFinalizacion;
+        ICondicionDeFinalizacion condicionDeFin;
         IOrdenDeLasJugadas ordenDeLasJugadas;
         IFormadeRepartir formadeRepartir;
         IModoDeJuego modoDeJuego;
         IFormaDeCalcularPuntuacion formaDeCalcular;
 
-        public Jugar(List<IJugador> jugadores,ICondicionDeFinalizacion condicionDeFinalizacion,IOrdenDeLasJugadas ordenDeLasJugadas,IFormadeRepartir formadeRepartir, IModoDeJuego modoDeJuego,IFormaDeCalcularPuntuacion formaDeCalcular)
+        public Jugar(List<IJugador> jugadores,ICondicionDeFinalizacion condicionDeFin,IOrdenDeLasJugadas ordenDeLasJugadas,IFormadeRepartir formadeRepartir, IModoDeJuego modoDeJuego,IFormaDeCalcularPuntuacion formaDeCalcular)
         {
-            this.condicionDeFinalizacion = condicionDeFinalizacion;
+            this.condicionDeFin = condicionDeFin;
             this.ordenDeLasJugadas = ordenDeLasJugadas;
             this.formadeRepartir = formadeRepartir;
             this.modoDeJuego = modoDeJuego;
             this.formaDeCalcular = formaDeCalcular;
 
             InitializeComponent();
-            juego = new Juego(jugadores,condicionDeFinalizacion,ordenDeLasJugadas,formadeRepartir,modoDeJuego,formaDeCalcular);
+            juego = new Juego(jugadores,condicionDeFin,ordenDeLasJugadas,formadeRepartir,modoDeJuego,formaDeCalcular);
             this.jugadores = jugadores;
         }
 
@@ -48,7 +48,7 @@ namespace Proyecto_Domino
         {
             timer1.Enabled = false;
             juego.Reset();
-            Crear_Jugadores form2 = new Crear_Jugadores(condicionDeFinalizacion, ordenDeLasJugadas, formadeRepartir, modoDeJuego, formaDeCalcular);
+            Crear_Jugadores form2 = new Crear_Jugadores(condicionDeFin, ordenDeLasJugadas, formadeRepartir, modoDeJuego, formaDeCalcular);
             this.Hide();
             form2.Show();
         }
